@@ -1,17 +1,15 @@
-def apiTarget = 29
-
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    compileSdk apiTarget
+    compileSdk 29
 
     defaultConfig {
         applicationId "com.semblanceoffunctionality.groceryapp"
         minSdk 21
-        targetSdk apiTarget
+        targetSdk 29
         versionCode 1
         versionName "1.0"
 
