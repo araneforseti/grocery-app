@@ -42,7 +42,7 @@ jobs:
       - name: Set up our JDK environment
         uses: actions/setup-java@v1.4.3
         with:
-           java-version: ${{ JAVA_VERSION }}
+           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Build all artifacts
         id: buildAllApks
@@ -59,7 +59,7 @@ jobs:
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-            api-level: ${{ API_VERSION }}
+            api-level: ${{ env.API_VERSION }}
             force-avd-creation: false
             emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
             disable-animations: false
@@ -68,7 +68,7 @@ jobs:
       - name: Run tests on emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-           api-level: ${{ API_VERSION }}
+           api-level: ${{ env.API_VERSION }}
            force-avd-creation: false
            emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
            disable-animations: true
