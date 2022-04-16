@@ -3,7 +3,7 @@ name: Build
 on: [pull_request, push]
 
 env:
-  API_VERSION: 30 # 31
+  API_VERSION: 31
   JAVA_VERSION: 11
 
 # Where will they run
