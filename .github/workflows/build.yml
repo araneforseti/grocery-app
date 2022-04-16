@@ -29,11 +29,11 @@ jobs:
       - name: Run Unit Tests
         uses: eskatos/gradle-command-action@v1.3.3
         with:
-            gradle-version: current
-            wrapper-cache-enabled: true
-            dependencies-cache-enabled: true
-            configuration-cache-enabled: true
-            arguments: test
+           gradle-version: current
+           wrapper-cache-enabled: true
+           dependencies-cache-enabled: true
+           configuration-cache-enabled: true
+           arguments: test
 
       - name: Build all artifacts
         id: buildAllApks
@@ -49,54 +49,71 @@ jobs:
         id: avd-cache
         uses: actions/cache@v2
         with:
-          path: |
-            ~/.android/avd/*
-            ~/.android/adb*
-         key: avd-android${{ env.API_VERSION }}
+           path: |
+             ~/.android/avd/*
+             ~/.android/adb*
+           key: avd-android${{ env.API_VERSION }}
 
       - name: Download and install JDK 11
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+           java-version: 11
 
       - name: Set up Android virtual device if not cached
         uses: reactivecircus/android-emulator-runner@v2
         if: steps.avd-cache.outputs.cache-hit != 'true'
         with:
-          api-level: ${{ env.API_VERSION }}
-          arch: x86_64
-          target: ${{ env.API_VERSION >= 30 && 'google_apis' || 'default' }}
-          force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: false
-          script: echo "Generated AVD snapshot for caching."
+           api-level: ${{ env.API_VERSION }}
+           arch: x86_64
+           target: ${{ env.API_VERSION >= 30 && 'google_apis' || 'default' }}
+           force-avd-creation: false
+           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+           disable-animations: false
+           script: echo "Generated AVD snapshot for caching."
 
       - name: Run instrumented tests on Android virtual device
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ env.API_VERSION }}
-          arch: x86_64
-          target: ${{ env.API_VERSION >= 30 && 'google_apis' || 'default' }}
-          force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          disable-animations: true
-          script: ./gradlew connectedAndroidTest --stacktrace
+           api-level: ${{ env.API_VERSION }}
+           arch: x86_64
+           target: ${{ env.API_VERSION >= 30 && 'google_apis' || 'default' }}
+           force-avd-creation: false
+           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+           disable-animations: true
+           script: ./gradlew connectedAndroidTest --stacktrace
 
       - name: create AVD and generate snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
         uses: reactivecircus/android-emulator-runner@v2
         with:
-            api-level: ${{ env.API_VERSION }}
-            force-avd-creation: false
-            emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-            emulator-build: 7425822
-            disable-animations: false
-            script: echo "Generated AVD snapshot for caching."
+           path: |
+              ~/.android/avd/*
+              ~/.android/adb*
+           key: avd-android${{ env.API_VERSION }}
 
-      - name: Run tests on emulator
+      - name: Download and install JDK 11
+        uses: actions/setup-java@v1
+        with:
+           java-version: 11
+
+      - name: Set up Android virtual device if not cached
+        uses: reactivecircus/android-emulator-runner@v2
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        with:
+           api-level: ${{ env.API_VERSION }}
+           arch: x86_64
+           target: ${{ env.API_VERSION >= 30 && 'google_apis' || 'default' }}
+           force-avd-creation: false
+           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+           disable-animations: false
+           script: echo "Generated AVD snapshot for caching."
+
+      - name: Run instrumented tests on Android virtual device
         uses: reactivecircus/android-emulator-runner@v2
         with:
            api-level: ${{ env.API_VERSION }}
+           arch: x86_64
+           target: 'default'
            force-avd-creation: false
            emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
            disable-animations: true
