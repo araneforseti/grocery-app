@@ -18,30 +18,6 @@ jobs:
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
 
-      - name: AVD cache
-        uses: actions/cache@v3
-        id: avd-cache
-        with:
-            path: |
-              ~/.android/avd/*
-              ~/.android/adb*
-            key: avd-{{ env.API_VERSION }}
-
-      - name: Set up our JDK environment
-        uses: actions/setup-java@v1.4.3
-        with:
-           java-version: {{ JAVA_VERSION }}
-
-      - name: Build all artifacts
-        id: buildAllApks
-        uses: eskatos/gradle-command-action@v1.3.3
-        with:
-           gradle-version: current
-           wrapper-cache-enabled: true
-           dependencies-cache-enabled: true
-           configuration-cache-enabled: true
-           arguments: assembleRelease
-
 #     - name: Run Kotlin Linter
 #        run: ./gradlew ktlintStagingDebugCheck
 
@@ -54,13 +30,48 @@ jobs:
             configuration-cache-enabled: true
             arguments: test
 
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+            path: |
+              ~/.android/avd/*
+              ~/.android/adb*
+            key: avd-${{ env.API_VERSION }}
+
+      - name: Set up our JDK environment
+        uses: actions/setup-java@v1.4.3
+        with:
+           java-version: ${{ JAVA_VERSION }}
+
+      - name: Build all artifacts
+        id: buildAllApks
+        uses: eskatos/gradle-command-action@v1.3.3
+        with:
+           gradle-version: current
+           wrapper-cache-enabled: true
+           dependencies-cache-enabled: true
+           configuration-cache-enabled: true
+           arguments: assembleRelease
+
+
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+            api-level: ${{ API_VERSION }}
+            force-avd-creation: false
+            emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+            disable-animations: false
+            script: echo "Generated AVD snapshot for caching."
+
       - name: Run tests on emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-           api-level: {{ API_VERSION }}
-           target: default
-           arch: x86
-           profile: Pixel 4
+           api-level: ${{ API_VERSION }}
+           force-avd-creation: false
+           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+           disable-animations: true
            script: ./gradlew connectedAndroidTest --stacktrace
 
 ## Sign our artifact##
