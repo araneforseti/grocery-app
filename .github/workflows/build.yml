@@ -62,6 +62,7 @@ jobs:
             api-level: ${{ env.API_VERSION }}
             force-avd-creation: false
             emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+            emulator-build: 7425822
             disable-animations: false
             script: echo "Generated AVD snapshot for caching."
 
