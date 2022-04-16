@@ -1,6 +1,6 @@
 # grocery-app
 
-![Build](https://github.com/araneforseti/grocery-app/actions/workflows/build/badge.svg)
+[![Build Status](https://github.com/araneforseti/grocery-app/workflows/Build/badge.svg)](https://github.com/araneforseti/grocery-app/actions?query=workflow%3ABuild+branch%3Amaster)
 
 
 # Android Target Info
