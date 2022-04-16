@@ -2,19 +2,35 @@ name: Build
 
 on: [pull_request, push]
 
+env:
+  API_VERSION: 31
+  JAVA_VERSION: 11
+
 # Where will they run
 jobs:
    build:
-      runs-on: ubuntu-latest
+      runs-on: macos-latest
 
       steps:
       - name: Checkout
         uses: actions/checkout@v2.3.3
 
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+
+      - name: AVD cache
+        uses: actions/cache@v3
+        id: avd-cache
+        with:
+            path: |
+              ~/.android/avd/*
+              ~/.android/adb*
+            key: avd-{{ env.API_VERSION }}
+
       - name: Set up our JDK environment
         uses: actions/setup-java@v1.4.3
         with:
-           java-version: 11
+           java-version: {{ JAVA_VERSION }}
 
       - name: Build all artifacts
         id: buildAllApks
@@ -41,7 +57,7 @@ jobs:
       - name: Run tests on emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-           api-level: 31
+           api-level: {{ API_VERSION }}
            target: default
            arch: x86
            profile: Pixel 4
