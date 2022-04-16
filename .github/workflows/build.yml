@@ -18,6 +18,7 @@ jobs:
       - name: Set up our JDK environment
         uses: actions/setup-java@v3.1.1
         with:
+           distribution: 'temurin'
            java-version: ${{ env.JAVA_VERSION }}
 
       - name: Gradle cache
