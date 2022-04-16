@@ -1,0 +1,59 @@
+name: Build
+
+on: [pull_request, push]
+
+# Where will they run
+jobs:
+   build:
+      runs-on: ubuntu-latest
+
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.3
+
+      - name: Set up our JDK environment
+        uses: actions/setup-java@v1.4.3
+        with:
+           java-version: 11
+
+      - name: Build all artifacts
+        id: buildAllApks
+        uses: eskatos/gradle-command-action@v1.3.3
+        with:
+           gradle-version: current
+           wrapper-cache-enabled: true
+           dependencies-cache-enabled: true
+           configuration-cache-enabled: true
+           arguments: assembleRelease
+
+#     - name: Run Kotlin Linter
+#        run: ./gradlew ktlintStagingDebugCheck
+
+#      - name: Run Unit Tests
+#        run: ./gradlew testStagingDebugUnitTest
+
+#      - name: Run tests on emulator
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#           api-level: 31
+#           target: default
+#           arch: x86
+#           profile: Pixel 4
+#           script: ./gradlew connectedCheck --stacktrace
+
+## Sign our artifact##
+#     - name: Sign artifact
+#       id: signArtifact
+#       uses: r0adkll/sign-android-release@v1.0.1
+#       with:
+#          releaseDirectory: app/build/outputs/apk/ourbuildtype/release
+#          alias: ${{ secrets.KEYALIAS }}
+#          signingKeyBase64: ${{ secrets.KEYSTORE }}
+#          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+#          keyPassword: ${{ secrets.KEY_PASSWORD }}
+#
+#     - name: Upload our APK
+#       uses: actions/upload-artifact@v2.2.0
+#       with:
+#          name: Release artifact
+#          path: app/build/outputs/apk/ourbuildtype/release/app-artifact-*.apk
