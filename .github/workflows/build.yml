@@ -29,17 +29,17 @@ jobs:
 #     - name: Run Kotlin Linter
 #        run: ./gradlew ktlintStagingDebugCheck
 
-#      - name: Run Unit Tests
-#        run: ./gradlew testStagingDebugUnitTest
+      - name: Run Unit Tests
+        run: ./gradlew test
 
-#      - name: Run tests on emulator
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#           api-level: 31
-#           target: default
-#           arch: x86
-#           profile: Pixel 4
-#           script: ./gradlew connectedCheck --stacktrace
+      - name: Run tests on emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+           api-level: 31
+           target: default
+           arch: x86
+           profile: Pixel 4
+           script: ./gradlew connectedAndroidTest --stacktrace
 
 ## Sign our artifact##
 #     - name: Sign artifact
