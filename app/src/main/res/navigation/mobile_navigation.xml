@@ -6,6 +6,12 @@
     app:startDestination="@+id/nav_home">
 
     <fragment
+        android:id="@+id/nav_groceries"
+        android:name="com.semblanceoffunctionality.groceryapp.ui.grocery.GroceryFragment"
+        android:label="@string/menu_groceries"
+        tools:layout="@layout/fragment_grocery" />
+
+    <fragment
         android:id="@+id/nav_home"
         android:name="com.semblanceoffunctionality.groceryapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
