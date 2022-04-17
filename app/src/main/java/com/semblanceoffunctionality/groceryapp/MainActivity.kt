@@ -1,8 +1,10 @@
 package com.semblanceoffunctionality.groceryapp
 
 import android.os.Bundle
+import android.util.SparseBooleanArray
 import android.view.Menu
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import com.google.android.material.snackbar.Snackbar
@@ -54,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         val listView = findViewById<ListView>(R.id.listView)
         val editText = findViewById<EditText>(R.id.editText)
-/*
+
         val add = findViewById<Button>(R.id.add)
         // Adding the items to the list when the add button is pressed
         add.setOnClickListener {
@@ -96,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             position.clear()
             adapter.notifyDataSetChanged()
         }
- */
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
