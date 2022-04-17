@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 }
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk 31
@@ -45,6 +46,10 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
     implementation "androidx.work:work-runtime-ktx:2.7.1"
+
+    // Extensions = ViewModel + LiveData
+    implementation 'androidx.room:room-ktx:2.4.2'
+    kapt "androidx.room:room-compiler:2.4.2"
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
