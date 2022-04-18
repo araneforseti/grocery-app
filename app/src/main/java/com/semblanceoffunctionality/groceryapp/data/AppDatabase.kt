@@ -11,6 +11,7 @@ import com.semblanceoffunctionality.groceryapp.utilities.DATABASE_NAME
     StoreStock::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun groceryItemDao(): GroceryItemDao
+    abstract fun storeDao(): StoreDao
 
     companion object {
         // For Singleton instantiation
