@@ -47,31 +47,27 @@ class GroceryItemDaoTest {
     fun testGetAllItems() = runBlocking {
         val resultList = groceryItemDao.getAll()
         assertThat(resultList.size, equalTo(2))
-        assertThat(true, equalTo(true))
     }
 
     @Test
     fun testGetWantedItemsWhenNone() = runBlocking {
-//        val resultList = groceryItemDao.getAllWantedItems()
-//
-//        assertThat(resultList.size, equalTo(1))
-//        assertThat(resultList[0], equalTo(wantedItem))
-        assertThat(true, equalTo(true))
+        val resultList = groceryItemDao.getAllWantedItems()
+
+        assertThat(resultList.size, equalTo(1))
+        assertThat(resultList[0], equalTo(wantedItem))
     }
 
     @Test
     fun testFindByName() = runBlocking {
-//        val resultList = groceryItemDao.findByName(unwantedItem.name)
-//        assertThat(resultList, equalTo(unwantedItem))
-        assertThat(true, equalTo(true))
+        val resultList = groceryItemDao.findByName(unwantedItem.name)
+        assertThat(resultList, equalTo(unwantedItem))
     }
 
     @Test
     fun testDeleteItem() = runBlocking {
-//        groceryItemDao.delete(wantedItem)
-//        val resultList = groceryItemDao.getAll()
-//        assertThat(resultList.size, equalTo(1))
-//        assertThat(resultList[0], equalTo(unwantedItem))
-        assertThat(true, equalTo(true))
+        groceryItemDao.delete(wantedItem)
+        val resultList = groceryItemDao.getAll()
+        assertThat(resultList.size, equalTo(1))
+        assertThat(resultList[0], equalTo(unwantedItem))
     }
 }
