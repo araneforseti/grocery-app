@@ -1,10 +1,11 @@
 package com.semblanceoffunctionality.groceryapp.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
 data class GroceryItem(
     @PrimaryKey val name: String,
-    val wanted: Boolean
+    @ColumnInfo(name = "wanted") val wanted: Boolean
 )

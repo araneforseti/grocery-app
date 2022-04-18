@@ -18,6 +18,6 @@ class ItemRepository @Inject constructor(
     }
 
     fun isWanted(name: String) : Boolean {
-        return groceryItemDao.isWanted(name)
+        return groceryItemDao.isWanted(name)[0]
     }
 }

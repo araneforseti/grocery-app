@@ -19,8 +19,8 @@ import org.junit.runner.RunWith
 class GroceryItemDaoTest {
     private lateinit var database: AppDatabase
     private lateinit var groceryItemDao: GroceryItemDao
-    private val wantedItem = GroceryItem("wanted", true)
-    private val unwantedItem = GroceryItem("unwanted", false)
+    private val wantedItem = GroceryItem("wanted1", true)
+    private val unwantedItem = GroceryItem("unwanted2", false)
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -34,7 +34,6 @@ class GroceryItemDaoTest {
         Log.println(Log.DEBUG,"tag","Got here")
 
         groceryItemDao = database.groceryItemDao()
-        groceryItemDao.insertAll(listOf(wantedItem,unwantedItem))
     }
 
     @After fun closeDb() {
@@ -45,12 +44,16 @@ class GroceryItemDaoTest {
 
     @Test
     fun testGetAllItems() = runBlocking {
+        groceryItemDao.insertAll(listOf(wantedItem,unwantedItem))
+
         val resultList = groceryItemDao.getAll()
         assertThat(resultList.size, equalTo(2))
     }
 
     @Test
-    fun testGetWantedItemsWhenNone() = runBlocking {
+    fun testGetWantedItems_WhenOne() = runBlocking {
+        groceryItemDao.insertAll(listOf(wantedItem,unwantedItem))
+
         val resultList = groceryItemDao.getAllWantedItems()
 
         assertThat(resultList.size, equalTo(1))
@@ -58,28 +61,44 @@ class GroceryItemDaoTest {
     }
 
     @Test
+    fun testGetWantedItems_WhenNone() = runBlocking {
+        groceryItemDao.insertAll(listOf(unwantedItem))
+
+        val resultList = groceryItemDao.getAllWantedItems()
+
+        assertThat(resultList.size, equalTo(0))
+    }
+
+    @Test
     fun testFindByName() = runBlocking {
+        groceryItemDao.insertAll(listOf(wantedItem,unwantedItem))
+
         val resultList = groceryItemDao.findByName(unwantedItem.name)
         assertThat(resultList, equalTo(unwantedItem))
     }
 
     @Test
     fun testDeleteItem() = runBlocking {
+        groceryItemDao.insertAll(listOf(wantedItem,unwantedItem))
         groceryItemDao.delete(wantedItem)
+
         val resultList = groceryItemDao.getAll()
         assertThat(resultList.size, equalTo(1))
         assertThat(resultList[0], equalTo(unwantedItem))
     }
 
     @Test
-    fun testIsWantedTrue() = runBlocking {
+    fun testIsWanted_True() = runBlocking {
+        groceryItemDao.insertAll(listOf(wantedItem, unwantedItem))
         val result = groceryItemDao.isWanted(wantedItem.name)
-        assertThat(result, equalTo(wantedItem.wanted))
+        assertThat(result[0], equalTo(wantedItem.wanted))
     }
 
     @Test
-    fun testIsWantedFalse() = runBlocking {
+    fun testIsWanted_False() = runBlocking {
+        groceryItemDao.insertAll(listOf(wantedItem, unwantedItem))
+
         val result = groceryItemDao.isWanted(unwantedItem.name)
-        assertThat(result, equalTo(unwantedItem.wanted))
+        assertThat(result[0], equalTo(unwantedItem.wanted))
     }
 }
