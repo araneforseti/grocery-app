@@ -21,4 +21,7 @@ interface GroceryItemDao{
 
     @Delete
     fun delete(item: GroceryItem)
+
+    @Query("SELECT 'wanted' FROM groceryitem WHERE name = :name")
+    fun isWanted(name: String) : Boolean
 }

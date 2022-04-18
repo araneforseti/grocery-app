@@ -70,4 +70,16 @@ class GroceryItemDaoTest {
         assertThat(resultList.size, equalTo(1))
         assertThat(resultList[0], equalTo(unwantedItem))
     }
+
+    @Test
+    fun testIsWantedTrue() = runBlocking {
+        val result = groceryItemDao.isWanted(wantedItem.name)
+        assertThat(result, equalTo(wantedItem.wanted))
+    }
+
+    @Test
+    fun testIsWantedFalse() = runBlocking {
+        val result = groceryItemDao.isWanted(unwantedItem.name)
+        assertThat(result, equalTo(unwantedItem.wanted))
+    }
 }
