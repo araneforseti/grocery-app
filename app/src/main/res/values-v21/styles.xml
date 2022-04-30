@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="Theme.Grocery" parent="Base.Theme.Grocery">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+</resources>
