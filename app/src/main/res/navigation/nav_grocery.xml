@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/gallery_fragment"
-        android:name="com.semblanceoffunctionality.grocery.GalleryFragment"
+        android:name="com.semblanceoffunctionality.grocery.GroceryFragment"
         android:label="@string/item_details_title"
         tools:layout="@layout/fragment_gallery">
         <argument

@@ -33,7 +33,7 @@ class ItemListFragment : Fragment() {
         subscribeUi(adapter)
 
         binding.addItem.setOnClickListener {
-            createItemDialog()
+            createItemDialog(container)
         }
 
         setHasOptionsMenu(true)
@@ -50,11 +50,11 @@ class ItemListFragment : Fragment() {
         }
     }
 
-    private fun createItemDialog() {
+    private fun createItemDialog(container: ViewGroup?) {
         activity?.let {
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater
-            val dialogView = inflater.inflate(R.layout.fragment_new_item_dialog, null)
+            val dialogView = inflater.inflate(R.layout.fragment_new_item_dialog, container)
             builder.apply {
                 setView(dialogView)
                 setPositiveButton(R.string.create) { _, _ ->
