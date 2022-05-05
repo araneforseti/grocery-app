@@ -6,6 +6,12 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
+
+    lintOptions {
+        baseline(file("lint-baseline.xml"))
+    }
+
+
     buildFeatures {
         dataBinding true
     }
