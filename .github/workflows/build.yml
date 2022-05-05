@@ -1,6 +1,6 @@
 name: Build
 
-on: [pull_request, push]
+on: [pull_request]
 
 env:
   API_VERSION: 31
@@ -24,8 +24,8 @@ jobs:
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
 
-      - name: Run Kotlin Linter
-        run: ./gradlew lint
+#      - name: Run Kotlin Linter
+#        run: ./gradlew lint
 
       - name: Run Unit Tests
         uses: eskatos/gradle-command-action@v2.1.5
@@ -36,27 +36,27 @@ jobs:
            configuration-cache-enabled: true
            arguments: test
 
-      - name: Set up Android virtual device
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-           api-level: ${{ env.API_VERSION }}
-           arch: x86_64
-           target: ${{ env.API_VERSION >= 30 && 'google_apis' || 'default' }}
-           force-avd-creation: false
-           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-           disable-animations: false
-           script: echo "Generated AVD snapshot for caching."
+#      - name: Set up Android virtual device
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#           api-level: ${{ env.API_VERSION }}
+#           arch: x86_64
+#           target: ${{ env.API_VERSION >= 30 && 'google_apis' || 'default' }}
+#           force-avd-creation: false
+#           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+#           disable-animations: false
+#           script: echo "Generated AVD snapshot for caching."
 
-      - name: Run instrumented tests on Android virtual device
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-           api-level: ${{ env.API_VERSION }}
-           arch: x86_64
-           target: 'default'
-           force-avd-creation: false
-           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-           disable-animations: true
-           script: ./gradlew connectedAndroidTest --stacktrace
+#      - name: Run instrumented tests on Android virtual device
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#           api-level: ${{ env.API_VERSION }}
+#           arch: x86_64
+#           target: 'default'
+#           force-avd-creation: false
+#           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+#           disable-animations: true
+#           script: ./gradlew connectedAndroidTest --stacktrace
 
       - name: Build all artifacts
         id: buildAllApks

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 7.1.3" type="baseline" client="gradle" dependencies="false" name="AGP (7.1.3)" variant="all" version="7.1.3">
+
+    <issue
+        id="UnknownIssueId"
+        message="Unknown issue id &quot;AndroidLintRemoveWorkManagerInitializer&quot;. Did you mean &apos;RemoveWorkManagerInitializer&apos; (Remove androidx.work.WorkManagerInitializer from your AndroidManifest.xml when using on-demand initialization.) ?">
+        <location
+            file="build.gradle"/>
+    </issue>
+
+    <issue
+        id="RemoveWorkManagerInitializer"
+        message="Remove androidx.work.WorkManagerInitializer from your AndroidManifest.xml when using on-demand initialization.">
+        <location
+            file="app"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.lifecycle:lifecycle-livedata-ktx than 2.2.0 is available: 2.4.1"
+        errorLine1="    implementation &quot;androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion&quot;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="69"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.3.1 is available: 2.4.1"
+        errorLine1="    implementation &quot;androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion&quot;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="70"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.material:material than 1.4.0-beta01 is available: 1.7.0-alpha01"
+        errorLine1="    implementation &quot;com.google.android.material:material:$rootProject.materialVersion&quot;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="79"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v26`) is unnecessary; `minSdkVersion` is 31. Merge all the resources in this folder into `mipmap-anydpi`.">
+        <location
+            file="src/main/res/mipmap-anydpi-v26"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v21`) is unnecessary; `minSdkVersion` is 31. Merge all the resources in this folder into `values-night`.">
+        <location
+            file="src/main/res/values-night-v21"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v21`) is unnecessary; `minSdkVersion` is 31. Merge all the resources in this folder into `values`.">
+        <location
+            file="src/main/res/values-v21"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="This folder configuration (`v29`) is unnecessary; `minSdkVersion` is 31. Merge all the resources in this folder into `values`.">
+        <location
+            file="src/main/res/values-v29"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.dimen.margin_extra_small` appears to be unused"
+        errorLine1="    &lt;dimen name=&quot;margin_extra_small&quot;>4dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/dimens.xml"
+            line="16"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.dimen.item_item_image_height` appears to be unused"
+        errorLine1="    &lt;dimen name=&quot;item_item_image_height&quot;>95dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/dimens.xml"
+            line="18"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.dimen.item_description_min_height` appears to be unused"
+        errorLine1="    &lt;dimen name=&quot;item_description_min_height&quot;>555dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/dimens.xml"
+            line="34"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.ic_filter_list_24dp` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/ic_filter_list_24dp.xml"
+            line="3"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.ic_launcher_background` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/ic_launcher_background.xml"
+            line="3"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.layout.list_item_grocery_wanted` appears to be unused"
+        errorLine1="&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/layout/list_item_grocery_wanted.xml"
+            line="3"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.layout.list_item_name` appears to be unused"
+        errorLine1="&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/layout/list_item_name.xml"
+            line="3"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.menu_filter_by_store` appears to be unused"
+        errorLine1="    &lt;string name=&quot;menu_filter_by_store&quot; translation_description=&quot;The label for the menu item to filter the displayed items by store.&quot;>Filter by store&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="7"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="TypographyEllipsis"
+        message="Replace &quot;...&quot; with ellipsis character (…, &amp;#8230;) ?"
+        errorLine1="    &lt;string name=&quot;gallery_title&quot; translation_description=&quot;Title for the item gallery screen&quot;>...&lt;/string>"
+        errorLine2="                                                                                             ~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="14"
+            column="94"/>
+    </issue>
+
+</issues>

@@ -1,79 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.grocery.GroceryFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:text="@string/app_name"
-        android:textColor="@color/black"
-        android:textSize="26sp" />
-    <EditText
-        android:layout_below="@id/textView"
-        android:id="@+id/editText"
-        android:padding="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/add_hint"
-        android:inputType="textNoSuggestions"
-        android:autofillHints="name"
-        android:textColorHint="@color/black"
-        android:textColor="@color/black"/>
+    <data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout1"
-        android:orientation="horizontal"
-        android:layout_below="@id/editText"
-        android:padding="10dp">
-        <Button
-            android:id="@+id/add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/add_text"
-            android:background="@color/black"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/delete_text"
-            android:layout_marginStart="70dp"
-            android:background="@color/black"
-            style="?android:attr/borderlessButtonStyle"/>
-        <Button
-            android:id="@+id/clear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/clear_text"
-            android:layout_marginStart="60dp"
-            android:background="@color/black"
-            style="?android:attr/borderlessButtonStyle"/>
-    </LinearLayout>
+        <variable
+                name="hasItemings"
+                type="boolean" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp"
-        android:layout_below="@id/linearLayout1"
-        android:text="@string/menu_groceries"
-        android:textSize="20sp"
-        android:textColor="@color/black"/>
+    </data>
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@id/textView1"
-        android:choiceMode="multipleChoice"/>
-</RelativeLayout>
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/grocery_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:layout_marginStart="@dimen/card_side_margin"
+                android:layout_marginEnd="@dimen/card_side_margin"
+                android:layout_marginTop="@dimen/margin_normal"
+                app:isGone="@{!hasItemings}"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+                app:spanCount="@integer/grid_columns"
+                tools:listitem="@layout/list_item_grocery_iteming"/>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:isGone="@{hasItemings}">
+
+            <TextView
+                    android:id="@+id/empty_grocery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/grocery_empty"
+                    android:textAppearance="?attr/textAppearanceHeadline5" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorPrimary"
+                android:text="@string/add_item"
+                app:backgroundTint="?attr/colorOnPrimary"
+                app:shapeAppearance="@style/ShapeAppearance.Grocery.Button.Add"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</layout>

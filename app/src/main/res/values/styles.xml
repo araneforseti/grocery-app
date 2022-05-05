@@ -1,0 +1,28 @@
+<resources>
+
+    <!-- To see how these attributes are used, please visit https://material.io/develop/android/theming/color/ -->
+    <style name="Base.Theme.Grocery" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/grocery_green_500</item>
+        <item name="colorOnPrimary">@color/grocery_yellow_500</item>
+        <item name="colorPrimaryDark">@color/grocery_green_700</item>
+        <item name="colorOnSurface">@color/grocery_black</item>
+        <item name="colorAccent">@color/grocery_green_700</item>
+        <item name="colorSurface">@color/grocery_gray_50</item>
+        <item name="colorSecondary">@color/grocery_yellow_500</item>
+        <item name="android:colorBackground">@color/grocery_green_500</item>
+    </style>
+
+    <style name="Theme.Grocery" parent="Base.Theme.Grocery"/>
+
+    <style name="Theme.Grocery.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Grocery.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+
+    <style name="TextAppearance.Grocery.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+</resources>
