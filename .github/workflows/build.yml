@@ -24,8 +24,8 @@ jobs:
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
 
-      - name: Run Kotlin Linter
-        run: ./gradlew lint
+#      - name: Run Kotlin Linter
+#        run: ./gradlew lint
 
       - name: Run Unit Tests
         uses: eskatos/gradle-command-action@v2.1.5
