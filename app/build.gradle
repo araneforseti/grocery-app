@@ -11,6 +11,12 @@ android {
         baseline(file("lint-baseline.xml"))
     }
 
+    configurations {
+        androidTestImplementation {
+            exclude group: 'org.checkerframework', module:'jetified-checker-qual'
+            exclude group: 'org.checkerframework', module:'checker-qual'
+        }
+    }
 
     buildFeatures {
         dataBinding true
