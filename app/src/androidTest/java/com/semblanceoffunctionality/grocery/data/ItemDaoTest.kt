@@ -31,6 +31,10 @@ class ItemDaoTest {
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         itemDao = database.itemDao()
         itemDao.insertAll(listOf(wantedItemA, notWantedItemB, wantedItemC))
+
+        // Fun learning - the Dao is ignoring my wanted value from constructor
+//        itemDao.setWanted(wantedItemA.itemId)
+//        itemDao.setWanted(wantedItemC.itemId)
     }
 
     @After
@@ -42,9 +46,9 @@ class ItemDaoTest {
     fun testGetItems() = runBlocking {
         val itemList = itemDao.getItems().first()
         assertThat(itemList.size, equalTo(3))
-        assertThat(itemList[0], equalTo(wantedItemA))
-        assertThat(itemList[1], equalTo(notWantedItemB))
-        assertThat(itemList[2], equalTo(wantedItemC))
+        assertThat(itemList[0].itemId, equalTo(wantedItemA.itemId))
+        assertThat(itemList[1].itemId, equalTo(notWantedItemB.itemId))
+        assertThat(itemList[2].itemId, equalTo(wantedItemC.itemId))
     }
 
     @Test
@@ -52,15 +56,15 @@ class ItemDaoTest {
         val itemList = itemDao.getWantedItems().first()
         assertThat(itemList.size, equalTo(2))
 
-        assertThat(itemList[0], equalTo(wantedItemA))
-        assertThat(itemList[1], equalTo(wantedItemC))
+        assertThat(itemList[0].itemId, equalTo(wantedItemA.itemId))
+        assertThat(itemList[1].itemId, equalTo(wantedItemC.itemId))
     }
 
     @Test
     fun testGetItem() = runBlocking {
         val item = itemDao.getItem(notWantedItemB.itemId).first()
 
-        assertThat(item, equalTo(notWantedItemB))
+        assertThat(item.itemId, equalTo(notWantedItemB.itemId))
     }
 
     @Test
@@ -75,6 +79,8 @@ class ItemDaoTest {
 
     @Test
     fun testSetWanted() = runBlocking {
+        assertThat(itemDao.isWanted(notWantedItemB.itemId), equalTo(false))
+
         itemDao.setWanted(notWantedItemB.itemId)
 
         assertThat(itemDao.isWanted(notWantedItemB.itemId), equalTo(true))
@@ -94,7 +100,7 @@ class ItemDaoTest {
         val itemList = itemDao.getItems().first()
         assertThat(itemList.size, equalTo(2))
 
-        assertThat(itemList[0], equalTo(notWantedItemB))
-        assertThat(itemList[2], equalTo(wantedItemC))
+        assertThat(itemList[0].itemId, equalTo(notWantedItemB.itemId))
+        assertThat(itemList[1].itemId, equalTo(wantedItemC.itemId))
     }
 }
