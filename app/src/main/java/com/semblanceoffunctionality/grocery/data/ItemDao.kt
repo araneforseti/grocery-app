@@ -17,16 +17,16 @@ interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(items: List<Item>)
 
-    @Query("UPDATE items SET wanted='true' WHERE id = :itemId")
+    @Query("UPDATE items SET wanted = 1 WHERE id = :itemId")
     fun setWanted(itemId: String)
 
-    @Query("SELECT * FROM items WHERE wanted = 'true'")
+    @Query("SELECT * FROM items WHERE wanted")
     fun getWantedItems(): Flow<List<Item>>
 
     @Query("SELECT wanted FROM items WHERE id = :itemId")
     fun isWanted(itemId: String): Boolean
 
-    @Query("UPDATE items SET wanted='false' WHERE id = :itemId")
+    @Query("UPDATE items SET wanted = 0 WHERE id = :itemId")
     fun setNotWanted(itemId: String)
 
     @Query("DELETE from items where id = :itemId")
