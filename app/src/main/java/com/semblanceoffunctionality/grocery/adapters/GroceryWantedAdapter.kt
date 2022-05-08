@@ -1,14 +1,11 @@
 package com.semblanceoffunctionality.grocery.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.semblanceoffunctionality.grocery.HomeViewPagerFragmentDirections
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.ListItemGroceryItemingBinding
@@ -37,19 +34,7 @@ class GroceryWantedAdapter :
     class ViewHolder(
         private val binding: ListItemGroceryItemingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.setClickListener { view ->
-                binding.viewModel?.itemId?.let { itemId ->
-                    navigateToItem(itemId, view)
-                }
-            }
-        }
-
-        private fun navigateToItem(itemId: String, view: View) {
-            val direction = HomeViewPagerFragmentDirections
-                .actionViewPagerFragmentToItemDetailFragment(itemId)
-            view.findNavController().navigate(direction)
-        }
+        init {}
 
         fun bind(item: Item) {
             with(binding) {

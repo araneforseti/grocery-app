@@ -7,7 +7,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.semblanceoffunctionality.grocery.HomeViewPagerFragmentDirections
 import com.semblanceoffunctionality.grocery.ItemListFragment
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.ListItemItemBinding
@@ -35,24 +34,7 @@ class ItemAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDiffCallback(
     class ItemViewHolder(
         private val binding: ListItemItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.setClickListener {
-                binding.item?.let { item ->
-                    navigateToItem(item, it)
-                }
-            }
-        }
-
-        private fun navigateToItem(
-            item: Item,
-            view: View
-        ) {
-            val direction =
-                HomeViewPagerFragmentDirections.actionViewPagerFragmentToItemDetailFragment(
-                    item.itemId
-                )
-            view.findNavController().navigate(direction)
-        }
+        init {}
 
         fun bind(listItem: Item) {
             binding.apply {

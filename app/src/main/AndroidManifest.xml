@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Grocery">
         <activity
-            android:name=".GroceryActivity"
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Grocery.NoActionBar">
             <intent-filter>

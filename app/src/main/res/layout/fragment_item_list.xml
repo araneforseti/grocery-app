@@ -18,7 +18,7 @@
             android:paddingTop="@dimen/header_margin"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="@integer/grid_columns"
-            tools:context=".GroceryActivity"
+            tools:context=".MainActivity"
             tools:listitem="@layout/list_item_item"/>
 
 

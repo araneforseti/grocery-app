@@ -3,48 +3,21 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/view_pager_fragment">
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_groceries">
 
     <fragment
-        android:id="@+id/view_pager_fragment"
-        android:name="com.semblanceoffunctionality.grocery.HomeViewPagerFragment"
-        tools:layout="@layout/fragment_view_pager">
-
-        <action
-                android:id="@+id/action_view_pager_fragment_to_item_detail_fragment"
-                app:destination="@id/item_detail_fragment"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/item_detail_fragment"
-        android:name="com.semblanceoffunctionality.grocery.ItemDetailFragment"
-        android:label="@string/item_details_title"
-        tools:layout="@layout/fragment_item_detail">
-
-        <action
-            android:id="@+id/action_item_detail_fragment_to_gallery_fragment"
-            app:destination="@id/gallery_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <argument
-            android:name="itemId"
-            app:argType="string" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/gallery_fragment"
+        android:id="@+id/nav_groceries"
         android:name="com.semblanceoffunctionality.grocery.GroceryFragment"
-        android:label="@string/item_details_title"
-        tools:layout="@layout/fragment_gallery">
-        <argument
-            android:name="itemName"
-            app:argType="string" />
+        android:label="@string/my_grocery_title"
+        tools:layout="@layout/fragment_desired_groceries">
+    </fragment>
+
+    <fragment
+        android:id="@+id/all_groceries"
+        android:name="com.semblanceoffunctionality.grocery.GroceryFragment"
+        android:label="@string/item_list_title"
+        tools:layout="@layout/fragment_grocery">
     </fragment>
 
 </navigation>

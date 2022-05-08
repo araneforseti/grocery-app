@@ -21,6 +21,8 @@
 
     <style name="Theme.Grocery.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
 
+    <style name="Theme.Grocery.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="TextAppearance.Grocery.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
