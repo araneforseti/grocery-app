@@ -1,4 +1,4 @@
-package com.semblanceoffunctionality.grocery
+package com.semblanceoffunctionality.grocery.ui.grocerylist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.viewpager2.widget.ViewPager2
+import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.GroceryWantedAdapter
 import com.semblanceoffunctionality.grocery.adapters.ITEM_LIST_PAGE_INDEX
 import com.semblanceoffunctionality.grocery.databinding.FragmentGroceryBinding
-import com.semblanceoffunctionality.grocery.viewmodels.GroceryWantedListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

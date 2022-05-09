@@ -8,16 +8,16 @@
         <import type="com.semblanceoffunctionality.grocery.data.Item"/>
         <variable
             name="viewModel"
-            type="com.semblanceoffunctionality.grocery.viewmodels.ItemDetailViewModel" />
+            type="com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailViewModel" />
         <variable
             name="addCallback"
-            type="com.semblanceoffunctionality.grocery.ItemDetailFragment.AddCallback" />
+            type="com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailFragment" />
         <variable
             name="removeCallback"
-            type="com.semblanceoffunctionality.grocery.ItemDetailFragment.RemoveCallback" />
+            type="com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailFragment" />
         <variable
             name="deleteCallback"
-            type="com.semblanceoffunctionality.grocery.ItemDetailFragment.DeleteCallback" />
+            type="com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailFragment" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -102,7 +102,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/fab_margin"
-                    android:onClick="@{() -> removeCallback.remove(viewModel.item)}"
                     app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
                     app:layout_anchorGravity="bottom|end"
                     app:layout_constraintTop_toBottomOf="@id/item_detail_name"
@@ -119,7 +118,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/fab_margin"
-                    android:onClick="@{() -> deleteCallback.delete(viewModel.item)}"
                     android:outlineSpotShadowColor="@color/design_default_color_on_primary"
                     app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
                     app:layout_anchorGravity="bottom|end"
@@ -139,7 +137,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:onClick="@{() -> addCallback.add(viewModel.item)}"
             android:tint="@android:color/white"
             app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
             app:isFabGone="@{false}"

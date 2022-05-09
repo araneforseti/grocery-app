@@ -1,4 +1,4 @@
-package com.semblanceoffunctionality.grocery.viewmodels
+package com.semblanceoffunctionality.grocery.ui.grocerylist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

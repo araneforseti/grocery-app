@@ -7,16 +7,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragment
 import com.semblanceoffunctionality.grocery.data.Item
+import com.semblanceoffunctionality.grocery.data.Store
 import com.semblanceoffunctionality.grocery.databinding.ListItemItemBinding
+import com.semblanceoffunctionality.grocery.databinding.StoreListItemBinding
 
 /**
  * Adapter for the [RecyclerView] in [ItemListFragment].
  */
-class ItemAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDiffCallback()) {
+class StoreAdapter : ListAdapter<Store, RecyclerView.ViewHolder>(StoreDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ItemViewHolder(
-            ListItemItemBinding.inflate(
+        return StoreViewHolder(
+            StoreListItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -25,31 +27,31 @@ class ItemAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDiffCallback(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = getItem(position)
-        (holder as ItemViewHolder).bind(item)
+        val store = getItem(position)
+        (holder as StoreViewHolder).bind(store)
     }
 
-    class ItemViewHolder(
-        private val binding: ListItemItemBinding
+    class StoreViewHolder(
+        private val binding: StoreListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {}
 
-        fun bind(listItem: Item) {
+        fun bind(listStore: Store) {
             binding.apply {
-                item = listItem
+                store = listStore
                 executePendingBindings()
             }
         }
     }
 }
 
-private class ItemDiffCallback : DiffUtil.ItemCallback<Item>() {
+private class StoreDiffCallback : DiffUtil.ItemCallback<Store>() {
 
-    override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem.itemId == newItem.itemId
+    override fun areItemsTheSame(oldItem: Store, newItem: Store): Boolean {
+        return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
+    override fun areContentsTheSame(oldItem: Store, newItem: Store): Boolean {
         return oldItem == newItem
     }
 }

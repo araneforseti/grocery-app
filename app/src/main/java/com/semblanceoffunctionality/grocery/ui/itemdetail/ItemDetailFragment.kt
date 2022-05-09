@@ -1,20 +1,17 @@
-package com.semblanceoffunctionality.grocery
+package com.semblanceoffunctionality.grocery.ui.itemdetail
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.findNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.Item
-import com.semblanceoffunctionality.grocery.viewmodels.ItemDetailViewModel
 import com.semblanceoffunctionality.grocery.databinding.FragmentItemDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,27 +37,27 @@ class ItemDetailFragment : Fragment() {
         ).apply {
             viewModel = itemDetailViewModel
             lifecycleOwner = viewLifecycleOwner
-            addCallback = AddCallback { item ->
-                item?.let {
-                    itemDetailViewModel.addItemToGrocery()
-                    Snackbar.make(root, R.string.added_item_to_grocery, Snackbar.LENGTH_LONG)
-                        .show()
-                }
-            }
-            removeCallback = RemoveCallback { item ->
-                item?.let {
-                    itemDetailViewModel.removeItemFromGrocery()
-                    Snackbar.make(root, R.string.removed_item_from_grocery, Snackbar.LENGTH_LONG)
-                        .show()
-                }
-            }
-            deleteCallback = DeleteCallback { item ->
-                item?.let {
-                    itemDetailViewModel.deleteItem()
-                    Snackbar.make(root, R.string.deleted_item, Snackbar.LENGTH_LONG)
-                        .show()
-                }
-            }
+//            addCallback = AddCallback { item ->
+//                item?.let {
+//                    itemDetailViewModel.addItemToGrocery()
+//                    Snackbar.make(root, R.string.added_item_to_grocery, Snackbar.LENGTH_LONG)
+//                        .show()
+//                }
+//            }
+//            removeCallback = RemoveCallback { item ->
+//                item?.let {
+//                    itemDetailViewModel.removeItemFromGrocery()
+//                    Snackbar.make(root, R.string.removed_item_from_grocery, Snackbar.LENGTH_LONG)
+//                        .show()
+//                }
+//            }
+//            deleteCallback = DeleteCallback { item ->
+//                item?.let {
+//                    itemDetailViewModel.deleteItem()
+//                    Snackbar.make(root, R.string.deleted_item, Snackbar.LENGTH_LONG)
+//                        .show()
+//                }
+//            }
 
             var isToolbarShown = false
 

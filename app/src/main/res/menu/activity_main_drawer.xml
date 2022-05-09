@@ -4,12 +4,14 @@
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_grocery_list"
-            android:title="@string/my_grocery_title" />
+            android:id="@+id/nav_groceries"
+            android:title="@string/my_grocery_title"
+            />
 
         <item
-            android:id="@+id/nav_all_item"
-            android:title="@string/item_list_title" />
+            android:id="@+id/nav_all_groceries"
+            android:title="@string/item_list_title"
+            />
 
         <item
             android:id="@+id/nav_store_list"

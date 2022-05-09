@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.ListItemGroceryItemingBinding
-import com.semblanceoffunctionality.grocery.viewmodels.GroceryWantedItemsViewModel
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryWantedItemsViewModel
 
 class GroceryWantedAdapter :
     ListAdapter<Item, GroceryWantedAdapter.ViewHolder>(

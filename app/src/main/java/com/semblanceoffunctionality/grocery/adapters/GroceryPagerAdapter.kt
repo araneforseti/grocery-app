@@ -2,8 +2,8 @@ package com.semblanceoffunctionality.grocery.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.semblanceoffunctionality.grocery.GroceryFragment
-import com.semblanceoffunctionality.grocery.ItemListFragment
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryFragment
+import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragment
 
 const val MY_GROCERY_PAGE_INDEX = 0
 const val ITEM_LIST_PAGE_INDEX = 1

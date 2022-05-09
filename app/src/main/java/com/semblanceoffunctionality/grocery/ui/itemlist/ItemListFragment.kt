@@ -1,4 +1,4 @@
-package com.semblanceoffunctionality.grocery
+package com.semblanceoffunctionality.grocery.ui.itemlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.ItemAdapter
 import com.semblanceoffunctionality.grocery.databinding.FragmentItemListBinding
-import com.semblanceoffunctionality.grocery.viewmodels.ItemListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
