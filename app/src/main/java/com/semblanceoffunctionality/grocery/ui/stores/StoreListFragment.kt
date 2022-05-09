@@ -41,9 +41,9 @@ class StoreListFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: StoreAdapter) {
-//        viewModel.items.observe(viewLifecycleOwner) { items ->
-//            adapter.submitList(items)
-//        }
+        viewModel.stores.observe(viewLifecycleOwner) { items ->
+            adapter.submitList(items)
+        }
     }
 
     private fun createItemDialog(container: ViewGroup?) {
@@ -55,7 +55,7 @@ class StoreListFragment : Fragment() {
                 setView(dialogView)
                 setPositiveButton(R.string.create) { _, _ ->
                     val userInput = dialogView.findViewById<EditText>(R.id.new_item)
-//                    viewModel.addItem(userInput.text.toString())
+                    viewModel.addStore(userInput.text.toString())
                 }
                 setNegativeButton(R.string.cancel) { dialog, _ ->
                     dialog?.cancel()

@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "stores")
 data class Store(
-    @PrimaryKey @ColumnInfo(name = "id") val name: String,
+    @PrimaryKey @ColumnInfo(name = "name") val name: String,
     val address: String,
 ) {
     override fun toString() = name

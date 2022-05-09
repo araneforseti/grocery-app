@@ -34,9 +34,4 @@ class ItemListViewModel @Inject internal constructor(
             itemRepository.createItem(itemName)
         }
     }
-
-    companion object {
-        private const val NO_STORE = -1
-        private const val STORE_SAVED_STATE_KEY = "STORE_SAVED_STATE_KEY"
-    }
 }
