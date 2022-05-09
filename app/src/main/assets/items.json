@@ -1,8 +1,7 @@
 [
   {
     "itemId": "milk",
-    "name": "Milk",
-    "wanted": 1
+    "name": "Milk"
   },
   {
     "itemId": "beta-vulgaris",

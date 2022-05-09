@@ -54,7 +54,7 @@ class ItemListFragment : Fragment() {
         activity?.let {
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater
-            val dialogView = inflater.inflate(R.layout.fragment_new_item_dialog, container)
+            val dialogView = inflater.inflate(R.layout.fragment_new_item_dialog, container, false)
             builder.apply {
                 setView(dialogView)
                 setPositiveButton(R.string.create) { _, _ ->
