@@ -1,13 +1,20 @@
 package com.semblanceoffunctionality.grocery.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragment
 import com.semblanceoffunctionality.grocery.data.Item
+import com.semblanceoffunctionality.grocery.databinding.FragmentItemDetailBinding
 import com.semblanceoffunctionality.grocery.databinding.ListItemItemBinding
+import com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailViewModel
+import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragmentDirections
 
 /**
  * Adapter for the [RecyclerView] in [ItemListFragment].
@@ -29,10 +36,19 @@ class ItemAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDiffCallback(
         (holder as ItemViewHolder).bind(item)
     }
 
-    class ItemViewHolder(
+    class ItemViewHolder
+        (
         private val binding: ListItemItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {}
+        init {
+            binding.setClickListener {
+                binding.item?.let { item ->
+                    val action = ItemListFragmentDirections
+                        .actionNavAllGroceriesToNavItemDetail(item.itemId)
+                    it.findNavController().navigate(action)
+                }
+            }
+        }
 
         fun bind(listItem: Item) {
             binding.apply {
