@@ -35,4 +35,8 @@ class StockStatusRepository @Inject constructor(
     }
 
     fun getAllStockStatusesForItem(itemId: String) = stockStatusDao.getStockStatusesForItem(itemId)
+
+    fun deleteItem(itemId: String) = stockStatusDao.deleteItem(itemId)
+
+    fun deleteStore(name: String) = stockStatusDao.deleteStore(name)
 }

@@ -83,4 +83,39 @@ class StockStatusRepositoryTest {
         assertThat(result[1].stockStatus, equalTo(StockStatusEnum.UNKNOWN))
         assertThat(result[1].store, equalTo(store2.name))
     }
+
+    @Test
+    fun testDeleteStockForStores_WhenItemDeleted() = runBlocking {
+        storeDao.insertAll(listOf(store1, store2))
+        itemDao.insertAll(listOf(itemA, itemB))
+
+        stockStatusRepository.addStockStatusesForItem(itemA.itemId)
+        stockStatusRepository.addStockStatusesForItem(itemB.itemId)
+
+        val result = stockStatusRepository.getAllStockStatusesForStore(store1.name).first()
+        assertThat(result.size, equalTo(2))
+
+        stockStatusRepository.deleteItem(itemA.itemId)
+
+        val newResult = stockStatusRepository.getAllStockStatusesForStore(store1.name).first()
+        assertThat(newResult.size, equalTo(1))
+        assertThat(newResult[0].itemId, equalTo(itemB.itemId))
+    }
+
+    @Test
+    fun testDeleteStockForItems_WhenStoreDeleted() = runBlocking {
+        storeDao.insertAll(listOf(store1, store2))
+        itemDao.insertAll(listOf(itemA))
+
+        stockStatusRepository.addStockStatusesForItem(itemA.itemId)
+
+        val result = stockStatusRepository.getAllStockStatusesForItem(itemA.itemId).first()
+        assertThat(result.size, equalTo(2))
+
+        stockStatusRepository.deleteStore(store2.name)
+
+        val newResult = stockStatusRepository.getAllStockStatusesForItem(itemA.itemId).first()
+        assertThat(newResult.size, equalTo(1))
+        assertThat(newResult[0].store, equalTo(store1.name))
+    }
 }
