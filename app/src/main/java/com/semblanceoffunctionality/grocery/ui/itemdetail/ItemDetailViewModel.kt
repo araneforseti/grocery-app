@@ -1,6 +1,5 @@
 package com.semblanceoffunctionality.grocery.ui.itemdetail
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -25,7 +24,6 @@ class ItemDetailViewModel @Inject constructor(
 
     fun addItemToGrocery() {
         CoroutineScope(Dispatchers.IO).launch {
-            Log.e("info", "Item: " + itemId + " should be added to list")
             itemRepository.setWanted(itemId)
         }
     }

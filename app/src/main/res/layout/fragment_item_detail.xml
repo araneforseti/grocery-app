@@ -116,6 +116,7 @@
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus"
+            android:onClick="@{() -> addCallback.add(viewModel.item)}"
             android:contentDescription="@string/add_button_descriptor" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
