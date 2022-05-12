@@ -37,54 +37,26 @@ class ItemDetailFragment : Fragment() {
         ).apply {
             viewModel = itemDetailViewModel
             lifecycleOwner = viewLifecycleOwner
-//            addCallback = AddCallback { item ->
-//                item?.let {
-//                    itemDetailViewModel.addItemToGrocery()
-//                    Snackbar.make(root, R.string.added_item_to_grocery, Snackbar.LENGTH_LONG)
-//                        .show()
-//                }
-//            }
-//            removeCallback = RemoveCallback { item ->
-//                item?.let {
-//                    itemDetailViewModel.removeItemFromGrocery()
-//                    Snackbar.make(root, R.string.removed_item_from_grocery, Snackbar.LENGTH_LONG)
-//                        .show()
-//                }
-//            }
-//            deleteCallback = DeleteCallback { item ->
-//                item?.let {
-//                    itemDetailViewModel.deleteItem()
-//                    Snackbar.make(root, R.string.deleted_item, Snackbar.LENGTH_LONG)
-//                        .show()
-//                }
-//            }
-
-            var isToolbarShown = false
-
-            // scroll change listener begins at Y = 0 when image is fully collapsed
-            itemDetailScrollview.setOnScrollChangeListener(
-                NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
-
-                    // User scrolled past image to height of toolbar and the title text is
-                    // underneath the toolbar, so the toolbar should be shown.
-                    val shouldShowToolbar = scrollY > toolbar.height
-
-                    // The new state of the toolbar differs from the previous state; update
-                    // appbar and toolbar attributes.
-                    if (isToolbarShown != shouldShowToolbar) {
-                        isToolbarShown = shouldShowToolbar
-
-                        // Use shadow animator to add elevation if toolbar is shown
-                        appbar.isActivated = shouldShowToolbar
-
-                        // Show the item name if toolbar is shown
-                        toolbarLayout.isTitleEnabled = shouldShowToolbar
-                    }
+            addCallback = AddCallback { item ->
+                item?.let {
+                    itemDetailViewModel.addItemToGrocery()
+                    Snackbar.make(root, R.string.added_item_to_grocery, Snackbar.LENGTH_LONG)
+                        .show()
                 }
-            )
-
-            toolbar.setNavigationOnClickListener { view ->
-                view.findNavController().navigateUp()
+            }
+            removeCallback = RemoveCallback { item ->
+                item?.let {
+                    itemDetailViewModel.removeItemFromGrocery()
+                    Snackbar.make(root, R.string.removed_item_from_grocery, Snackbar.LENGTH_LONG)
+                        .show()
+                }
+            }
+            deleteCallback = DeleteCallback { item ->
+                item?.let {
+                    itemDetailViewModel.deleteItem()
+                    Snackbar.make(root, R.string.deleted_item, Snackbar.LENGTH_LONG)
+                        .show()
+                }
             }
         }
         setHasOptionsMenu(true)
