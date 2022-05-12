@@ -10,7 +10,9 @@ import javax.inject.Singleton
  * query execution off of the main thread.
  */
 @Singleton
-class StoreRepository @Inject constructor(private val storeDao: StoreDao) {
+class StoreRepository @Inject constructor(
+    private val storeDao: StoreDao
+) {
 
     fun getStores() = storeDao.getStores()
 

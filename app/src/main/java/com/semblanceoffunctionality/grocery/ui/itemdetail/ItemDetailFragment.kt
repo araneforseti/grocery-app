@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
+import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 import com.semblanceoffunctionality.grocery.R
+import com.semblanceoffunctionality.grocery.adapters.StockAdapter
+import com.semblanceoffunctionality.grocery.adapters.StoreAdapter
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.FragmentItemDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,7 +62,17 @@ class ItemDetailFragment : Fragment() {
         }
         setHasOptionsMenu(true)
 
+        val adapter = StockAdapter()
+        binding.stockList.adapter = adapter
+        subscribeUi(adapter)
+
         return binding.root
+    }
+
+    private fun subscribeUi(adapter: StockAdapter) {
+        itemDetailViewModel.statuses.observe(viewLifecycleOwner) { statuses ->
+            adapter.submitList(statuses)
+        }
     }
 
     fun interface AddCallback {
