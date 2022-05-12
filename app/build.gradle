@@ -7,6 +7,9 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 android {
     compileSdkVersion rootProject.compileSdkVersion
 
+    lintOptions {
+        baseline(file("lint-baseline.xml"))
+    }
 
     configurations {
         androidTestImplementation {
@@ -58,10 +61,6 @@ android {
             excludes += ['/META-INF/AL2.0', '/META-INF/LGPL2.1']
         }
     }
-    lint {
-        baseline file('lint-baseline.xml')
-    }
-    namespace 'com.semblanceoffunctionality.grocery'
 }
 
 dependencies {
