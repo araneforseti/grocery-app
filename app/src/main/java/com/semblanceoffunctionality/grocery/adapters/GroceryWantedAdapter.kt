@@ -3,13 +3,16 @@ package com.semblanceoffunctionality.grocery.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.ListItemGroceryItemingBinding
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryFragmentDirections
 import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryWantedItemsViewModel
+import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragmentDirections
 
 class GroceryWantedAdapter :
     ListAdapter<Item, GroceryWantedAdapter.ViewHolder>(
@@ -34,7 +37,15 @@ class GroceryWantedAdapter :
     class ViewHolder(
         private val binding: ListItemGroceryItemingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {}
+        init {
+            binding.setClickListener {
+                binding.viewModel?.let { viewModel ->
+                    val action = GroceryFragmentDirections
+                        .actionNavGroceriesToNavItemDetail(viewModel.itemId)
+                    it.findNavController().navigate(action)
+                }
+            }
+        }
 
         fun bind(item: Item) {
             with(binding) {
