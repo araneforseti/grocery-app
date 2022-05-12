@@ -5,8 +5,9 @@
 
     <!-- Translatable resources -->
     <string name="menu_filter_by_store" translation_description="The label for the menu item to filter the displayed items by store.">Filter by store</string>
-    <string name="my_grocery_title" translation_description="Title for the 'My grocery' screen where the user can see the list of items that have been added to their grocery.">My grocery</string>
-    <string name="item_list_title" translation_description="Title for the item list screen where the user can see a list of items available to add to their grocery.">Item list</string>
+    <string name="my_grocery_title" translation_description="Title for the 'My grocery' screen where the user can see the list of items that have been added to their grocery.">My Grocery List</string>
+    <string name="item_list_title" translation_description="Title for the item list screen where the user can see a list of items available to add to their grocery.">Item List</string>
+    <string name="store_list_title" translation_description="Title for the store list">Store List</string>
     <string name="item_details_title" translation_description="Title for the item details screen where the user can see the details for a specific item.">item details</string>
     <string name="add_item" translation_description="Button text that prompts user to navigate to the Item List to add items to their empty grocery.">Add item</string>
     <string name="added_item_to_grocery" translation_description="Confirmation text that is shown when a user adds a item to their empty grocery.">Added item to grocery</string>
@@ -19,4 +20,13 @@
     <string name="removed_item_from_grocery">Item removed from grocery list</string>
     <string name="deleted_item">Item removed from database</string>
     <string name="item_name_hint">Item Name</string>
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="item_details">Item Details</string>
+    <string name="store_list">Store List</string>
+    <string name="store_name_hint">Store Name</string>
+    <string name="add_store">New Store</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.semblanceoffunctionality.grocery
+package com.semblanceoffunctionality.grocery.ui.grocerylist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.GroceryWantedAdapter
 import com.semblanceoffunctionality.grocery.adapters.ITEM_LIST_PAGE_INDEX
 import com.semblanceoffunctionality.grocery.databinding.FragmentGroceryBinding
-import com.semblanceoffunctionality.grocery.viewmodels.GroceryWantedListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,9 +46,7 @@ class GroceryFragment : Fragment() {
         }
     }
 
-    // TODO: convert to data binding if applicable
     private fun navigateToItemListPage() {
-        requireActivity().findViewById<ViewPager2>(R.id.view_pager).currentItem =
-            ITEM_LIST_PAGE_INDEX
+        this.findNavController().navigate(R.id.nav_all_groceries)
     }
 }

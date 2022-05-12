@@ -8,8 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/item_list"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/store_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -19,14 +19,14 @@
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="@integer/grid_columns"
             tools:context=".MainActivity"
-            tools:listitem="@layout/list_item_item"/>
+            tools:listitem="@layout/store_list_item"/>
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/add_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_item"
+            android:text="@string/add_store"
             android:textColor="?attr/colorPrimary"
             android:layout_gravity="bottom"
             android:layout_marginStart="150dp"

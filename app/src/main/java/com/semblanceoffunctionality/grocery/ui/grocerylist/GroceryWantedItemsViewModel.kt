@@ -1,4 +1,4 @@
-package com.semblanceoffunctionality.grocery.viewmodels
+package com.semblanceoffunctionality.grocery.ui.grocerylist
 
 import com.semblanceoffunctionality.grocery.data.Item
 

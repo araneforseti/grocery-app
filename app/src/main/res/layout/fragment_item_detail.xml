@@ -8,16 +8,16 @@
         <import type="com.semblanceoffunctionality.grocery.data.Item"/>
         <variable
             name="viewModel"
-            type="com.semblanceoffunctionality.grocery.viewmodels.ItemDetailViewModel" />
+            type="com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailViewModel" />
         <variable
             name="addCallback"
-            type="com.semblanceoffunctionality.grocery.ItemDetailFragment.AddCallback" />
+            type="com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailFragment.AddCallback" />
         <variable
             name="removeCallback"
-            type="com.semblanceoffunctionality.grocery.ItemDetailFragment.RemoveCallback" />
+            type="com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailFragment.RemoveCallback" />
         <variable
             name="deleteCallback"
-            type="com.semblanceoffunctionality.grocery.ItemDetailFragment.DeleteCallback" />
+            type="com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailFragment.DeleteCallback" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:background="?attr/colorSurface"
-        tools:context=".GroceryActivity"
+        tools:context=".MainActivity"
         tools:ignore="MergeRootFrame">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -37,33 +37,6 @@
             android:stateListAnimator="@animator/show_toolbar"
             android:background="?attr/colorSurface"
             android:animateLayoutChanges="true">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/toolbar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorSurface"
-                app:statusBarScrim="?attr/colorSurface"
-                app:collapsedTitleGravity="center"
-                app:collapsedTitleTextAppearance="@style/TextAppearance.Grocery.Toolbar.Text"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="@{viewModel.item.name}"
-                app:titleEnabled="false"
-                app:toolbarId="@id/toolbar">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="@android:color/transparent"
-                    app:titleTextColor="?attr/colorOnSurface"
-                    app:layout_collapseMode="pin"
-                    app:contentInsetStartWithNavigation="0dp"
-                    app:navigationIcon="@drawable/ic_detail_back"
-                    app:menu="@menu/menu_item_detail" />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -102,7 +75,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/fab_margin"
-                    android:onClick="@{() -> removeCallback.remove(viewModel.item)}"
                     app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
                     app:layout_anchorGravity="bottom|end"
                     app:layout_constraintTop_toBottomOf="@id/item_detail_name"
@@ -110,6 +82,7 @@
                     app:srcCompat="@drawable/ic_minus"
                     android:outlineSpotShadowColor="@color/design_default_color_on_primary"
                     android:contentDescription="@string/add_button_descriptor"
+                    android:onClick="@{() -> removeCallback.remove(viewModel.item)}"
                     app:tint="@android:color/white" />
 
 
@@ -119,13 +92,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/fab_margin"
-                    android:onClick="@{() -> deleteCallback.delete(viewModel.item)}"
                     android:outlineSpotShadowColor="@color/design_default_color_on_primary"
                     app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
                     app:layout_anchorGravity="bottom|end"
                     app:layout_constraintTop_toBottomOf="@id/item_detail_name"
                     app:layout_constraintLeft_toRightOf="@id/fab_remove"
                     app:srcCompat="@drawable/ic_delete"
+                    android:onClick="@{() -> deleteCallback.delete(viewModel.item)}"
                     android:contentDescription="@string/add_button_descriptor"
                     app:tint="@android:color/white" />
 
@@ -139,13 +112,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:onClick="@{() -> addCallback.add(viewModel.item)}"
             android:tint="@android:color/white"
             app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
             app:isFabGone="@{false}"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus"
+            android:onClick="@{() -> addCallback.add(viewModel.item)}"
             android:contentDescription="@string/add_button_descriptor" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

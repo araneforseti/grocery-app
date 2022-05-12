@@ -1,9 +1,8 @@
-package com.semblanceoffunctionality.grocery.viewmodels
+package com.semblanceoffunctionality.grocery.ui.itemdetail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.semblanceoffunctionality.grocery.ItemDetailFragment
 import com.semblanceoffunctionality.grocery.data.ItemRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope

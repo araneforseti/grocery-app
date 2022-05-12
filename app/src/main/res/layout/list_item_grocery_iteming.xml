@@ -9,7 +9,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="viewModel"
-            type="com.semblanceoffunctionality.grocery.viewmodels.GroceryWantedItemsViewModel"/>
+            type="com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryWantedItemsViewModel"/>
     </data>
 
     <com.semblanceoffunctionality.grocery.views.MaskedCardView

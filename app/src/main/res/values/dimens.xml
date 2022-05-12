@@ -32,5 +32,10 @@
 
     <!-- minimum height of item detail page so that the collapsing toolbar can be shown on every page -->
     <dimen name="item_description_min_height">555dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="tool_bar_height">48dp</dimen>
 
 </resources>

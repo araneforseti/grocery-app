@@ -3,14 +3,18 @@ package com.semblanceoffunctionality.grocery.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.semblanceoffunctionality.grocery.HomeViewPagerFragmentDirections
-import com.semblanceoffunctionality.grocery.ItemListFragment
+import com.semblanceoffunctionality.grocery.R
+import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragment
 import com.semblanceoffunctionality.grocery.data.Item
+import com.semblanceoffunctionality.grocery.databinding.FragmentItemDetailBinding
 import com.semblanceoffunctionality.grocery.databinding.ListItemItemBinding
+import com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailViewModel
+import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragmentDirections
 
 /**
  * Adapter for the [RecyclerView] in [ItemListFragment].
@@ -32,26 +36,18 @@ class ItemAdapter : ListAdapter<Item, RecyclerView.ViewHolder>(ItemDiffCallback(
         (holder as ItemViewHolder).bind(item)
     }
 
-    class ItemViewHolder(
+    class ItemViewHolder
+        (
         private val binding: ListItemItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
                 binding.item?.let { item ->
-                    navigateToItem(item, it)
+                    val action = ItemListFragmentDirections
+                        .actionNavAllGroceriesToNavItemDetail(item.itemId)
+                    it.findNavController().navigate(action)
                 }
             }
-        }
-
-        private fun navigateToItem(
-            item: Item,
-            view: View
-        ) {
-            val direction =
-                HomeViewPagerFragmentDirections.actionViewPagerFragmentToItemDetailFragment(
-                    item.itemId
-                )
-            view.findNavController().navigate(direction)
         }
 
         fun bind(listItem: Item) {

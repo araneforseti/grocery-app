@@ -1,18 +1,18 @@
 package com.semblanceoffunctionality.grocery.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.semblanceoffunctionality.grocery.HomeViewPagerFragmentDirections
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.ListItemGroceryItemingBinding
-import com.semblanceoffunctionality.grocery.viewmodels.GroceryWantedItemsViewModel
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryFragmentDirections
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryWantedItemsViewModel
+import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragmentDirections
 
 class GroceryWantedAdapter :
     ListAdapter<Item, GroceryWantedAdapter.ViewHolder>(
@@ -38,17 +38,13 @@ class GroceryWantedAdapter :
         private val binding: ListItemGroceryItemingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
-            binding.setClickListener { view ->
-                binding.viewModel?.itemId?.let { itemId ->
-                    navigateToItem(itemId, view)
+            binding.setClickListener {
+                binding.viewModel?.let { viewModel ->
+                    val action = GroceryFragmentDirections
+                        .actionNavGroceriesToNavItemDetail(viewModel.itemId)
+                    it.findNavController().navigate(action)
                 }
             }
-        }
-
-        private fun navigateToItem(itemId: String, view: View) {
-            val direction = HomeViewPagerFragmentDirections
-                .actionViewPagerFragmentToItemDetailFragment(itemId)
-            view.findNavController().navigate(direction)
         }
 
         fun bind(item: Item) {

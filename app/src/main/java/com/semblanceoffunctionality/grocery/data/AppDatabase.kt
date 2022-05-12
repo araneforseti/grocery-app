@@ -17,10 +17,11 @@ import com.semblanceoffunctionality.grocery.workers.SeedDatabaseWorker.Companion
 /**
  * The Room database for this app
  */
-@Database(entities = [Item::class], version = 1, exportSchema = false)
+@Database(entities = [Item::class, Store::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun itemDao(): ItemDao
+    abstract fun storeDao(): StoreDao
 
     companion object {
 
