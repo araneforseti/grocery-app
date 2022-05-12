@@ -26,7 +26,7 @@
             android:id="@+id/add_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_item"
+            android:text="@string/add_store"
             android:textColor="?attr/colorPrimary"
             android:layout_gravity="bottom"
             android:layout_marginStart="150dp"

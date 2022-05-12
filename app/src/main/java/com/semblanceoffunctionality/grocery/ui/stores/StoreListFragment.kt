@@ -29,7 +29,7 @@ class StoreListFragment : Fragment() {
         subscribeUi(adapter)
 
         binding.addItem.setOnClickListener {
-            createItemDialog(container)
+            createStoreDialog(container)
         }
 
         setHasOptionsMenu(true)
@@ -46,15 +46,15 @@ class StoreListFragment : Fragment() {
         }
     }
 
-    private fun createItemDialog(container: ViewGroup?) {
+    private fun createStoreDialog(container: ViewGroup?) {
         activity?.let {
             val builder = AlertDialog.Builder(it)
             val inflater = requireActivity().layoutInflater
-            val dialogView = inflater.inflate(R.layout.fragment_new_item_dialog, container, false)
+            val dialogView = inflater.inflate(R.layout.fragment_new_store_dialog, container, false)
             builder.apply {
                 setView(dialogView)
                 setPositiveButton(R.string.create) { _, _ ->
-                    val userInput = dialogView.findViewById<EditText>(R.id.new_item)
+                    val userInput = dialogView.findViewById<EditText>(R.id.new_store)
                     viewModel.addStore(userInput.text.toString())
                 }
                 setNegativeButton(R.string.cancel) { dialog, _ ->
