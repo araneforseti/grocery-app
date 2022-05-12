@@ -1,6 +1,6 @@
 name: Build
 
-on: [pull_request]
+on: [pull_request,push]
 
 env:
   API_VERSION: 31
