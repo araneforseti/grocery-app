@@ -28,83 +28,68 @@
         tools:context=".MainActivity"
         tools:ignore="MergeRootFrame">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_detail_app_bar_height"
-            android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:stateListAnimator="@animator/show_toolbar"
-            android:background="?attr/colorSurface"
-            android:animateLayoutChanges="true">
+            android:layout_margin="@dimen/margin_normal">
 
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/item_detail_scrollview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="@dimen/fab_bottom_padding"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/item_detail_name"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/margin_normal">
+                android:layout_height="100dp"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center_horizontal"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@{viewModel.item.name}"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Apple" />
 
-                <TextView
-                    android:id="@+id/item_detail_name"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginEnd="@dimen/margin_small"
-                    android:gravity="center_horizontal"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="@{viewModel.item.name}"
-                    android:textAppearance="?attr/textAppearanceHeadline5"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Apple" />
+            <ImageButton
+                android:id="@+id/fab_remove"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
+                app:layout_anchorGravity="bottom|end"
+                app:layout_constraintTop_toBottomOf="@id/item_detail_name"
+                app:layout_constraintRight_toLeftOf="@id/fab_delete"
+                app:srcCompat="@drawable/ic_minus"
+                android:outlineSpotShadowColor="@color/design_default_color_on_primary"
+                android:contentDescription="@string/add_button_descriptor"
+                android:onClick="@{() -> removeCallback.remove(viewModel.item)}"
+                app:tint="@android:color/white" />
 
-                <ImageButton
-                    android:id="@+id/fab_remove"
-                    style="@style/Widget.MaterialComponents.FloatingActionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/fab_margin"
-                    app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
-                    app:layout_anchorGravity="bottom|end"
-                    app:layout_constraintTop_toBottomOf="@id/item_detail_name"
-                    app:layout_constraintRight_toLeftOf="@id/fab_delete"
-                    app:srcCompat="@drawable/ic_minus"
-                    android:outlineSpotShadowColor="@color/design_default_color_on_primary"
-                    android:contentDescription="@string/add_button_descriptor"
-                    android:onClick="@{() -> removeCallback.remove(viewModel.item)}"
-                    app:tint="@android:color/white" />
+            <ImageButton
+                android:id="@+id/fab_delete"
+                style="@style/Widget.MaterialComponents.FloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/fab_margin"
+                android:outlineSpotShadowColor="@color/design_default_color_on_primary"
+                app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
+                app:layout_anchorGravity="bottom|end"
+                app:layout_constraintTop_toBottomOf="@id/item_detail_name"
+                app:layout_constraintLeft_toRightOf="@id/fab_remove"
+                app:srcCompat="@drawable/ic_delete"
+                android:onClick="@{() -> deleteCallback.delete(viewModel.item)}"
+                android:contentDescription="@string/add_button_descriptor"
+                app:tint="@android:color/white" />
 
-
-                <ImageButton
-                    android:id="@+id/fab_delete"
-                    style="@style/Widget.MaterialComponents.FloatingActionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/fab_margin"
-                    android:outlineSpotShadowColor="@color/design_default_color_on_primary"
-                    app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
-                    app:layout_anchorGravity="bottom|end"
-                    app:layout_constraintTop_toBottomOf="@id/item_detail_name"
-                    app:layout_constraintLeft_toRightOf="@id/fab_remove"
-                    app:srcCompat="@drawable/ic_delete"
-                    android:onClick="@{() -> deleteCallback.delete(viewModel.item)}"
-                    android:contentDescription="@string/add_button_descriptor"
-                    app:tint="@android:color/white" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/stock_list"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="@integer/grid_columns"
+            tools:listitem="@layout/list_store_status"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_add"
@@ -115,7 +100,7 @@
             android:tint="@android:color/white"
             app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
             app:isFabGone="@{false}"
-            app:layout_anchor="@id/appbar"
+            app:layout_anchor="@id/item_detail_name"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus"
             android:onClick="@{() -> addCallback.add(viewModel.item)}"

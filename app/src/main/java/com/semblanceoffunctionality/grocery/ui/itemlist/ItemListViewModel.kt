@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragment
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.data.ItemRepository
+import com.semblanceoffunctionality.grocery.data.StockStatusRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ItemListViewModel @Inject internal constructor(
     private val itemRepository: ItemRepository,
+    private val stockRepository: StockStatusRepository,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -32,6 +34,7 @@ class ItemListViewModel @Inject internal constructor(
     fun addItem(itemName: String) {
         CoroutineScope(Dispatchers.IO).launch {
             itemRepository.createItem(itemName)
+            stockRepository.addStockStatusesForItem(itemName)
         }
     }
 }
