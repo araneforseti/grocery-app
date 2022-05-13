@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.semblanceoffunctionality.grocery.data.StockStatus
+import com.semblanceoffunctionality.grocery.data.StockStatusEnum
 import com.semblanceoffunctionality.grocery.databinding.ListStoreStatusBinding
 
 /**
  * Adapter for the [RecyclerView] in [ItemDetailFragment].
  */
-class StockAdapter : ListAdapter<StockStatus, RecyclerView.ViewHolder>(StockStatusDiffCallback()) {
+class ItemStockAdapter : ListAdapter<StockStatus, RecyclerView.ViewHolder>(StockStatusDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return StockStatusViewHolder(

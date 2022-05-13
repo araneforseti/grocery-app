@@ -9,7 +9,7 @@ class ItemTest {
     private lateinit var item: Item
 
     @Before fun setUp() {
-        item = Item("1", "Tomato")
+        item = Item("Tomato")
     }
 
     @Test fun test_toString() {

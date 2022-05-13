@@ -16,4 +16,16 @@ data class StockStatus(
     @ColumnInfo(name="item") val item: String,
     @ColumnInfo(name="store") val store: String,
     @ColumnInfo(name="stockStatus") val stockStatus: StockStatusEnum
-) {}
+) {
+    fun isStocked(): Boolean {
+        return stockStatus == StockStatusEnum.STOCKED
+    }
+
+    fun isUnknown(): Boolean {
+        return stockStatus == StockStatusEnum.UNKNOWN
+    }
+
+    fun isNotStocked(): Boolean {
+        return stockStatus == StockStatusEnum.NOT_STOCKED
+    }
+}

@@ -24,7 +24,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_detail_app_bar_height"
+            android:layout_height="100dp"
             android:layout_margin="@dimen/margin_normal">
 
             <TextView

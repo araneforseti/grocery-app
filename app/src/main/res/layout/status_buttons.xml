@@ -1,36 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_margin="5dp"
-    android:orientation="horizontal">
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
-        android:id="@+id/status_stocked"
+    <data>
+        <variable
+            name="status"
+            type="com.semblanceoffunctionality.grocery.data.StockStatus" />
+    </data>
+
+    <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup
+        android:id="@+id/status_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="0dp"
-        app:statusImage="@drawable/ic_stocked" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
 
-    <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
-        android:id="@+id/status_unknown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="0dp"
-        app:statusImage="@drawable/ic_status_unknown" />
+        <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
+            android:id="@+id/status_stocked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:checked="@{status.isStocked}"
+            app:statusImage="@drawable/ic_status_stocked" />
 
-    <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
-        android:id="@+id/status_not_stocked"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="0dp"
-        app:statusImage="@drawable/ic_status_not_stocked" />
+        <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
+            android:id="@+id/status_unknown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:checked="@{status.isUnknown}"
+            app:statusImage="@drawable/ic_status_unknown" />
 
-</com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup>
+        <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
+            android:id="@+id/status_not_stocked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:checked="@{status.isNotStocked}"
+            app:statusImage="@drawable/ic_status_not_stocked" />
+
+    </com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup>
+</layout>
