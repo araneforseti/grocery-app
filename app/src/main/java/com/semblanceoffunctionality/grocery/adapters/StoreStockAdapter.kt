@@ -46,7 +46,7 @@ class StoreStockAdapter : ListAdapter<StockStatus, RecyclerView.ViewHolder>(Stor
 private class StoreStockStatusDiffCallback : DiffUtil.ItemCallback<StockStatus>() {
 
     override fun areItemsTheSame(oldItem: StockStatus, newItem: StockStatus): Boolean {
-        return oldItem.itemId == newItem.itemId && oldItem.store == newItem.store
+        return oldItem.item == newItem.item && oldItem.store == newItem.store
     }
 
     override fun areContentsTheSame(oldItem: StockStatus, newItem: StockStatus): Boolean {

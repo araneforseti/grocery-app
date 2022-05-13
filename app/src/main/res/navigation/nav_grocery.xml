@@ -40,7 +40,7 @@
         android:label="@string/item_details"
         tools:layout="@layout/fragment_item_detail">
         <argument
-            android:name="itemId"
+            android:name="name"
             app:argType="string" />
     </fragment>
 

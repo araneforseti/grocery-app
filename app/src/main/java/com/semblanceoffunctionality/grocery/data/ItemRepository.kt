@@ -14,19 +14,19 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
 
     fun getItems() = itemDao.getItems()
 
-    fun getItem(itemId: String) = itemDao.getItem(itemId)
+    fun getItem(name: String) = itemDao.getItem(name)
 
-    suspend fun createItem(itemName: String) = itemDao.insertAll(listOf(Item(itemName, itemName, true)))
+    suspend fun createItem(itemName: String) = itemDao.insertAll(listOf(Item(itemName, true)))
 
-    fun setWanted(itemId: String) {
-        itemDao.setWanted(itemId)
+    fun setWanted(name: String) {
+        itemDao.setWanted(name)
     }
 
     fun getWantedItems() = itemDao.getWantedItems()
 
-    fun isWanted(itemId: String) = itemDao.isWanted(itemId)
+    fun isWanted(name: String) = itemDao.isWanted(name)
 
-    fun removeWanted(itemId: String) = itemDao.setNotWanted(itemId)
+    fun removeWanted(name: String) = itemDao.setNotWanted(name)
 
-    fun deleteItem(itemId: String) = itemDao.deleteItem(itemId)
+    fun deleteItem(name: String) = itemDao.deleteItem(name)
 }
