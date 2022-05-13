@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StatusImageRadioButton">
+        <attr name="statusImage" format="reference" />
+        <attr name="statusPressedImageTint" format="color" />
+        <attr name="statusUnpressedImageTint" format="color" />
+        <attr name="statusPressedBackgroundDrawable" format="reference" />
+    </declare-styleable>
+</resources>

@@ -65,7 +65,7 @@
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:spanCount="@integer/grid_columns"
             tools:listitem="@layout/list_item_status"/>
 

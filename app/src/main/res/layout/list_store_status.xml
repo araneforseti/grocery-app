@@ -40,10 +40,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:text="Store Name"/>
-                <com.semblanceoffunctionality.grocery.ui.StatusSwitcher
-                    android:layout_width="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/store_item_title"
-                    android:layout_height="match_parent"/>
+
+                <include layout="@layout/status_buttons" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
