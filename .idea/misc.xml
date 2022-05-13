@@ -42,6 +42,7 @@
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/fragment_plant_detail.xml" value="0.1" />
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/fragment_plant_list.xml" value="0.1" />
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/fragment_slideshow.xml" value="0.1" />
+        <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/fragment_store_detail.xml" value="0.1" />
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/fragment_store_list.xml" value="0.2" />
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/fragment_view_pager.xml" value="0.1" />
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/list_item.xml" value="0.17239583333333333" />
@@ -53,6 +54,8 @@
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/list_item_name.xml" value="0.1" />
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/list_item_photo.xml" value="0.1" />
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/list_item_plant.xml" value="0.12952898550724637" />
+        <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/list_item_status.xml" value="0.1" />
+        <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/list_store_status.xml" value="0.1" />
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/list_store_stock.xml" value="0.1" />
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="..\:/Users/arane/Documents/grocery-app/app/src/main/res/layout/store_list_item.xml" value="0.2" />

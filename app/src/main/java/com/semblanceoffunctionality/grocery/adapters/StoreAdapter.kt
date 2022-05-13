@@ -2,17 +2,17 @@ package com.semblanceoffunctionality.grocery.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragment
-import com.semblanceoffunctionality.grocery.data.Item
+import com.semblanceoffunctionality.grocery.ui.storelist.StoreListFragment
 import com.semblanceoffunctionality.grocery.data.Store
-import com.semblanceoffunctionality.grocery.databinding.ListItemItemBinding
 import com.semblanceoffunctionality.grocery.databinding.StoreListItemBinding
+import com.semblanceoffunctionality.grocery.ui.storelist.StoreListFragmentDirections
 
 /**
- * Adapter for the [RecyclerView] in [ItemListFragment].
+ * Adapter for the [RecyclerView] in [StoreListFragment].
  */
 class StoreAdapter : ListAdapter<Store, RecyclerView.ViewHolder>(StoreDiffCallback()) {
 
@@ -34,7 +34,15 @@ class StoreAdapter : ListAdapter<Store, RecyclerView.ViewHolder>(StoreDiffCallba
     class StoreViewHolder(
         private val binding: StoreListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {}
+        init {
+            binding.setClickListener {
+                binding.store?.let { store ->
+                    val action = StoreListFragmentDirections
+                        .actionNavStoreListToNavStoreDetail(store.name)
+                    it.findNavController().navigate(action)
+                }
+            }
+        }
 
         fun bind(listStore: Store) {
             binding.apply {

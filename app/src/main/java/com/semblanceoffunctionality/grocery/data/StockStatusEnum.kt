@@ -3,8 +3,8 @@ package com.semblanceoffunctionality.grocery.data
 import androidx.room.TypeConverter
 
 enum class StockStatusEnum(val value: Int) {
-    UNKNOWN(0),
-    STOCKED(1),
+    STOCKED(0),
+    UNKNOWN(1),
     NOT_STOCKED(2)
 }
 

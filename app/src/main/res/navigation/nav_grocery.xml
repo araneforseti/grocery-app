@@ -46,9 +46,25 @@
 
     <fragment
         android:id="@+id/nav_store_list"
-        android:name="com.semblanceoffunctionality.grocery.ui.stores.StoreListFragment"
+        android:name="com.semblanceoffunctionality.grocery.ui.storelist.StoreListFragment"
         android:label="@string/store_list"
         tools:layout="@layout/fragment_store_list">
+        <action
+            android:id="@+id/action_nav_store_list_to_nav_store_detail"
+            app:destination="@id/nav_store_detail" />
+        <argument
+            android:name="store"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_store_detail"
+        android:name="com.semblanceoffunctionality.grocery.ui.storedetail.StoreDetailFragment"
+        android:label="@string/store_detail"
+        tools:layout="@layout/fragment_store_detail">
+        <argument
+            android:name="store"
+            app:argType="string" />
     </fragment>
 
 </navigation>
