@@ -39,6 +39,7 @@ class ItemDetailViewModel @Inject constructor(
 
     fun deleteItem() {
         CoroutineScope(Dispatchers.IO).launch {
+            stockStatusRepository.deleteItem(itemId)
             itemRepository.deleteItem(itemId)
         }
     }

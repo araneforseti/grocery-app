@@ -1,4 +1,4 @@
-package com.semblanceoffunctionality.grocery.ui.stores
+package com.semblanceoffunctionality.grocery.ui.storelist
 
 import android.os.Bundle
 import android.view.*

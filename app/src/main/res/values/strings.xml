@@ -29,4 +29,6 @@
     <string name="store_list">Store List</string>
     <string name="store_name_hint">Store Name</string>
     <string name="add_store">New Store</string>
+    <string name="store_detail">Store Detail</string>
+    <string name="deleted_store">Deleted store from database</string>
 </resources>

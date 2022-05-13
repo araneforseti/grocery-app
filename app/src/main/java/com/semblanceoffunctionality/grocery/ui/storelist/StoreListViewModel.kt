@@ -1,4 +1,4 @@
-package com.semblanceoffunctionality.grocery.ui.stores
+package com.semblanceoffunctionality.grocery.ui.storelist
 
 import androidx.lifecycle.*
 import com.semblanceoffunctionality.grocery.data.StockStatusRepository

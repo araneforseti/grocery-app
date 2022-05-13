@@ -20,5 +20,5 @@ class StoreRepository @Inject constructor(
 
     suspend fun createStore(name: String, address: String = "") = storeDao.insertAll(listOf(Store(name, address)))
 
-    fun deleteItem(itemId: String) = storeDao.deleteStore(itemId)
+    fun deleteStore(name: String) = storeDao.deleteStore(name)
 }

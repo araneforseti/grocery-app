@@ -29,21 +29,17 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/store_item_title"
+                    android:id="@+id/status_item_title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/margin_normal"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:text="@{stockStatus.store}"
+                    android:text="@{stockStatus.itemId}"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:gravity="center_horizontal"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    tools:text="Store Name"/>
-                <com.semblanceoffunctionality.grocery.ui.StatusSwitcher
-                    android:layout_width="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/store_item_title"
-                    android:layout_height="match_parent"/>
+                    tools:text="Item Name"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
