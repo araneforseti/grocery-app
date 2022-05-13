@@ -21,30 +21,30 @@ class ItemDetailViewModel @Inject constructor(
     private val stockStatusRepository: StockStatusRepository
 ) : ViewModel() {
 
-    val itemId: String = savedStateHandle.get<String>(ITEM_ID_SAVED_STATE_KEY)!!
-    val item = itemRepository.getItem(itemId).asLiveData()
-    val statuses = stockStatusRepository.getStockStatusesForItem(itemId).asLiveData()
+    val name: String = savedStateHandle.get<String>(ITEM_ID_SAVED_STATE_KEY)!!
+    val item = itemRepository.getItem(name).asLiveData()
+    val statuses = stockStatusRepository.getStockStatusesForItem(name).asLiveData()
 
     fun addItemToGrocery() {
         CoroutineScope(Dispatchers.IO).launch {
-            itemRepository.setWanted(itemId)
+            itemRepository.setWanted(name)
         }
     }
 
     fun removeItemFromGrocery() {
         CoroutineScope(Dispatchers.IO).launch {
-            itemRepository.removeWanted(itemId)
+            itemRepository.removeWanted(name)
         }
     }
 
     fun deleteItem() {
         CoroutineScope(Dispatchers.IO).launch {
-            stockStatusRepository.deleteItem(itemId)
-            itemRepository.deleteItem(itemId)
+            stockStatusRepository.deleteItem(name)
+            itemRepository.deleteItem(name)
         }
     }
 
     companion object {
-        private const val ITEM_ID_SAVED_STATE_KEY = "itemId"
+        private const val ITEM_ID_SAVED_STATE_KEY = "name"
     }
 }

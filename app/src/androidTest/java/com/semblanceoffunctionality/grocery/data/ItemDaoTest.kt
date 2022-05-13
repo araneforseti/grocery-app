@@ -18,9 +18,9 @@ import org.junit.runner.RunWith
 class ItemDaoTest {
     private lateinit var database: AppDatabase
     private lateinit var itemDao: ItemDao
-    private val wantedItemA = Item("itemA", "itemA", true)
-    private val notWantedItemB = Item("itemB", "itemB", false)
-    private val wantedItemC = Item("itemC", "itemC", true)
+    private val wantedItemA = Item("itemA", true)
+    private val notWantedItemB = Item("itemB", false)
+    private val wantedItemC = Item("itemC", true)
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -31,10 +31,6 @@ class ItemDaoTest {
         database = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         itemDao = database.itemDao()
         itemDao.insertAll(listOf(wantedItemA, notWantedItemB, wantedItemC))
-
-        // Fun learning - the Dao is ignoring my wanted value from constructor
-//        itemDao.setWanted(wantedItemA.itemId)
-//        itemDao.setWanted(wantedItemC.itemId)
     }
 
     @After
@@ -46,9 +42,9 @@ class ItemDaoTest {
     fun testGetItems() = runBlocking {
         val itemList = itemDao.getItems().first()
         assertThat(itemList.size, equalTo(3))
-        assertThat(itemList[0].itemId, equalTo(wantedItemA.itemId))
-        assertThat(itemList[1].itemId, equalTo(notWantedItemB.itemId))
-        assertThat(itemList[2].itemId, equalTo(wantedItemC.itemId))
+        assertThat(itemList[0].name, equalTo(wantedItemA.name))
+        assertThat(itemList[1].name, equalTo(notWantedItemB.name))
+        assertThat(itemList[2].name, equalTo(wantedItemC.name))
     }
 
     @Test
@@ -56,51 +52,51 @@ class ItemDaoTest {
         val itemList = itemDao.getWantedItems().first()
         assertThat(itemList.size, equalTo(2))
 
-        assertThat(itemList[0].itemId, equalTo(wantedItemA.itemId))
-        assertThat(itemList[1].itemId, equalTo(wantedItemC.itemId))
+        assertThat(itemList[0].name, equalTo(wantedItemA.name))
+        assertThat(itemList[1].name, equalTo(wantedItemC.name))
     }
 
     @Test
     fun testGetItem() = runBlocking {
-        val item = itemDao.getItem(notWantedItemB.itemId).first()
+        val item = itemDao.getItem(notWantedItemB.name).first()
 
-        assertThat(item.itemId, equalTo(notWantedItemB.itemId))
+        assertThat(item.name, equalTo(notWantedItemB.name))
     }
 
     @Test
     fun testIsWanted_true() = runBlocking {
-        assertThat(itemDao.isWanted(wantedItemA.itemId), equalTo(true))
+        assertThat(itemDao.isWanted(wantedItemA.name), equalTo(true))
     }
 
     @Test
     fun testIsWanted_false() = runBlocking {
-        assertThat(itemDao.isWanted(notWantedItemB.itemId), equalTo(false))
+        assertThat(itemDao.isWanted(notWantedItemB.name), equalTo(false))
     }
 
     @Test
     fun testSetWanted() = runBlocking {
-        assertThat(itemDao.isWanted(notWantedItemB.itemId), equalTo(false))
+        assertThat(itemDao.isWanted(notWantedItemB.name), equalTo(false))
 
-        itemDao.setWanted(notWantedItemB.itemId)
+        itemDao.setWanted(notWantedItemB.name)
 
-        assertThat(itemDao.isWanted(notWantedItemB.itemId), equalTo(true))
+        assertThat(itemDao.isWanted(notWantedItemB.name), equalTo(true))
     }
 
     @Test
     fun testSetNotWanted() = runBlocking {
-        itemDao.setNotWanted(wantedItemA.itemId)
+        itemDao.setNotWanted(wantedItemA.name)
 
-        assertThat(itemDao.isWanted(wantedItemA.itemId), equalTo(false))
+        assertThat(itemDao.isWanted(wantedItemA.name), equalTo(false))
     }
 
     @Test
     fun testDelete() = runBlocking {
-        itemDao.deleteItem(wantedItemA.itemId)
+        itemDao.deleteItem(wantedItemA.name)
 
         val itemList = itemDao.getItems().first()
         assertThat(itemList.size, equalTo(2))
 
-        assertThat(itemList[0].itemId, equalTo(notWantedItemB.itemId))
-        assertThat(itemList[1].itemId, equalTo(wantedItemC.itemId))
+        assertThat(itemList[0].name, equalTo(notWantedItemB.name))
+        assertThat(itemList[1].name, equalTo(wantedItemC.name))
     }
 }

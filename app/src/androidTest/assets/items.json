@@ -1,46 +1,46 @@
 [
   {
-    "itemId": "milk",
+    "name": "milk",
     "name": "Milk"
   },
   {
-    "itemId": "beta-vulgaris",
+    "name": "beta-vulgaris",
     "name": "Beet"
   },
   {
-    "itemId": "coriandrum-sativum",
+    "name": "coriandrum-sativum",
     "name": "Cilantro"
   },
   {
-    "itemId": "solanum-lycopersicum",
+    "name": "solanum-lycopersicum",
     "name": "Tomato"
   },
   {
-    "itemId": "persea-americana",
+    "name": "persea-americana",
     "name": "Avocado"
   },
   {
-    "itemId": "pyrus-communis",
+    "name": "pyrus-communis",
     "name": "Pear"
   },
   {
-    "itemId": "egg",
+    "name": "egg",
     "name": "Egg"
   },
   {
-    "itemId": "vitis-vinifera",
+    "name": "vitis-vinifera",
     "name": "Grape"
   },
   {
-    "itemId": "mangifera-indica",
+    "name": "mangifera-indica",
     "name": "Mango"
   },
   {
-    "itemId": "citrus-x-sinensis",
+    "name": "citrus-x-sinensis",
     "name": "Orange"
   },
   {
-    "itemId": "citrullus-lanatus",
+    "name": "citrullus-lanatus",
     "name": "Watermelon"
   }
 ]
