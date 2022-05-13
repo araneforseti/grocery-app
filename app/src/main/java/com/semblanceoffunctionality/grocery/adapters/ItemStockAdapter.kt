@@ -5,13 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragment
-import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.data.StockStatus
-import com.semblanceoffunctionality.grocery.data.Store
-import com.semblanceoffunctionality.grocery.databinding.ListItemItemBinding
 import com.semblanceoffunctionality.grocery.databinding.ListStoreStatusBinding
-import com.semblanceoffunctionality.grocery.databinding.StoreListItemBinding
 
 /**
  * Adapter for the [RecyclerView] in [ItemDetailFragment].
@@ -50,7 +45,7 @@ class StockAdapter : ListAdapter<StockStatus, RecyclerView.ViewHolder>(StockStat
 private class StockStatusDiffCallback : DiffUtil.ItemCallback<StockStatus>() {
 
     override fun areItemsTheSame(oldItem: StockStatus, newItem: StockStatus): Boolean {
-        return oldItem.itemId == newItem.itemId && oldItem.store == newItem.store
+        return oldItem.item == newItem.item && oldItem.store == newItem.store
     }
 
     override fun areContentsTheSame(oldItem: StockStatus, newItem: StockStatus): Boolean {

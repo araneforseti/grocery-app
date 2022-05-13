@@ -56,13 +56,13 @@ class StockStatusRepositoryTest {
 
         val result = stockStatusRepository.getAllStockStatusesForStore(store1.name).first()
         assertThat(result.size, equalTo(3))
-        assertThat(result[0].itemId, equalTo(itemA.itemId))
+        assertThat(result[0].item, equalTo(itemA.name))
         assertThat(result[0].store, equalTo(store1.name))
         assertThat(result[0].stockStatus, equalTo(StockStatusEnum.UNKNOWN))
-        assertThat(result[1].itemId, equalTo(itemB.itemId))
+        assertThat(result[1].item, equalTo(itemB.name))
         assertThat(result[1].stockStatus, equalTo(StockStatusEnum.UNKNOWN))
         assertThat(result[1].store, equalTo(store1.name))
-        assertThat(result[2].itemId, equalTo(itemC.itemId))
+        assertThat(result[2].item, equalTo(itemC.name))
         assertThat(result[2].stockStatus, equalTo(StockStatusEnum.UNKNOWN))
         assertThat(result[2].store, equalTo(store1.name))
     }
@@ -72,14 +72,14 @@ class StockStatusRepositoryTest {
         storeDao.insertAll(listOf(store1, store2))
         itemDao.insertAll(listOf(itemA))
 
-        stockStatusRepository.addStockStatusesForItem(itemA.itemId)
+        stockStatusRepository.addStockStatusesForItem(itemA.name)
 
-        val result = stockStatusRepository.getAllStockStatusesForItem(itemA.itemId).first()
+        val result = stockStatusRepository.getAllStockStatusesForItem(itemA.name).first()
         assertThat(result.size, equalTo(2))
-        assertThat(result[0].itemId, equalTo(itemA.itemId))
+        assertThat(result[0].item, equalTo(itemA.name))
         assertThat(result[0].stockStatus, equalTo(StockStatusEnum.UNKNOWN))
         assertThat(result[0].store, equalTo(store1.name))
-        assertThat(result[1].itemId, equalTo(itemA.itemId))
+        assertThat(result[1].item, equalTo(itemA.name))
         assertThat(result[1].stockStatus, equalTo(StockStatusEnum.UNKNOWN))
         assertThat(result[1].store, equalTo(store2.name))
     }
@@ -89,17 +89,17 @@ class StockStatusRepositoryTest {
         storeDao.insertAll(listOf(store1, store2))
         itemDao.insertAll(listOf(itemA, itemB))
 
-        stockStatusRepository.addStockStatusesForItem(itemA.itemId)
-        stockStatusRepository.addStockStatusesForItem(itemB.itemId)
+        stockStatusRepository.addStockStatusesForItem(itemA.name)
+        stockStatusRepository.addStockStatusesForItem(itemB.name)
 
         val result = stockStatusRepository.getAllStockStatusesForStore(store1.name).first()
         assertThat(result.size, equalTo(2))
 
-        stockStatusRepository.deleteItem(itemA.itemId)
+        stockStatusRepository.deleteItem(itemA.name)
 
         val newResult = stockStatusRepository.getAllStockStatusesForStore(store1.name).first()
         assertThat(newResult.size, equalTo(1))
-        assertThat(newResult[0].itemId, equalTo(itemB.itemId))
+        assertThat(newResult[0].item, equalTo(itemB.name))
     }
 
     @Test
@@ -107,14 +107,14 @@ class StockStatusRepositoryTest {
         storeDao.insertAll(listOf(store1, store2))
         itemDao.insertAll(listOf(itemA))
 
-        stockStatusRepository.addStockStatusesForItem(itemA.itemId)
+        stockStatusRepository.addStockStatusesForItem(itemA.name)
 
-        val result = stockStatusRepository.getAllStockStatusesForItem(itemA.itemId).first()
+        val result = stockStatusRepository.getAllStockStatusesForItem(itemA.name).first()
         assertThat(result.size, equalTo(2))
 
         stockStatusRepository.deleteStore(store2.name)
 
-        val newResult = stockStatusRepository.getAllStockStatusesForItem(itemA.itemId).first()
+        val newResult = stockStatusRepository.getAllStockStatusesForItem(itemA.name).first()
         assertThat(newResult.size, equalTo(1))
         assertThat(newResult[0].store, equalTo(store1.name))
     }

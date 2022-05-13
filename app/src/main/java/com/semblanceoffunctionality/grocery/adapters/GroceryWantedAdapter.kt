@@ -12,7 +12,6 @@ import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.ListItemGroceryItemingBinding
 import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryFragmentDirections
 import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryWantedItemsViewModel
-import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragmentDirections
 
 class GroceryWantedAdapter :
     ListAdapter<Item, GroceryWantedAdapter.ViewHolder>(
@@ -41,7 +40,7 @@ class GroceryWantedAdapter :
             binding.setClickListener {
                 binding.viewModel?.let { viewModel ->
                     val action = GroceryFragmentDirections
-                        .actionNavGroceriesToNavItemDetail(viewModel.itemId)
+                        .actionNavGroceriesToNavItemDetail(viewModel.name)
                     it.findNavController().navigate(action)
                 }
             }
@@ -62,7 +61,7 @@ private class GroceryItemDiffCallback : DiffUtil.ItemCallback<Item>() {
         oldItem: Item,
         newItem: Item
     ): Boolean {
-        return oldItem.itemId == newItem.itemId
+        return oldItem.name == newItem.name
     }
 
     override fun areContentsTheSame(
