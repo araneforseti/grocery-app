@@ -11,4 +11,5 @@
     <color name="grocery_white">#deffffff</color>
     <color name="grocery_yellow_300">#f8f99f</color>
     <color name="grocery_yellow_500">#ffff63</color>
+    <color name="grocery_check">#49bb79</color>
 </resources>

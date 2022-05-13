@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 import com.semblanceoffunctionality.grocery.R
-import com.semblanceoffunctionality.grocery.adapters.StockAdapter
+import com.semblanceoffunctionality.grocery.adapters.StoreStockAdapter
 import com.semblanceoffunctionality.grocery.data.Store
 import com.semblanceoffunctionality.grocery.databinding.FragmentStoreDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,14 +47,14 @@ class StoreDetailFragment : Fragment() {
         }
         setHasOptionsMenu(true)
 
-        val adapter = StockAdapter()
+        val adapter = StoreStockAdapter()
         binding.stockItemList.adapter = adapter
         subscribeUi(adapter)
 
         return binding.root
     }
 
-    private fun subscribeUi(adapter: StockAdapter) {
+    private fun subscribeUi(adapter: StoreStockAdapter) {
         storeDetailViewModel.statuses.observe(viewLifecycleOwner) { statuses ->
             adapter.submitList(statuses)
         }

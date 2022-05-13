@@ -37,7 +37,6 @@
                     android:text="@{stockStatus.itemId}"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:gravity="center_horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:text="Item Name"/>
