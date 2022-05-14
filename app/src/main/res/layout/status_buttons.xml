@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            name="status"
+            name="stockStatus"
             type="com.semblanceoffunctionality.grocery.data.StockStatus" />
     </data>
 
@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="0dp"
-            android:checked="@{status.isStocked}"
+            android:checked="@{stockStatus.isStocked}"
             app:statusImage="@drawable/ic_status_stocked" />
 
         <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="0dp"
-            android:checked="@{status.isUnknown}"
+            android:checked="@{stockStatus.isUnknown}"
             app:statusImage="@drawable/ic_status_unknown" />
 
         <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="0dp"
-            android:checked="@{status.isNotStocked}"
+            android:checked="@{stockStatus.isNotStocked}"
             app:statusImage="@drawable/ic_status_not_stocked" />
 
     </com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup>

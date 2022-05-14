@@ -41,7 +41,10 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:text="Store Name"/>
 
-                <include layout="@layout/status_buttons" />
+                <include
+                    layout="@layout/status_buttons"
+                    app:stockStatus="@{stockStatus}"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
