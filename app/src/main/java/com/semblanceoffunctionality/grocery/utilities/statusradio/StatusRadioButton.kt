@@ -94,8 +94,31 @@ class StatusRadioButton: RelativeLayout, StatusRadioCheckable {
         myOnTouchListener = l
     }
 
+    override fun performClick(): Boolean {
+        myOnClickListener?.onClick(this)
+        super.performClick()
+        return true
+    }
+
     // TODO: handle user defined click listeners
     fun onTouchListener() = myOnTouchListener
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        super.onTouchEvent(event)
+        if (event != null) {
+            when(event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    isChecked = true
+                    return true
+                }
+                MotionEvent.ACTION_UP -> {
+                    performClick()
+                    return true
+                }
+            }
+        }
+        return false
+    }
 
     fun onTouchDown(motionEvent: MotionEvent) {
         // TODO: handle user defined click listeners

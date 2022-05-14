@@ -44,6 +44,24 @@ class ItemDetailViewModel @Inject constructor(
         }
     }
 
+    fun setStockedStatus(store: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            stockStatusRepository.setStockedStatus(store, name)
+        }
+    }
+
+    fun setStockedUnknownStatus(store: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            stockStatusRepository.setUnknownStatus(store, name)
+        }
+    }
+
+    fun setNotStockedStatus(store: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            stockStatusRepository.setNotStockedStatus(store, name)
+        }
+    }
+
     companion object {
         private const val ITEM_ID_SAVED_STATE_KEY = "name"
     }

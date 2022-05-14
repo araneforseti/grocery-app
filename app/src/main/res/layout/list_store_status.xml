@@ -10,7 +10,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="stockStatus"
-            type="com.semblanceoffunctionality.grocery.data.StockStatus"/>
+            type="com.semblanceoffunctionality.grocery.data.StockStatus" />
     </data>
 
     <com.semblanceoffunctionality.grocery.views.MaskedCardView
@@ -43,6 +43,7 @@
 
                 <include
                     layout="@layout/status_buttons"
+                    android:id="@+id/status_buttons"
                     app:stockStatus="@{stockStatus}"
                     />
 

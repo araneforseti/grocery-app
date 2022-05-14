@@ -6,6 +6,15 @@
         <variable
             name="stockStatus"
             type="com.semblanceoffunctionality.grocery.data.StockStatus" />
+        <variable
+            name="stockedTouchListener"
+            type="android.view.View.OnTouchListener"/>
+        <variable
+            name="unknownTouchListener"
+            type="android.view.View.OnTouchListener"/>
+        <variable
+            name="notStockedTouchListener"
+            type="android.view.View.OnTouchListener"/>
     </data>
 
     <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup

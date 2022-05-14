@@ -39,4 +39,8 @@ class StockStatusRepository @Inject constructor(
     fun deleteItem(item: String) = stockStatusDao.deleteItem(item)
 
     fun deleteStore(item: String) = stockStatusDao.deleteStore(item)
+
+    fun setStockedStatus(store: String, item: String) = stockStatusDao.setStock(item, store, StockStatusEnum.STOCKED)
+    fun setUnknownStatus(store: String, item: String) = stockStatusDao.setStock(item, store, StockStatusEnum.UNKNOWN)
+    fun setNotStockedStatus(store: String, item: String) = stockStatusDao.setStock(item, store, StockStatusEnum.NOT_STOCKED)
 }

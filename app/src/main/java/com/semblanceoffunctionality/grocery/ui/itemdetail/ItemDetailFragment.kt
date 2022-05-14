@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +14,8 @@ import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.ItemStockAdapter
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.FragmentItemDetailBinding
+import com.semblanceoffunctionality.grocery.generated.callback.OnClickListener
+import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -28,7 +31,6 @@ class ItemDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         val binding = DataBindingUtil.inflate<FragmentItemDetailBinding>(
             inflater,
             R.layout.fragment_item_detail,
@@ -61,7 +63,23 @@ class ItemDetailFragment : Fragment() {
         }
         setHasOptionsMenu(true)
 
-        val adapter = ItemStockAdapter()
+        val adapter = ItemStockAdapter(
+            object : ItemStockAdapter.StockedClickListener {
+                override fun onClickListener(store: String) {
+                    itemDetailViewModel.setStockedStatus(store)
+                }
+            },
+            object : ItemStockAdapter.UnknownClickListener {
+                override fun onClickListener(store: String) {
+                    itemDetailViewModel.setStockedUnknownStatus(store)
+                }
+            },
+            object : ItemStockAdapter.NotStockedClickListener {
+                override fun onClickListener(store: String) {
+                    itemDetailViewModel.setNotStockedStatus(store)
+                }
+            },
+        )
         binding.stockList.adapter = adapter
         subscribeUi(adapter)
 

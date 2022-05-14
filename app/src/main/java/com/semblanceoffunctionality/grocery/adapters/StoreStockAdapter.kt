@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.semblanceoffunctionality.grocery.data.StockStatus
 import com.semblanceoffunctionality.grocery.databinding.ListItemStatusBinding
+import com.semblanceoffunctionality.grocery.ui.stockstatus.StockStatusViewModel
 import com.semblanceoffunctionality.grocery.ui.storedetail.StoreDetailFragment
 
 /**
