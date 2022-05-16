@@ -7,6 +7,9 @@
             name="stockStatus"
             type="com.semblanceoffunctionality.grocery.data.StockStatus" />
         <variable
+            name="stockName"
+            type="String" />
+        <variable
             name="stockedTouchListener"
             type="android.view.View.OnTouchListener"/>
         <variable
@@ -24,6 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="5dp"
+        app:store="@{stockStatus.store}"
         android:orientation="horizontal">
 
         <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton

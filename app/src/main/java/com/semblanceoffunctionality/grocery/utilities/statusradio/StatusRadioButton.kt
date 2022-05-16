@@ -13,6 +13,7 @@ import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
 import androidx.core.widget.ImageViewCompat
 import com.semblanceoffunctionality.grocery.R
+import com.semblanceoffunctionality.grocery.adapters.ItemStockAdapter
 
 class StatusRadioButton: RelativeLayout, StatusRadioCheckable {
 
@@ -54,12 +55,12 @@ class StatusRadioButton: RelativeLayout, StatusRadioCheckable {
     }
 
     private fun parseAttrs(attrs: AttributeSet) {
-        val array = context.obtainStyledAttributes(attrs, R.styleable.StatusImageRadioButton)
+        val array = context.obtainStyledAttributes(attrs, R.styleable.StatusRadioButton)
         try {
-            image = array.getDrawable(R.styleable.StatusImageRadioButton_statusImage)
-            unpressedImageTint = array.getColor(R.styleable.StatusImageRadioButton_statusUnpressedImageTint, DEFAULT_UNPRESSED_IMAGE_TINT)
-            pressedImageTint = array.getColor(R.styleable.StatusImageRadioButton_statusPressedImageTint, DEFAULT_PRESSED_IMAGE_TINT)
-            pressedBackgroundDrawable = array.getDrawable(R.styleable.StatusImageRadioButton_statusPressedBackgroundDrawable)
+            image = array.getDrawable(R.styleable.StatusRadioButton_statusImage)
+            unpressedImageTint = array.getColor(R.styleable.StatusRadioButton_statusUnpressedImageTint, DEFAULT_UNPRESSED_IMAGE_TINT)
+            pressedImageTint = array.getColor(R.styleable.StatusRadioButton_statusPressedImageTint, DEFAULT_PRESSED_IMAGE_TINT)
+            pressedBackgroundDrawable = array.getDrawable(R.styleable.StatusRadioButton_statusPressedBackgroundDrawable)
         } finally {
             array.recycle()
         }
@@ -88,6 +89,7 @@ class StatusRadioButton: RelativeLayout, StatusRadioCheckable {
 
     private fun setCustomTouchListener() {
         super.setOnTouchListener(TouchListener())
+        super.setOnClickListener(ClickListener())
     }
 
     override fun setOnTouchListener(l: OnTouchListener?) {
@@ -206,6 +208,12 @@ class StatusRadioButton: RelativeLayout, StatusRadioCheckable {
             myOnTouchListener?.onTouch(v, event)
 
             return true
+        }
+    }
+
+    private inner class ClickListener : OnClickListener {
+        override fun onClick(v: View?) {
+            performClick()
         }
     }
 }

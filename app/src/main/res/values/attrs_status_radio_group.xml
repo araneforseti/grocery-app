@@ -2,5 +2,7 @@
 <resources>
     <declare-styleable name="StatusRadioGroup">
         <attr name="grgRadioButtonCheckedId" format="reference" />
+        <attr name="store" format="string" />
+        <attr name="item" format="string" />
     </declare-styleable>
 </resources>

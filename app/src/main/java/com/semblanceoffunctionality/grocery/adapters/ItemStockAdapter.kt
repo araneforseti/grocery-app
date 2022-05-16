@@ -5,19 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.StockStatus
+import com.semblanceoffunctionality.grocery.data.StockStatusEnum
 import com.semblanceoffunctionality.grocery.databinding.ListStoreStatusBinding
-import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
 import com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailFragment
+import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup
 
 /**
  * Adapter for the [RecyclerView] in [ItemDetailFragment].
  */
 class ItemStockAdapter(
-    private var stockedClickListener: StockedClickListener,
-    private var unknownClickListener: UnknownClickListener,
-    private var notStockedClickListener: NotStockedClickListener
+    private var groupListener: StatusRadioGroup.OnCheckedChangeListener
 ) : ListAdapter<StockStatus, RecyclerView.ViewHolder>(StockStatusDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -26,46 +24,24 @@ class ItemStockAdapter(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            groupListener
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val status = getItem(position)
 
-        (holder as StockStatusViewHolder).stockedStatus.setOnClickListener {
-            stockedClickListener
-        }
-        holder.unknownStatus.setOnClickListener {
-            unknownClickListener
-        }
-        holder.notStockedStatus.setOnClickListener {
-            notStockedClickListener
-        }
-
-        holder.bind(status)
-    }
-
-    interface StockedClickListener {
-        fun onClickListener(store: String)
-    }
-
-    interface UnknownClickListener {
-        fun onClickListener(store: String)
-    }
-
-    interface NotStockedClickListener {
-        fun onClickListener(store: String)
+        (holder as StockStatusViewHolder).bind(status)
     }
 
     class StockStatusViewHolder(
-        private val binding: ListStoreStatusBinding
+        private val binding: ListStoreStatusBinding,
+        groupListener: StatusRadioGroup.OnCheckedChangeListener
     ) : RecyclerView.ViewHolder(binding.root) {
-        var stockedStatus: StatusRadioButton = itemView.findViewById(R.id.status_stocked)
-        var unknownStatus: StatusRadioButton = itemView.findViewById(R.id.status_unknown)
-        var notStockedStatus: StatusRadioButton = itemView.findViewById(R.id.status_not_stocked)
-
-        init {}
+        init {
+            binding.statusButtons.statusGroup.setOnCheckedChangeListener(groupListener)
+        }
 
         fun bind(listStatus: StockStatus) {
             binding.apply {

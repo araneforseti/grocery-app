@@ -11,6 +11,8 @@ import com.semblanceoffunctionality.grocery.R
 class StatusRadioGroup : LinearLayout {
 
     private var radioButtonCheckedId = View.NO_ID
+    var store = ""
+    var item = ""
 
     private var protectFromCheckedChange = false
 
