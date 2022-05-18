@@ -1,21 +1,30 @@
 package com.semblanceoffunctionality.grocery.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ExpandableListView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.StockStatus
 import com.semblanceoffunctionality.grocery.data.StockStatusEnum
+import com.semblanceoffunctionality.grocery.data.StockStatusRepository
 import com.semblanceoffunctionality.grocery.databinding.ListStoreStatusBinding
+import com.semblanceoffunctionality.grocery.generated.callback.OnClickListener
 import com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailFragment
+import com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailViewModel
+import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusButtonCallback
+import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
 import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup
 
 /**
  * Adapter for the [RecyclerView] in [ItemDetailFragment].
  */
 class ItemStockAdapter(
-    private var groupListener: StatusRadioGroup.OnCheckedChangeListener
+    private val itemDetailViewModel: ItemDetailViewModel
 ) : ListAdapter<StockStatus, RecyclerView.ViewHolder>(StockStatusDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -25,7 +34,7 @@ class ItemStockAdapter(
                 parent,
                 false
             ),
-            groupListener
+            itemDetailViewModel
         )
     }
 
@@ -37,15 +46,31 @@ class ItemStockAdapter(
 
     class StockStatusViewHolder(
         private val binding: ListStoreStatusBinding,
-        groupListener: StatusRadioGroup.OnCheckedChangeListener
+        private val itemDetailViewModel: ItemDetailViewModel
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.statusButtons.statusGroup.setOnCheckedChangeListener(groupListener)
-        }
+        init {}
 
         fun bind(listStatus: StockStatus) {
             binding.apply {
                 stockStatus = listStatus
+                binding.statusButtons.stockedCallback = StatusButtonCallback.SetStockedCallback { item, store ->
+                    if (store != null && item != null) {
+                        itemDetailViewModel.setStockedStatus(store)
+                        this.notifyChange()
+                    }
+                }
+                binding.statusButtons.unknownCallback = StatusButtonCallback.SetUnknownCallback { item, store ->
+                    if (store != null && item != null) {
+                        itemDetailViewModel.setStockedUnknownStatus(store)
+                    }
+                    this.notifyChange()
+                }
+                binding.statusButtons.notStockedCallback = StatusButtonCallback.SetNotStockedCallback { item, store ->
+                    if (store != null && item != null) {
+                        itemDetailViewModel.setNotStockedStatus(store)
+                    }
+                    this.notifyChange()
+                }
                 executePendingBindings()
             }
         }

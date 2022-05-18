@@ -45,7 +45,6 @@
                     layout="@layout/status_buttons"
                     android:id="@+id/status_buttons"
                     app:stockStatus="@{stockStatus}"
-                    app:stockName="@{stockStatus.store}"
                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

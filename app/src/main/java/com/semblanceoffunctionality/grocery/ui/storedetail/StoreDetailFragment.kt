@@ -14,6 +14,7 @@ import com.semblanceoffunctionality.grocery.adapters.StoreStockAdapter
 import com.semblanceoffunctionality.grocery.data.StockStatusEnum
 import com.semblanceoffunctionality.grocery.data.Store
 import com.semblanceoffunctionality.grocery.databinding.FragmentStoreDetailBinding
+import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -48,7 +49,18 @@ class StoreDetailFragment : Fragment() {
         }
         setHasOptionsMenu(true)
 
-        val adapter = StoreStockAdapter()
+        val adapter = StoreStockAdapter { view ->
+            val store = (view as StatusRadioGroup?)?.status?.store
+            when (view.checkedRadioButtonId()) {
+                R.id.status_stocked -> store?.let { storeDetailViewModel.setStockedStatus(it) }
+                R.id.status_unknown -> store?.let {
+                    storeDetailViewModel.setStockedUnknownStatus(it)
+                }
+                R.id.status_not_stocked -> store?.let {
+                    storeDetailViewModel.setNotStockedStatus(it)
+                }
+            }
+        }
         binding.stockItemList.adapter = adapter
         subscribeUi(adapter)
 

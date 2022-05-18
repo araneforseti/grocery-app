@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,10 +13,6 @@ import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.ItemStockAdapter
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.FragmentItemDetailBinding
-import com.semblanceoffunctionality.grocery.databinding.StatusButtonsBinding
-import com.semblanceoffunctionality.grocery.generated.callback.OnClickListener
-import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
-import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -67,18 +60,7 @@ class ItemDetailFragment : Fragment() {
         }
         setHasOptionsMenu(true)
 
-        val adapter = ItemStockAdapter { radioGroup, radioButton, checked, checkedId ->
-            val store = (radioGroup as StatusRadioGroup?)?.store
-            when (checkedId) {
-                R.id.status_stocked -> store?.let { itemDetailViewModel.setStockedStatus(it) }
-                R.id.status_unknown -> store?.let {
-                    itemDetailViewModel.setStockedUnknownStatus(it)
-                }
-                R.id.status_not_stocked -> store?.let {
-                    itemDetailViewModel.setNotStockedStatus(it)
-                }
-            }
-        }
+        val adapter = ItemStockAdapter(itemDetailViewModel)
         binding.stockList.adapter = adapter
         subscribeUi(adapter)
 

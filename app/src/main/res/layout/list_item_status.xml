@@ -43,6 +43,7 @@
 
                 <include
                     layout="@layout/status_buttons"
+                    android:id="@+id/status_buttons"
                     app:stockStatus="@{stockStatus}"
                     />
 

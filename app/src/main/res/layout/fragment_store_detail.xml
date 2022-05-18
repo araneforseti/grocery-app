@@ -64,7 +64,7 @@
             android:id="@+id/stock_item_list"
             android:layout_gravity="bottom"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="600dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:spanCount="@integer/grid_columns"
             tools:listitem="@layout/list_item_status"/>

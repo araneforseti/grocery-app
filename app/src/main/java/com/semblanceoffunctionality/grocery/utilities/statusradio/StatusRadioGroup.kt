@@ -5,14 +5,26 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RadioButton
 import androidx.annotation.IdRes
 import com.semblanceoffunctionality.grocery.R
+import com.semblanceoffunctionality.grocery.data.StockStatus
+import com.semblanceoffunctionality.grocery.data.StockStatusEnum
+import com.semblanceoffunctionality.grocery.data.StockStatusEnum.*
 
 class StatusRadioGroup : LinearLayout {
 
     private var radioButtonCheckedId = View.NO_ID
-    var store = ""
-    var item = ""
+    var status : StockStatus? = null
+        set(newStatus) {
+            field = newStatus
+            when(status?.stockStatus) {
+                STOCKED -> this.check(R.id.status_stocked)
+                UNKNOWN -> this.check(R.id.status_unknown)
+                NOT_STOCKED -> this.check(R.id.status_not_stocked)
+                else -> {this.clearCheck()}
+            }
+        }
 
     private var protectFromCheckedChange = false
 
@@ -50,6 +62,12 @@ class StatusRadioGroup : LinearLayout {
         childOnCheckedChangeListener = CheckedStateTracker()
         passThroughHierarchyChangeListener = PassThroughHierarchyChangeListener()
         super.setOnHierarchyChangeListener(passThroughHierarchyChangeListener)
+        when(status?.stockStatus) {
+            STOCKED -> this.check(R.id.status_stocked)
+            UNKNOWN -> this.check(R.id.status_unknown)
+            NOT_STOCKED -> this.check(R.id.status_not_stocked)
+            else -> {this.clearCheck()}
+        }
     }
 
     override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
