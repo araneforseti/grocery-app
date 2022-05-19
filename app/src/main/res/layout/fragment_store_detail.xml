@@ -43,22 +43,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Store" />
 
-            <ImageButton
-                android:id="@+id/fab_delete"
-                style="@style/Widget.MaterialComponents.FloatingActionButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/fab_margin"
-                android:outlineSpotShadowColor="@color/design_default_color_on_primary"
-                app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
-                app:layout_anchorGravity="bottom|end"
-                app:layout_constraintTop_toBottomOf="@id/store_detail_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_delete"
-                android:onClick="@{() -> deleteCallback.delete(viewModel.store)}"
-                android:contentDescription="@string/add_button_descriptor"
-                app:tint="@android:color/white" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/stock_item_list"
@@ -68,6 +52,21 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:spanCount="@integer/grid_columns"
             tools:listitem="@layout/list_item_status"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_delete"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:tint="@android:color/white"
+            app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
+            app:isFabGone="@{false}"
+            app:layout_anchor="@id/store_detail_name"
+            app:layout_anchorGravity="bottom|end"
+            app:srcCompat="@drawable/ic_delete"
+            android:onClick="@{() -> deleteCallback.delete(viewModel.store)}"
+            android:contentDescription="@string/delete_button_descriptor" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -17,6 +17,7 @@
     <string name="cancel">Cancel</string>
     <string name="create">Create</string>
     <string name="add_button_descriptor">Add button</string>
+    <string name="delete_button_descriptor">Delete button</string>
     <string name="removed_item_from_grocery">Item removed from grocery list</string>
     <string name="deleted_item">Item removed from database</string>
     <string name="item_name_hint">Item Name</string>
