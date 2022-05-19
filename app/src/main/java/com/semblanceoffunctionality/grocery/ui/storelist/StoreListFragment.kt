@@ -26,7 +26,7 @@ class StoreListFragment : Fragment() {
 
         val adapter = StoreAdapter()
         binding.storeList.adapter = adapter
-        subscribeUi(adapter)
+        subscribeUi(adapter, binding)
 
         binding.addItem.setOnClickListener {
             createStoreDialog(container)
@@ -40,9 +40,10 @@ class StoreListFragment : Fragment() {
         inflater.inflate(R.menu.menu_item_list, menu)
     }
 
-    private fun subscribeUi(adapter: StoreAdapter) {
-        viewModel.stores.observe(viewLifecycleOwner) { items ->
-            adapter.submitList(items)
+    private fun subscribeUi(adapter: StoreAdapter, binding: FragmentStoreListBinding) {
+        viewModel.stores.observe(viewLifecycleOwner) { stores ->
+            binding.hasStores  = !stores.isNullOrEmpty()
+            adapter.submitList(stores)
         }
     }
 

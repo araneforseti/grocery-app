@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.ItemAdapter
+import com.semblanceoffunctionality.grocery.databinding.FragmentGroceriesBinding
 import com.semblanceoffunctionality.grocery.databinding.FragmentItemListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +31,7 @@ class ItemListFragment : Fragment() {
 
         val adapter = ItemAdapter()
         binding.itemList.adapter = adapter
-        subscribeUi(adapter)
+        subscribeUi(adapter, binding)
 
         binding.addItem.setOnClickListener {
             createItemDialog(container)
@@ -44,8 +45,9 @@ class ItemListFragment : Fragment() {
         inflater.inflate(R.menu.menu_item_list, menu)
     }
 
-    private fun subscribeUi(adapter: ItemAdapter) {
+    private fun subscribeUi(adapter: ItemAdapter, binding: FragmentItemListBinding) {
         viewModel.items.observe(viewLifecycleOwner) { items ->
+            binding.hasItems = !items.isNullOrEmpty()
             adapter.submitList(items)
         }
     }

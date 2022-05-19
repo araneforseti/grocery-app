@@ -24,7 +24,7 @@
         android:id="@+id/nav_all_items"
         android:name="com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragment"
         android:label="@string/item_list_title"
-        tools:layout="@layout/fragment_all_items">
+        tools:layout="@layout/fragment_item_list">
         <action
             android:id="@+id/action_nav_all_groceries_to_nav_item_detail"
             app:destination="@id/nav_item_detail" />
