@@ -32,4 +32,7 @@ interface StockStatusDao {
 
     @Query("DELETE from stock_status where item = :item")
     fun deleteItem(item: String)
+
+    @Query("SELECT * FROM stock_status WHERE item = :item AND store = :store")
+    fun getStatus(item: String, store: String): StockStatus?
 }

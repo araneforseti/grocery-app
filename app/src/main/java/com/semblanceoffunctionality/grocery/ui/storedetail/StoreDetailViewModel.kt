@@ -3,6 +3,7 @@ package com.semblanceoffunctionality.grocery.ui.storedetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import com.semblanceoffunctionality.grocery.data.StockStatus
 import com.semblanceoffunctionality.grocery.data.StockStatusRepository
 import com.semblanceoffunctionality.grocery.data.StoreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +22,7 @@ class StoreDetailViewModel @Inject constructor(
     private val stockStatusRepository: StockStatusRepository
 ) : ViewModel() {
 
-    val storeName: String = savedStateHandle.get<String>(STORE_SAVED_STATE_KEY)!!
+    private val storeName: String = savedStateHandle.get<String>(STORE_SAVED_STATE_KEY)!!
     val store = storeRepository.getStore(storeName).asLiveData()
     val statuses = stockStatusRepository.getAllStockStatusesForStore(storeName).asLiveData()
 
@@ -48,6 +49,10 @@ class StoreDetailViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             stockStatusRepository.setNotStockedStatus(storeName, item)
         }
+    }
+
+    fun getStatusForItem(item: String): StockStatus? {
+        return stockStatusRepository.getStockStatus(item, storeName)
     }
 
     companion object {

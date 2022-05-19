@@ -49,18 +49,7 @@ class StoreDetailFragment : Fragment() {
         }
         setHasOptionsMenu(true)
 
-        val adapter = StoreStockAdapter { view ->
-            val store = (view as StatusRadioGroup?)?.status?.store
-            when (view.checkedRadioButtonId()) {
-                R.id.status_stocked -> store?.let { storeDetailViewModel.setStockedStatus(it) }
-                R.id.status_unknown -> store?.let {
-                    storeDetailViewModel.setStockedUnknownStatus(it)
-                }
-                R.id.status_not_stocked -> store?.let {
-                    storeDetailViewModel.setNotStockedStatus(it)
-                }
-            }
-        }
+        val adapter = StoreStockAdapter(storeDetailViewModel)
         binding.stockItemList.adapter = adapter
         subscribeUi(adapter)
 

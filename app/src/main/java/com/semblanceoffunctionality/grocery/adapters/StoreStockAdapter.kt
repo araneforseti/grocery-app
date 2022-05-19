@@ -1,22 +1,24 @@
 package com.semblanceoffunctionality.grocery.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.semblanceoffunctionality.grocery.data.StockStatus
 import com.semblanceoffunctionality.grocery.databinding.ListItemStatusBinding
-import com.semblanceoffunctionality.grocery.ui.stockstatus.StockStatusViewModel
 import com.semblanceoffunctionality.grocery.ui.storedetail.StoreDetailFragment
-import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup
+import com.semblanceoffunctionality.grocery.ui.storedetail.StoreDetailViewModel
+import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusButtonCallback
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Adapter for the [RecyclerView] in [StoreDetailFragment].
  */
 class StoreStockAdapter(
-    private var groupClickListener: View.OnClickListener
+    private val storeDetailViewModel: StoreDetailViewModel
 ) : ListAdapter<StockStatus, RecyclerView.ViewHolder>(StoreStockStatusDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -26,7 +28,7 @@ class StoreStockAdapter(
                 parent,
                 false
             ),
-            groupClickListener
+            storeDetailViewModel
         )
     }
 
@@ -37,15 +39,37 @@ class StoreStockAdapter(
 
     class StockStatusViewHolder(
         private val binding: ListItemStatusBinding,
-        groupClickListener: View.OnClickListener
+        private val storeDetailViewModel: StoreDetailViewModel
     ) : RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.statusButtons.statusGroup.setOnClickListener(groupClickListener)
-        }
+        init {}
 
         fun bind(listStatus: StockStatus) {
             binding.apply {
                 stockStatus = listStatus
+                binding.statusButtons.stockedCallback = StatusButtonCallback.SetStockedCallback { item, store ->
+                    if (store != null && item != null) {
+                        storeDetailViewModel.setStockedStatus(item)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            stockStatus = storeDetailViewModel.getStatusForItem(item)
+                        }
+                    }
+                }
+                binding.statusButtons.unknownCallback = StatusButtonCallback.SetUnknownCallback { item, store ->
+                    if (store != null && item != null) {
+                        storeDetailViewModel.setStockedUnknownStatus(item)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            stockStatus = storeDetailViewModel.getStatusForItem(item)
+                        }
+                    }
+                }
+                binding.statusButtons.notStockedCallback = StatusButtonCallback.SetNotStockedCallback { item, store ->
+                    if (store != null && item != null) {
+                        storeDetailViewModel.setNotStockedStatus(item)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            stockStatus = storeDetailViewModel.getStatusForItem(item)
+                        }
+                    }
+                }
                 executePendingBindings()
             }
         }

@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.semblanceoffunctionality.grocery.data.ItemRepository
+import com.semblanceoffunctionality.grocery.data.StockStatus
 import com.semblanceoffunctionality.grocery.data.StockStatusRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -60,6 +61,10 @@ class ItemDetailViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             stockStatusRepository.setNotStockedStatus(store, name)
         }
+    }
+
+    fun getStatusForStore(store: String): StockStatus? {
+        return stockStatusRepository.getStockStatus(name, store)
     }
 
     companion object {

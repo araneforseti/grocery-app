@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import com.google.android.material.snackbar.Snackbar
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.ItemStockAdapter
