@@ -33,7 +33,7 @@
                 android:layout_height="100dp"
                 android:layout_marginStart="@dimen/margin_small"
                 android:layout_marginEnd="@dimen/margin_small"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@{viewModel.store.name}"
@@ -63,7 +63,7 @@
             app:shapeAppearance="@style/ShapeAppearance.Grocery.FAB"
             app:isFabGone="@{false}"
             app:layout_anchor="@id/store_detail_name"
-            app:layout_anchorGravity="bottom|end"
+            app:layout_anchorGravity="center|end"
             app:srcCompat="@drawable/ic_delete"
             android:onClick="@{() -> deleteCallback.delete(viewModel.store)}"
             android:contentDescription="@string/delete_button_descriptor" />
