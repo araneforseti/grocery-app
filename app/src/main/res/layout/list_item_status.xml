@@ -41,6 +41,12 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:text="Item Name"/>
 
+                <include
+                    layout="@layout/status_buttons"
+                    android:id="@+id/status_buttons"
+                    app:stockStatus="@{stockStatus}"
+                    />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.semblanceoffunctionality.grocery.views.MaskedCardView>

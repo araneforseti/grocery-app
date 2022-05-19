@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * The Data Access Object for the ItemsAndStores class.
  */
+@TypeConverters(StockConverters::class)
 @Dao
 interface StockStatusDao {
     @Query("SELECT * FROM stock_status WHERE item = :item ORDER BY store")
@@ -32,4 +33,7 @@ interface StockStatusDao {
 
     @Query("DELETE from stock_status where item = :item")
     fun deleteItem(item: String)
+
+    @Query("SELECT * FROM stock_status WHERE item = :item AND store = :store")
+    fun getStatus(item: String, store: String): StockStatus?
 }

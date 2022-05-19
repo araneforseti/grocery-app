@@ -17,6 +17,7 @@ class StockStatusRepository @Inject constructor(
     private val storeDao: StoreDao
 ) {
     fun getStockStatusesForItem(name: String) = stockStatusDao.getStockStatusesForItem(name)
+    fun getStockStatus(item: String, store: String) = stockStatusDao.getStatus(item, store)
 
     fun getAllStockStatusesForStore(store: String) = stockStatusDao.getStockStatusForStore(store)
 
@@ -39,4 +40,8 @@ class StockStatusRepository @Inject constructor(
     fun deleteItem(item: String) = stockStatusDao.deleteItem(item)
 
     fun deleteStore(item: String) = stockStatusDao.deleteStore(item)
+
+    fun setStockedStatus(store: String, item: String) = stockStatusDao.setStock(item, store, StockStatusEnum.STOCKED)
+    fun setUnknownStatus(store: String, item: String) = stockStatusDao.setStock(item, store, StockStatusEnum.UNKNOWN)
+    fun setNotStockedStatus(store: String, item: String) = stockStatusDao.setStock(item, store, StockStatusEnum.NOT_STOCKED)
 }

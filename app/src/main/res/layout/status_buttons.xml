@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="stockStatus"
+            type="com.semblanceoffunctionality.grocery.data.StockStatus" />
+        <variable
+            name="stockedCallback"
+            type="com.semblanceoffunctionality.grocery.utilities.statusradio.StatusButtonCallback.SetStockedCallback" />
+        <variable
+            name="unknownCallback"
+            type="com.semblanceoffunctionality.grocery.utilities.statusradio.StatusButtonCallback.SetUnknownCallback" />
+        <variable
+            name="notStockedCallback"
+            type="com.semblanceoffunctionality.grocery.utilities.statusradio.StatusButtonCallback.SetNotStockedCallback" />
+    </data>
+
+    <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup
+        android:id="@+id/status_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="5dp"
+        app:status="@{stockStatus}"
+        android:orientation="horizontal">
+
+        <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
+            android:id="@+id/status_stocked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:onClick="@{() -> stockedCallback.setStocked(stockStatus.item, stockStatus.store)}"
+            app:statusImage="@drawable/ic_status_stocked" />
+
+        <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
+            android:id="@+id/status_unknown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:onClick="@{() -> unknownCallback.setUnknown(stockStatus.item, stockStatus.store)}"
+            app:statusImage="@drawable/ic_status_unknown" />
+
+        <com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioButton
+            android:id="@+id/status_not_stocked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:onClick="@{() -> notStockedCallback.setNotStocked(stockStatus.item, stockStatus.store)}"
+            app:statusImage="@drawable/ic_status_not_stocked" />
+
+    </com.semblanceoffunctionality.grocery.utilities.statusradio.StatusRadioGroup>
+</layout>

@@ -10,7 +10,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="stockStatus"
-            type="com.semblanceoffunctionality.grocery.data.StockStatus"/>
+            type="com.semblanceoffunctionality.grocery.data.StockStatus" />
     </data>
 
     <com.semblanceoffunctionality.grocery.views.MaskedCardView
@@ -40,10 +40,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     tools:text="Store Name"/>
-                <com.semblanceoffunctionality.grocery.ui.StatusSwitcher
-                    android:layout_width="wrap_content"
-                    app:layout_constraintStart_toEndOf="@+id/store_item_title"
-                    android:layout_height="match_parent"/>
+
+                <include
+                    layout="@layout/status_buttons"
+                    android:id="@+id/status_buttons"
+                    app:stockStatus="@{stockStatus}"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
