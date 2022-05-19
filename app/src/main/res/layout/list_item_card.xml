@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener"/>
         <variable
-            name="item"
-            type="com.semblanceoffunctionality.grocery.data.Item"/>
+            name="viewModel"
+            type="com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryItemsViewModel"/>
     </data>
 
     <com.semblanceoffunctionality.grocery.views.MaskedCardView
@@ -24,25 +23,23 @@
         app:cardPreventCornerOverlap="false"
         app:shapeAppearanceOverlay="@style/ShapeAppearance.Grocery.Card">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/photographer"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_normal"
-                    android:layout_marginTop="@dimen/margin_normal"
-                    android:text="@{item.name}"
-                    android:textAppearance="?attr/textAppearanceListItem"
-                    android:gravity="center_horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    tools:text="Text here"/>
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.itemName}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.semblanceoffunctionality.grocery.views.MaskedCardView>
 

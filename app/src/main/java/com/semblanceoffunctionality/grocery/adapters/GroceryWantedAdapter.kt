@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.Item
-import com.semblanceoffunctionality.grocery.databinding.ListItemGroceryItemingBinding
-import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryFragmentDirections
-import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryWantedItemsViewModel
+import com.semblanceoffunctionality.grocery.databinding.ListGroceryCardBinding
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragmentDirections
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryItemsViewModel
 
 class GroceryWantedAdapter :
     ListAdapter<Item, GroceryWantedAdapter.ViewHolder>(
@@ -22,7 +22,7 @@ class GroceryWantedAdapter :
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.list_item_grocery_iteming,
+                R.layout.list_grocery_card,
                 parent,
                 false
             )
@@ -34,12 +34,12 @@ class GroceryWantedAdapter :
     }
 
     class ViewHolder(
-        private val binding: ListItemGroceryItemingBinding
+        private val binding: ListGroceryCardBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
                 binding.viewModel?.let { viewModel ->
-                    val action = GroceryFragmentDirections
+                    val action = GroceriesFragmentDirections
                         .actionNavGroceriesToNavItemDetail(viewModel.name)
                     it.findNavController().navigate(action)
                 }
@@ -48,7 +48,7 @@ class GroceryWantedAdapter :
 
         fun bind(item: Item) {
             with(binding) {
-                viewModel = GroceryWantedItemsViewModel(item)
+                viewModel = GroceryItemsViewModel(item)
                 executePendingBindings()
             }
         }
