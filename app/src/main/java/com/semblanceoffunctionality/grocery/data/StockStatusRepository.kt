@@ -17,6 +17,7 @@ class StockStatusRepository @Inject constructor(
     private val storeDao: StoreDao
 ) {
     fun getStockStatusesForItem(name: String) = stockStatusDao.getStockStatusesForItem(name)
+
     fun getStockStatus(item: String, store: String) = stockStatusDao.getStatus(item, store)
 
     fun getAllStockStatusesForStore(store: String) = stockStatusDao.getStockStatusForStore(store)

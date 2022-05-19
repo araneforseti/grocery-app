@@ -11,5 +11,12 @@ data class Item(
     val quantity: Int = 0,
     val obtained: Boolean = false
 ) {
+    fun quantityString(): String {
+        if(wanted) {
+            return quantity.toString()
+        }
+        return ""
+    }
+
     override fun toString() = name
 }
