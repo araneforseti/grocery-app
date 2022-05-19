@@ -47,6 +47,7 @@ class ItemStockAdapter(
         fun bind(listStatus: StockStatus) {
             binding.apply {
                 stockStatus = listStatus
+                binding.statusButtons.stockStatus = listStatus
                 binding.statusButtons.stockedCallback = StatusButtonCallback.SetStockedCallback { item, store ->
                     if (store != null && item != null) {
                         itemDetailViewModel.setStockedStatus(store)

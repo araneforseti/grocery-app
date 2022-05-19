@@ -5,6 +5,5 @@
         <attr name="statusPressedImageTint" format="color" />
         <attr name="statusUnpressedImageTint" format="color" />
         <attr name="statusPressedBackgroundDrawable" format="reference" />
-        <attr name="stockName" format="string" />
     </declare-styleable>
 </resources>

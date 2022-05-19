@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 /**
  * The Data Access Object for the ItemsAndStores class.
  */
+@TypeConverters(StockConverters::class)
 @Dao
 interface StockStatusDao {
     @Query("SELECT * FROM stock_status WHERE item = :item ORDER BY store")
