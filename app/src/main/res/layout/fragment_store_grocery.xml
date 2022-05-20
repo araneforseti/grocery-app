@@ -1,0 +1,130 @@
+<!--            TODO: Make isFabGone true when item is already in list -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.semblanceoffunctionality.grocery.data.Store"/>
+        <variable
+            name="hasItems"
+            type="boolean" />
+        <variable
+            name="viewModel"
+            type="com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryViewModel"/>
+        <variable
+            name="toggleObtained"
+            type="com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryFragment.ToggleObtainedCallback" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="?attr/colorSurface"
+        tools:context=".MainActivity"
+        tools:ignore="MergeRootFrame">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/margin_normal">
+
+            <TextView
+                android:id="@+id/store_detail_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@{viewModel.store.name}"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Store" />
+
+            <TextView
+                android:id="@+id/potential_stocked_label"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/look_for_items"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/store_detail_name"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/store_grocery_list"
+            android:layout_gravity="bottom"
+            app:layout_anchor="@id/potential_stocked_label"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:spanCount="@integer/grid_columns"
+            tools:listitem="@layout/list_grocery_item_status"/>
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/not_stocked_toolbar"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/unstocked_list"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+        <Space
+            android:id="@+id/expanded_size"
+            android:layout_width="match_parent"
+            android:layout_height="108dp"/>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            app:titleMargin="0dp"
+            app:titleMargins="0dp"
+            app:contentInsetStart="?attr/actionBarSize"
+            app:contentInsetLeft="?attr/actionBarSize"
+            app:contentInsetRight="?attr/actionBarSize"
+            app:contentInsetEnd="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:contentInsetStartWithNavigation="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"/>
+
+        <FrameLayout
+            android:id="@+id/clickable_layout"
+            android:layout_width="wrap_content"
+            tools:layout_width="200dp"
+            android:translationZ="10dp"
+            android:layout_gravity="bottom"
+            android:paddingBottom="@dimen/clickable_layout_bottom_padding_expanded"
+            android:layout_height="?attr/actionBarSize">
+
+            <ImageView
+                android:id="@+id/chevron"
+                android:layout_width="wrap_content"
+                app:srcCompat="@drawable/ic_expand"
+                app:tint="@color/gray"
+                android:layout_gravity="end|bottom"
+                android:layout_height="wrap_content"/>
+
+        </FrameLayout>
+            <View
+                android:id="@+id/back_button_touch_forwarder"
+                app:layout_collapseMode="pin"
+                android:translationZ="12dp"
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="?attr/actionBarSize"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>

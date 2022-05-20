@@ -34,4 +34,7 @@
     <string name="add_store">New Store</string>
     <string name="store_detail">Store Detail</string>
     <string name="deleted_store">Deleted store from database</string>
+    <string name="look_for_items">Look for Items:</string>
+    <string name="unstocked_list">Unstocked List</string>
+    <string name="store_grocery_title">Grocery by Store</string>
 </resources>

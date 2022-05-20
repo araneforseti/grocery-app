@@ -10,6 +10,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.GroceryWantedAdapter
+import com.semblanceoffunctionality.grocery.adapters.StoreSelectorAdapter
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.FragmentGroceriesBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +35,7 @@ class GroceriesFragment : Fragment() {
             }
         }
         binding.groceryList.adapter = adapter
+        binding.storeSpinner.adapter = StoreSelectorAdapter()
 
         binding.addItem.setOnClickListener {
             navigateToItemListPage()

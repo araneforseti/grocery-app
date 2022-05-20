@@ -18,6 +18,27 @@
             android:name="item"
             app:argType="string"
             />
+        <action
+            android:id="@+id/action_nav_groceries_to_nav_store_grocery"
+            app:destination="@id/nav_store_grocery" />
+        <argument
+            android:name="store"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_store_grocery"
+        android:name="com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryFragment"
+        android:label="@string/store_grocery_title"
+        tools:layout="@layout/fragment_store_grocery"
+        >
+        <action
+            android:id="@+id/action_nav_store_grocery_to_nav_item_detail"
+            app:destination="@id/nav_item_detail" />
+        <argument
+            android:name="item"
+            app:argType="string"
+            />
     </fragment>
 
     <fragment

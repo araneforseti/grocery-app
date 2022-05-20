@@ -12,4 +12,5 @@
     <color name="grocery_yellow_300">#f8f99f</color>
     <color name="grocery_yellow_500">#ffff63</color>
     <color name="grocery_check">#49bb79</color>
+    <color name="gray">#424141</color>
 </resources>
