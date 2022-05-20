@@ -10,13 +10,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.ListGroceryCardBinding
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragment
 import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragmentDirections
 import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryItemsViewModel
 
-class GroceryWantedAdapter :
+class GroceryWantedAdapter() :
     ListAdapter<Item, GroceryWantedAdapter.ViewHolder>(
         GroceryItemDiffCallback()
     ) {
+
+    lateinit var groceryToggle: GroceriesFragment.ToggleObtainedCallback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -25,7 +28,8 @@ class GroceryWantedAdapter :
                 R.layout.list_grocery_card,
                 parent,
                 false
-            )
+            ),
+            groceryToggle
         )
     }
 
@@ -34,7 +38,8 @@ class GroceryWantedAdapter :
     }
 
     class ViewHolder(
-        private val binding: ListGroceryCardBinding
+        private val binding: ListGroceryCardBinding,
+        groceryToggle: GroceriesFragment.ToggleObtainedCallback
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
@@ -44,6 +49,7 @@ class GroceryWantedAdapter :
                     it.findNavController().navigate(action)
                 }
             }
+            binding.toggleObtained = groceryToggle
         }
 
         fun bind(item: Item) {

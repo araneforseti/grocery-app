@@ -9,6 +9,9 @@
             name="clickListener"
             type="android.view.View.OnClickListener"/>
         <variable
+            name="toggleObtained"
+            type="com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragment.ToggleObtainedCallback" />
+        <variable
             name="viewModel"
             type="com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryItemsViewModel"/>
     </data>
@@ -33,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:checked="@{viewModel.obtained}"
+                android:onClick="@{() -> toggleObtained.toggle(viewModel.item)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />

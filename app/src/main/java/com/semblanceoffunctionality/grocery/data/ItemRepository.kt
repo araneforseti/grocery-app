@@ -44,4 +44,6 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
     fun isWanted(name: String) = itemDao.isWanted(name)
 
     fun deleteItem(name: String) = itemDao.deleteItem(name)
+
+    fun setObtained(name: String?, newObtained: Boolean?) = itemDao.setObtained(name, newObtained)
 }

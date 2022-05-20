@@ -37,4 +37,7 @@ interface ItemDao {
 
     @Query("SELECT quantity FROM items WHERE name = :name")
     fun getQuantity(name: String): Int
+
+    @Query("UPDATE items SET obtained = :obtained WHERE name = :name")
+    fun setObtained(name: String?, obtained: Boolean?)
 }

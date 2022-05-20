@@ -10,6 +10,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.GroceryWantedAdapter
+import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.FragmentGroceriesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +28,17 @@ class GroceriesFragment : Fragment() {
     ): View {
         binding = FragmentGroceriesBinding.inflate(inflater, container, false)
         val adapter = GroceryWantedAdapter()
+        adapter.groceryToggle = object : ToggleObtainedCallback {
+            override fun toggle(item: Item?) {
+                viewModel.toggleObtained(item)
+            }
+        }
         binding.groceryList.adapter = adapter
+        binding.toggleObtained = object : ToggleObtainedCallback {
+            override fun toggle(item: Item?) {
+                viewModel.toggleObtained(item)
+            }
+        }
 
         binding.addItem.setOnClickListener {
             navigateToItemListPage()
@@ -46,5 +57,9 @@ class GroceriesFragment : Fragment() {
 
     private fun navigateToItemListPage() {
         this.findNavController().navigate(R.id.nav_all_items)
+    }
+
+    interface ToggleObtainedCallback {
+        fun toggle(item: Item?)
     }
 }

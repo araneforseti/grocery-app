@@ -5,11 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="hasItems"
             type="boolean" />
-
+        <variable
+            name="toggleObtained"
+            type="com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragment.ToggleObtainedCallback" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
