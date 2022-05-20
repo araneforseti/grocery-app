@@ -28,13 +28,13 @@ class ItemDetailViewModel @Inject constructor(
 
     fun addItemToGrocery() {
         CoroutineScope(Dispatchers.IO).launch {
-            itemRepository.setWanted(name)
+            itemRepository.incrementQuantity(name)
         }
     }
 
     fun removeItemFromGrocery() {
         CoroutineScope(Dispatchers.IO).launch {
-            itemRepository.removeWanted(name)
+            itemRepository.decreaseQuantity(name)
         }
     }
 

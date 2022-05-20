@@ -18,15 +18,30 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
 
     suspend fun createItem(itemName: String) = itemDao.insertAll(listOf(Item(itemName, true)))
 
-    fun setWanted(name: String) {
-        itemDao.setWanted(name)
+    fun incrementQuantity(name: String) {
+        if(itemDao.isWanted(name))
+        {
+            itemDao.setQuantity(name, itemDao.getQuantity(name)+1)
+        } else {
+            itemDao.setWanted(name)
+            itemDao.setQuantity(name, 1)
+        }
+    }
+
+    fun decreaseQuantity(name: String) {
+        var newQuantity = itemDao.getQuantity(name)-1
+        if(newQuantity <= 0) {
+            itemDao.setQuantity(name, 0)
+            itemDao.setNotWanted(name)
+        } else {
+            itemDao.setQuantity(name, newQuantity)
+        }
+
     }
 
     fun getWantedItems() = itemDao.getWantedItems()
 
     fun isWanted(name: String) = itemDao.isWanted(name)
-
-    fun removeWanted(name: String) = itemDao.setNotWanted(name)
 
     fun deleteItem(name: String) = itemDao.deleteItem(name)
 }

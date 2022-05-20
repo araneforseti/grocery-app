@@ -31,4 +31,10 @@ interface ItemDao {
 
     @Query("DELETE from items where name = :name")
     fun deleteItem(name: String)
+
+    @Query("UPDATE items SET quantity = :quantity WHERE name = :name")
+    fun setQuantity(name: String, quantity: Int)
+
+    @Query("SELECT quantity FROM items WHERE name = :name")
+    fun getQuantity(name: String): Int
 }
