@@ -4,16 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.CursorAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.GroceryWantedAdapter
-import com.semblanceoffunctionality.grocery.adapters.StoreSelectorAdapter
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.FragmentGroceriesBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GroceriesFragment : Fragment() {
@@ -35,7 +40,24 @@ class GroceriesFragment : Fragment() {
             }
         }
         binding.groceryList.adapter = adapter
-        binding.storeSpinner.adapter = StoreSelectorAdapter()
+
+        var storeAdapter : ArrayAdapter<String>? =
+            this.context?.let { ArrayAdapter(it, R.layout.support_simple_spinner_dropdown_item, ArrayList()) }
+
+        storeAdapter?.add(resources.getString(R.string.no_store_selected))
+        storeAdapter?.addAll(viewModel.getStores())
+        storeAdapter?.notifyDataSetChanged()
+
+        binding.storeSpinner.adapter = storeAdapter
+        binding.storeSelect = object : SelectStore {
+            override fun storeSelect() {
+                val selection = binding.storeSpinner.selectedItem.toString()
+                binding.storeSpinner.setSelection(0)
+                if(selection != resources.getString(R.string.no_store_selected)) {
+                    navigateToStoreGroceryPage(selection)
+                }
+            }
+        }
 
         binding.addItem.setOnClickListener {
             navigateToItemListPage()
@@ -56,7 +78,16 @@ class GroceriesFragment : Fragment() {
         this.findNavController().navigate(R.id.nav_all_items)
     }
 
+    private fun navigateToStoreGroceryPage(store: String) {
+        val action = GroceriesFragmentDirections.actionNavGroceriesToNavStoreGrocery(store)
+        this.findNavController().navigate(action)
+    }
+
     interface ToggleObtainedCallback {
         fun toggle(item: Item?)
+    }
+
+    interface SelectStore {
+        fun storeSelect()
     }
 }

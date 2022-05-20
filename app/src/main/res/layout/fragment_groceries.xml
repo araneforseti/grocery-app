@@ -11,6 +11,9 @@
         <variable
             name="toggleObtained"
             type="com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragment.ToggleObtainedCallback" />
+        <variable
+            name="storeSelect"
+            type="com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragment.SelectStore" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -32,6 +35,7 @@
                 android:id="@+id/store_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:onItemSelected="@{() -> storeSelect.storeSelect()}"
                 />
 
         </LinearLayout>

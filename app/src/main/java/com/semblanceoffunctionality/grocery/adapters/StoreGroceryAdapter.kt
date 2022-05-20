@@ -14,7 +14,6 @@ import com.semblanceoffunctionality.grocery.databinding.ListGroceryItemStatusBin
 import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryFragment
 import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryFragmentDirections
 import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryItemsViewModel
-import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryViewModel
 
 class StoreGroceryAdapter() :
     ListAdapter<Item, StoreGroceryAdapter.ViewHolder>(

@@ -19,4 +19,7 @@ interface StoreDao {
 
     @Query("DELETE from stores where name = :name")
     fun deleteStore(name: String)
+
+    @Query("SELECT name FROM stores")
+    fun getStoreNames(): Flow<List<String>>
 }

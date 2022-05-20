@@ -37,4 +37,5 @@
     <string name="look_for_items">Look for Items:</string>
     <string name="unstocked_list">Unstocked List</string>
     <string name="store_grocery_title">Grocery by Store</string>
+    <string name="no_store_selected"><![CDATA[<no store selected>]]></string>
 </resources>

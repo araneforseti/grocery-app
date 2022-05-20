@@ -34,6 +34,6 @@ class StoreGroceryViewModel  @Inject internal constructor(
     }
 
     companion object {
-        private const val STORE_SAVED_STATE_KEY = "store"
+        private const val STORE_SAVED_STATE_KEY = "item"
     }
 }

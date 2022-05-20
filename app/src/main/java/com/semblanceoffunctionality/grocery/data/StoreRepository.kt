@@ -1,5 +1,6 @@
 package com.semblanceoffunctionality.grocery.data
 
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,4 +22,6 @@ class StoreRepository @Inject constructor(
     suspend fun createStore(name: String, address: String = "") = storeDao.insertAll(listOf(Store(name, address)))
 
     fun deleteStore(name: String) = storeDao.deleteStore(name)
+
+    suspend fun getStoresNames() : List<String> = storeDao.getStoreNames().first()
 }
