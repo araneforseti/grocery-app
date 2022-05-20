@@ -22,9 +22,9 @@ class StockStatusRepositoryTest {
     private lateinit var stockStatusDao: StockStatusDao
     private lateinit var stockStatusRepository: StockStatusRepository
 
-    private val itemA = Item("itemA", "itemA", true)
-    private val itemB = Item("itemB", "itemB", false)
-    private val itemC = Item("itemC", "itemC", true)
+    private val itemA = Item("itemA")
+    private val itemB = Item("itemB")
+    private val itemC = Item("itemC")
 
     private val store1 = Store("store1", "")
     private val store2 = Store("store2", "")

@@ -6,54 +6,56 @@
 
     <data>
         <variable
-            name="hasStores"
+            name="hasItems"
             type="boolean" />
+        <variable
+            name="toggleObtained"
+            type="com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragment.ToggleObtainedCallback" />
     </data>
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/store_list"
+            android:id="@+id/grocery_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingEnd="@dimen/card_side_margin"
             android:paddingStart="@dimen/card_side_margin"
-            android:paddingTop="@dimen/header_margin"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            android:paddingTop="@dimen/gallery_header_margin"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:spanCount="@integer/grid_columns"
-            tools:context=".MainActivity"
-            tools:listitem="@layout/store_list_item"/>
+            tools:listitem="@layout/list_grocery_card"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            app:isGone="@{hasStores}">
+            app:isGone="@{hasItems}">
 
             <TextView
                 android:id="@+id/empty_grocery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/store_empty"
+                android:text="@string/grocery_empty"
                 android:textAppearance="?attr/textAppearanceHeadline5" />
 
         </LinearLayout>
-
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/add_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_store"
             android:textColor="?attr/colorPrimary"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="150dp"
+            android:layout_gravity="bottom|center"
+            android:text="@string/add_item"
             app:backgroundTint="?attr/colorOnPrimary"
-            app:shapeAppearance="@style/ShapeAppearance.Grocery.Button.Add" />
+            app:shapeAppearance="@style/ShapeAppearance.Grocery.Button.Add"/>
 
-    </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 </layout>

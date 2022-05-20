@@ -1,5 +1,6 @@
 package com.semblanceoffunctionality.grocery.adapters
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -9,23 +10,27 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.Item
-import com.semblanceoffunctionality.grocery.databinding.ListItemGroceryItemingBinding
-import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryFragmentDirections
-import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryWantedItemsViewModel
+import com.semblanceoffunctionality.grocery.databinding.ListGroceryCardBinding
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragment
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragmentDirections
+import com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryItemsViewModel
 
-class GroceryWantedAdapter :
+class GroceryWantedAdapter() :
     ListAdapter<Item, GroceryWantedAdapter.ViewHolder>(
         GroceryItemDiffCallback()
     ) {
+
+    lateinit var groceryToggle: GroceriesFragment.ToggleObtainedCallback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.list_item_grocery_iteming,
+                R.layout.list_grocery_card,
                 parent,
                 false
-            )
+            ),
+            groceryToggle
         )
     }
 
@@ -34,21 +39,28 @@ class GroceryWantedAdapter :
     }
 
     class ViewHolder(
-        private val binding: ListItemGroceryItemingBinding
+        private val binding: ListGroceryCardBinding,
+        groceryToggle: GroceriesFragment.ToggleObtainedCallback
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
                 binding.viewModel?.let { viewModel ->
-                    val action = GroceryFragmentDirections
+                    val action = GroceriesFragmentDirections
                         .actionNavGroceriesToNavItemDetail(viewModel.name)
                     it.findNavController().navigate(action)
                 }
             }
+            binding.toggleObtained = groceryToggle
         }
 
         fun bind(item: Item) {
             with(binding) {
-                viewModel = GroceryWantedItemsViewModel(item)
+                viewModel = GroceryItemsViewModel(item)
+                if((viewModel as GroceryItemsViewModel).obtained) {
+                    this.itemName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                } else {
+                    this.itemName.paintFlags = 0
+                }
                 executePendingBindings()
             }
         }

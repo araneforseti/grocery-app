@@ -6,13 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.workDataOf
 import com.semblanceoffunctionality.grocery.utilities.DATABASE_NAME
-import com.semblanceoffunctionality.grocery.utilities.ITEM_DATA_FILENAME
-import com.semblanceoffunctionality.grocery.workers.SeedDatabaseWorker
-import com.semblanceoffunctionality.grocery.workers.SeedDatabaseWorker.Companion.KEY_FILENAME
 
 /**
  * The Room database for this app
@@ -43,10 +37,6 @@ abstract class AppDatabase : RoomDatabase() {
                     object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-                            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
-                                    .setInputData(workDataOf(KEY_FILENAME to ITEM_DATA_FILENAME))
-                                    .build()
-                            WorkManager.getInstance(context).enqueue(request)
                         }
                     }
                 )

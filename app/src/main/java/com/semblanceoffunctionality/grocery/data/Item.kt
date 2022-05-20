@@ -7,7 +7,16 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "items")
 data class Item(
     @PrimaryKey @ColumnInfo(name = "name") val name: String,
-    val wanted: Boolean = true
+    val wanted: Boolean = true,
+    val quantity: Int = 0,
+    val obtained: Boolean = false
 ) {
+    fun quantityString(): String {
+        if(wanted) {
+            return quantity.toString()
+        }
+        return ""
+    }
+
     override fun toString() = name
 }

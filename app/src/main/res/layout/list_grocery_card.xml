@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="toggleObtained"
+            type="com.semblanceoffunctionality.grocery.ui.grocerylist.GroceriesFragment.ToggleObtainedCallback" />
+        <variable
+            name="viewModel"
+            type="com.semblanceoffunctionality.grocery.ui.grocerylist.GroceryItemsViewModel"/>
+    </data>
+
+    <com.semblanceoffunctionality.grocery.views.MaskedCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/card_side_margin"
+        android:layout_marginEnd="@dimen/card_side_margin"
+        android:layout_marginBottom="@dimen/card_bottom_margin"
+        android:onClick="@{clickListener}"
+        app:cardElevation="@dimen/card_elevation"
+        app:cardPreventCornerOverlap="false"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Grocery.Card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:id="@+id/check_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="@{viewModel.obtained}"
+                android:onClick="@{() -> toggleObtained.toggle(viewModel.item)}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="@{viewModel.name}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintStart_toEndOf="@+id/check_item"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Grocery Item" />
+
+            <TextView
+                android:id="@+id/item_quantity"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="@{viewModel.quantity}"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="0"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.semblanceoffunctionality.grocery.views.MaskedCardView>
+
+</layout>
