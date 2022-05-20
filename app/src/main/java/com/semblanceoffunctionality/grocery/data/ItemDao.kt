@@ -20,7 +20,7 @@ interface ItemDao {
     @Query("UPDATE items SET wanted = 1 WHERE name = :name")
     fun setWanted(name: String)
 
-    @Query("SELECT * FROM items WHERE wanted")
+    @Query("SELECT * FROM items WHERE wanted ORDER BY obtained ASC, name ASC")
     fun getWantedItems(): Flow<List<Item>>
 
     @Query("SELECT wanted FROM items WHERE name = :name")
