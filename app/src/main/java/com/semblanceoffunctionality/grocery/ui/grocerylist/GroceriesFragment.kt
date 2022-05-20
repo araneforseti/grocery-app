@@ -34,11 +34,6 @@ class GroceriesFragment : Fragment() {
             }
         }
         binding.groceryList.adapter = adapter
-        binding.toggleObtained = object : ToggleObtainedCallback {
-            override fun toggle(item: Item?) {
-                viewModel.toggleObtained(item)
-            }
-        }
 
         binding.addItem.setOnClickListener {
             navigateToItemListPage()

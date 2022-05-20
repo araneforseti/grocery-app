@@ -20,7 +20,7 @@ class GroceryWantedListViewModel @Inject internal constructor(
     fun toggleObtained(item: Item?) {
         val newObtained = !item?.obtained!!
         CoroutineScope(Dispatchers.IO).launch {
-            itemRepository.setObtained(item?.name, newObtained)
+            itemRepository.setObtained(item.name, newObtained)
         }
     }
 }

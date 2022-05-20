@@ -1,5 +1,6 @@
 package com.semblanceoffunctionality.grocery.adapters
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -55,6 +56,11 @@ class GroceryWantedAdapter() :
         fun bind(item: Item) {
             with(binding) {
                 viewModel = GroceryItemsViewModel(item)
+                if((viewModel as GroceryItemsViewModel).obtained) {
+                    this.itemName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                } else {
+                    this.itemName.paintFlags = 0
+                }
                 executePendingBindings()
             }
         }
