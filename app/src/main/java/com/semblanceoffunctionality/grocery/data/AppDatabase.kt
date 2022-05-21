@@ -17,6 +17,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun itemDao(): ItemDao
     abstract fun storeDao(): StoreDao
     abstract fun stockStatusDao(): StockStatusDao
+    abstract fun stockStatusGroceryItemForStoreDao(): StockStatusGroceryItemForStoreDao
 
     companion object {
 

@@ -69,7 +69,7 @@
             <include
                 layout="@layout/status_buttons"
                 android:id="@+id/status_buttons"
-                app:stockStatus="@{stockStatus}"
+                app:stockStatus="@{viewModel.stockStatus}"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,4 +38,5 @@
     <string name="unstocked_list">Unstocked List</string>
     <string name="store_grocery_title">Grocery by Store</string>
     <string name="no_store_selected"><![CDATA[<no store selected>]]></string>
+    <string name="store_grocery_empty">No groceries found for store</string>
 </resources>

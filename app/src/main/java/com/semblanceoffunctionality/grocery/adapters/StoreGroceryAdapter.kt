@@ -3,30 +3,30 @@ package com.semblanceoffunctionality.grocery.adapters
 import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.data.Item
+import com.semblanceoffunctionality.grocery.data.StockStatus
 import com.semblanceoffunctionality.grocery.databinding.ListGroceryItemStatusBinding
 import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryFragment
 import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryFragmentDirections
 import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryItemsViewModel
 
-class StoreGroceryAdapter() :
-    ListAdapter<Item, StoreGroceryAdapter.ViewHolder>(
-        StoreGroceryItemDiffCallback()
-    ) {
+
+class StoreGroceryAdapter(
+    private val items: Map<Item, StockStatus>
+) : ListAdapter<Map.Entry<Item, StockStatus>, StoreGroceryAdapter.ViewHolder>(
+    StoreGroceryItemDiffCallback()
+) {
 
     lateinit var groceryToggle: StoreGroceryFragment.ToggleObtainedCallback
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.list_grocery_item_status,
+            ListGroceryItemStatusBinding.inflate(
+                LayoutInflater.from(parent!!.context),
                 parent,
                 false
             ),
@@ -36,6 +36,18 @@ class StoreGroceryAdapter() :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    override fun getItem(position: Int): Map.Entry<Item, StockStatus> {
+        return items.entries.elementAt(position)
+    }
+
+    fun submitList(map: Map<Item, StockStatus>?) {
+        super.submitList(map?.entries!!.toList())
+    }
+
+    override fun getItemCount(): Int {
+        return items.keys.size
     }
 
     class ViewHolder(
@@ -53,7 +65,7 @@ class StoreGroceryAdapter() :
             binding.toggleObtained = groceryToggle
         }
 
-        fun bind(item: Item) {
+        fun bind(item: Map.Entry<Item, StockStatus>) {
             with(binding) {
                 viewModel = StoreGroceryItemsViewModel(item)
                 if((viewModel as StoreGroceryItemsViewModel).obtained) {
@@ -67,18 +79,18 @@ class StoreGroceryAdapter() :
     }
 }
 
-private class StoreGroceryItemDiffCallback : DiffUtil.ItemCallback<Item>() {
+private class StoreGroceryItemDiffCallback : DiffUtil.ItemCallback<Map.Entry<Item, StockStatus>>() {
 
     override fun areItemsTheSame(
-        oldItem: Item,
-        newItem: Item
+        oldItem: Map.Entry<Item, StockStatus>,
+        newItem: Map.Entry<Item, StockStatus>
     ): Boolean {
-        return oldItem.name == newItem.name
+        return oldItem.key == newItem.key
     }
 
     override fun areContentsTheSame(
-        oldItem: Item,
-        newItem: Item
+        oldItem: Map.Entry<Item, StockStatus>,
+        newItem: Map.Entry<Item, StockStatus>
     ): Boolean {
         return oldItem == newItem
     }

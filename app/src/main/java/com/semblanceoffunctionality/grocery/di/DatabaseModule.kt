@@ -1,10 +1,7 @@
 package com.semblanceoffunctionality.grocery.di
 
 import android.content.Context
-import com.semblanceoffunctionality.grocery.data.AppDatabase
-import com.semblanceoffunctionality.grocery.data.ItemDao
-import com.semblanceoffunctionality.grocery.data.StockStatusDao
-import com.semblanceoffunctionality.grocery.data.StoreDao
+import com.semblanceoffunctionality.grocery.data.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,5 +32,10 @@ class DatabaseModule {
     @Provides
     fun provideStockStatusDao(appDatabase: AppDatabase): StockStatusDao {
         return appDatabase.stockStatusDao()
+    }
+
+    @Provides
+    fun provideStockStatusGroceryItemForStoreDao(appDatabase: AppDatabase): StockStatusGroceryItemForStoreDao {
+        return appDatabase.stockStatusGroceryItemForStoreDao()
     }
 }
