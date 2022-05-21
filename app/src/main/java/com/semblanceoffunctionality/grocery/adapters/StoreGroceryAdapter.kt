@@ -15,9 +15,7 @@ import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryFrag
 import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryItemsViewModel
 
 
-class StoreGroceryAdapter(
-    private val items: Map<Item, StockStatus>
-) : ListAdapter<Map.Entry<Item, StockStatus>, StoreGroceryAdapter.ViewHolder>(
+class StoreGroceryAdapter() : ListAdapter<Map.Entry<Item, StockStatus>, StoreGroceryAdapter.ViewHolder>(
     StoreGroceryItemDiffCallback()
 ) {
 
@@ -26,7 +24,7 @@ class StoreGroceryAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             ListGroceryItemStatusBinding.inflate(
-                LayoutInflater.from(parent!!.context),
+                LayoutInflater.from(parent.context),
                 parent,
                 false
             ),
@@ -38,16 +36,8 @@ class StoreGroceryAdapter(
         holder.bind(getItem(position))
     }
 
-    override fun getItem(position: Int): Map.Entry<Item, StockStatus> {
-        return items.entries.elementAt(position)
-    }
-
     fun submitList(map: Map<Item, StockStatus>?) {
         super.submitList(map?.entries!!.toList())
-    }
-
-    override fun getItemCount(): Int {
-        return items.keys.size
     }
 
     class ViewHolder(

@@ -4,15 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import com.google.android.material.snackbar.Snackbar
-import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.StoreGroceryAdapter
 import com.semblanceoffunctionality.grocery.data.Item
-import com.semblanceoffunctionality.grocery.databinding.FragmentStoreDetailBinding
 import com.semblanceoffunctionality.grocery.databinding.FragmentStoreGroceryBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,9 +24,8 @@ class StoreGroceryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = DataBindingUtil.inflate<FragmentStoreGroceryBinding>(
+        binding = FragmentStoreGroceryBinding.inflate(
             inflater,
-            R.layout.fragment_store_grocery,
             container,
             false
         ).apply {
@@ -38,7 +33,7 @@ class StoreGroceryFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        val adapter = storeGroceryViewModel.items.value?.let { StoreGroceryAdapter(it) }
+        val adapter = StoreGroceryAdapter()
         if (adapter != null) {
             adapter.groceryToggle = object : ToggleObtainedCallback {
                 override fun toggle(item: Item?) {
