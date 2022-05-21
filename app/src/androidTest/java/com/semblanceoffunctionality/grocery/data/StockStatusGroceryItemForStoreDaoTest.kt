@@ -26,6 +26,12 @@ class StockStatusGroceryItemForStoreDaoTest {
     private val wantedItemC = Item("itemC", true)
     private val store = Store("store 1", "")
     private val store2 = Store("store 2", "")
+    private val stockStatusA1 = StockStatus(wantedItemA.name, store.name, StockStatusEnum.STOCKED)
+    private val stockStatusA2 = StockStatus(wantedItemA.name, store2.name, StockStatusEnum.UNKNOWN)
+    private val stockStatusB1 = StockStatus(notWantedItemB.name, store.name, StockStatusEnum.NOT_STOCKED)
+    private val stockStatusB2 = StockStatus(notWantedItemB.name, store2.name, StockStatusEnum.UNKNOWN)
+    private val stockStatusC1 = StockStatus(wantedItemC.name, store.name, StockStatusEnum.UNKNOWN)
+    private val stockStatusC2 = StockStatus(wantedItemC.name, store2.name, StockStatusEnum.NOT_STOCKED)
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -41,6 +47,9 @@ class StockStatusGroceryItemForStoreDaoTest {
 
         itemDao.insertAll(listOf(wantedItemA, notWantedItemB, wantedItemC))
         storeDao.insertAll(listOf(store, store2))
+        stockStatusDao.insertAll(listOf(stockStatusA1,stockStatusA2,
+            stockStatusB1,stockStatusB2,
+            stockStatusC1,stockStatusC2))
     }
 
     @After
@@ -51,11 +60,9 @@ class StockStatusGroceryItemForStoreDaoTest {
     @Test
     fun testGetItems() = runBlocking {
         val result = groceryDao.getWantedItemsAndStockStatus(store.name).first()
-        val stockA = stockStatusDao.getStatus(store.name, wantedItemA.name)
-        val stockC = stockStatusDao.getStatus(store.name, wantedItemC.name)
 
         ViewMatchers.assertThat(result.size, CoreMatchers.equalTo(2))
-        ViewMatchers.assertThat(result[wantedItemA], CoreMatchers.equalTo(stockA))
-        ViewMatchers.assertThat(result[wantedItemC], CoreMatchers.equalTo(stockC))
+        ViewMatchers.assertThat(result[wantedItemA], CoreMatchers.equalTo(stockStatusA1))
+        ViewMatchers.assertThat(result[wantedItemC], CoreMatchers.equalTo(stockStatusC1))
     }
 }
