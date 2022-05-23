@@ -10,7 +10,8 @@ import kotlinx.coroutines.flow.Flow
 abstract class StockStatusGroceryItemForStoreDao {
     @Query("SELECT * FROM items " +
             "JOIN stock_status ON stock_status.item = items.name " +
-            "WHERE stock_status.store = :storeName AND items.wanted")
+            "WHERE stock_status.store = :storeName AND items.wanted " +
+            "ORDER BY items.obtained ASC, stock_status.stockStatus ASC, items.name ASC")
     abstract fun getWantedItemsAndStockStatus(storeName: String): Flow<Map<Item, StockStatus>>
 
 }
