@@ -11,11 +11,12 @@ import javax.inject.Inject
 @HiltViewModel
 class StoreGroceryViewModel  @Inject internal constructor(
     savedStateHandle: SavedStateHandle,
-    private val stockStatusRepository: StockStatusGroceryItemForStoreRepository,
+    private val groceryStockStatusRepository: StockStatusGroceryItemForStoreRepository,
+    private val stockStatusRepository: StockStatusRepository,
     private val itemRepository: ItemRepository
 ) : ViewModel() {
     val storeName: String = savedStateHandle.get<String>(STORE_SAVED_STATE_KEY)!!
-    val items : LiveData<Map<Item, StockStatus>> = stockStatusRepository.getWantedItemsAndStockStatus(storeName).asLiveData()
+    val items : LiveData<Map<Item, StockStatus>> = groceryStockStatusRepository.getWantedItemsAndStockStatus(storeName).asLiveData()
 
     init {
         viewModelScope.launch {}
@@ -26,6 +27,28 @@ class StoreGroceryViewModel  @Inject internal constructor(
         CoroutineScope(Dispatchers.IO).launch {
             itemRepository.setObtained(item.name, newObtained)
         }
+    }
+
+    fun setStockedStatus(item: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            stockStatusRepository.setStockedStatus(storeName, item)
+        }
+    }
+
+    fun setStockedUnknownStatus(item: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            stockStatusRepository.setUnknownStatus(storeName, item)
+        }
+    }
+
+    fun setNotStockedStatus(item: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            stockStatusRepository.setNotStockedStatus(storeName, item)
+        }
+    }
+
+    fun getStatusForItem(item: String): StockStatus? {
+        return stockStatusRepository.getStockStatus(item, storeName)
     }
 
     companion object {

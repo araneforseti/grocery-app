@@ -13,9 +13,16 @@ import com.semblanceoffunctionality.grocery.databinding.ListGroceryItemStatusBin
 import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryFragment
 import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryFragmentDirections
 import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryItemsViewModel
+import com.semblanceoffunctionality.grocery.ui.storegrocerylist.StoreGroceryViewModel
+import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusButtonCallback
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
-class StoreGroceryAdapter() : ListAdapter<Map.Entry<Item, StockStatus>, StoreGroceryAdapter.ViewHolder>(
+class StoreGroceryAdapter(
+    private val storeGroceryViewModel: StoreGroceryViewModel
+) : ListAdapter<Map.Entry<Item, StockStatus>, StoreGroceryAdapter.ViewHolder>(
     StoreGroceryItemDiffCallback()
 ) {
 
@@ -28,6 +35,7 @@ class StoreGroceryAdapter() : ListAdapter<Map.Entry<Item, StockStatus>, StoreGro
                 parent,
                 false
             ),
+            storeGroceryViewModel,
             groceryToggle
         )
     }
@@ -42,6 +50,7 @@ class StoreGroceryAdapter() : ListAdapter<Map.Entry<Item, StockStatus>, StoreGro
 
     class ViewHolder(
         private val binding: ListGroceryItemStatusBinding,
+        private val storeGroceryViewModel: StoreGroceryViewModel,
         groceryToggle: StoreGroceryFragment.ToggleObtainedCallback
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
@@ -62,6 +71,30 @@ class StoreGroceryAdapter() : ListAdapter<Map.Entry<Item, StockStatus>, StoreGro
                     this.itemName.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 } else {
                     this.itemName.paintFlags = 0
+                }
+                binding.statusButtons.stockedCallback = StatusButtonCallback.SetStockedCallback { item, store ->
+                    if (store != null && item != null) {
+                        storeGroceryViewModel.setStockedStatus(item)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            stockStatus = storeGroceryViewModel.getStatusForItem(item)
+                        }
+                    }
+                }
+                binding.statusButtons.unknownCallback = StatusButtonCallback.SetUnknownCallback { item, store ->
+                    if (store != null && item != null) {
+                        storeGroceryViewModel.setStockedUnknownStatus(item)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            stockStatus = storeGroceryViewModel.getStatusForItem(item)
+                        }
+                    }
+                }
+                binding.statusButtons.notStockedCallback = StatusButtonCallback.SetNotStockedCallback { item, store ->
+                    if (store != null && item != null) {
+                        storeGroceryViewModel.setNotStockedStatus(item)
+                        CoroutineScope(Dispatchers.IO).launch {
+                            stockStatus = storeGroceryViewModel.getStatusForItem(item)
+                        }
+                    }
                 }
                 executePendingBindings()
             }

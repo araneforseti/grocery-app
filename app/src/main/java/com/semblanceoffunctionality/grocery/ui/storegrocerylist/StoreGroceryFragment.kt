@@ -33,15 +33,13 @@ class StoreGroceryFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
 
-        val adapter = StoreGroceryAdapter()
-        if (adapter != null) {
-            adapter.groceryToggle = object : ToggleObtainedCallback {
-                override fun toggle(item: Item?) {
-                    storeGroceryViewModel.toggleObtained(item)
-                }
+        val adapter = StoreGroceryAdapter(storeGroceryViewModel)
+        adapter.groceryToggle = object : ToggleObtainedCallback {
+            override fun toggle(item: Item?) {
+                storeGroceryViewModel.toggleObtained(item)
             }
-            subscribeUi(adapter, binding)
         }
+        subscribeUi(adapter, binding)
 
         binding.storeGroceryList.adapter = adapter
 
