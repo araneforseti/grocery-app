@@ -110,28 +110,35 @@ jobs:
        - name: Gradle cache
          uses: gradle/gradle-build-action@v2
 
-       - name: Build all artifacts
-         id: buildAllApks
-         uses: eskatos/gradle-command-action@v2.1.6
-         with:
-           gradle-version: current
-           wrapper-cache-enabled: true
-           dependencies-cache-enabled: true
-           configuration-cache-enabled: true
-           arguments: assembleRelease
-
-       - name: Sign artifact
-         id: signArtifact
-         uses: r0adkll/sign-android-release@v1.0.1
-         with:
-            releaseDirectory: app/build/outputs/apk/ourbuildtype/release
-            alias: ${{ secrets.KEYALIAS }}
-            signingKeyBase64: ${{ secrets.KEYSTORE }}
-            keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-            keyPassword: ${{ secrets.KEY_PASSWORD }}
+       - name: Build apk
+         id: buildApk
+         run: bash ./gradlew assembleDebug --
 
        - name: Upload our APK
          uses: actions/upload-artifact@v2.2.0
          with:
-            name: Release artifact
-            path: app/build/outputs/apk/ourbuildtype/release/app-artifact-*.apk
+           name: apk
+           path: app/build/outputs/apk/debug/app-*.apk
+
+   release:
+     name: Uploads artifact to release
+     needs: build
+     runs-on: ubuntu-latest
+     steps:
+       - name: Download apk
+         uses: actions/download-artifact@v2
+         with:
+           name: apk
+
+       - name: Upload as release
+         uses: softprops/action-gh-release@v1
+         with:
+           draft: true
+
+       - name: Trigger Repository Dispatch
+         uses: peter-evans/repository-dispatch@v2
+         with:
+           token: ${{ secrets.REPO_ACCESS_TOKEN }}
+           repository: araneforseti/grocery-app-private
+           event-type: apk-built
+           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
