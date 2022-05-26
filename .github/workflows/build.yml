@@ -130,6 +130,9 @@ jobs:
          with:
            name: apk
 
+       - name: What do we have?
+         run: ls
+
        - name: Upload as release
          uses: softprops/action-gh-release@v1
          with:
