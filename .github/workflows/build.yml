@@ -152,8 +152,17 @@ jobs:
            SIGNING_KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
            SIGNING_STORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
 
-       - name: Upload as release
-         uses: softprops/action-gh-release@v1
+       - name: Save Artifact
+         uses: actions/upload-artifact@v3
          with:
-           tag_name: "candidate"
+           name: signed-artifact
            path: app/build/outputs
+           if-no-files-found: error
+
+       - name: Upload as Release
+         uses: ncipollo/release-action@v1
+         with:
+           artifacts: "app/build/outputs/*.apk"
+           tag: "candidate"
+           allowUpdates: true
+           name: release-${{ github.sha }}
