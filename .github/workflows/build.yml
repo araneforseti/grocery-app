@@ -136,10 +136,10 @@ jobs:
          id: sign_app
          with:
            releaseDirectory: ./
-           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-           alias: ${{ secrets.ALIAS }}
-           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-           keyPassword: ${{ secrets.KEY_PASSWORD }}
+           signingKeyBase64: ${{ secrets.SIGNINGKEYBASE64 }}
+#           alias: ${{ secrets.ALIAS }}
+           keyStorePassword: ${{ secrets.KEYSTOREPASSWORD }}
+           keyPassword: ${{ secrets.KEYPASSWORD }}
 
        - name: Upload as release
          uses: softprops/action-gh-release@v1
