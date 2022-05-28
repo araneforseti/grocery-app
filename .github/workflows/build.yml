@@ -158,11 +158,3 @@ jobs:
            name: signed-artifact
            path: app/build/outputs
            if-no-files-found: error
-
-       - name: Upload as Release
-         uses: ncipollo/release-action@v1
-         with:
-           artifacts: "app/build/outputs/*.apk"
-           tag: "candidate"
-           allowUpdates: true
-           name: release-${{ github.sha }}
