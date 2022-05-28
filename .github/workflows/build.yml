@@ -130,19 +130,22 @@ jobs:
          with:
            name: apk
 
-       - name: What do we have?
-         run: ls
+       - name: Sign
+         uses: r0adkll/sign-android-release@v1
+         # ID used to access action output
+         id: sign_app
+         with:
+           releaseDirectory: ./
+           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+           alias: ${{ secrets.ALIAS }}
+           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+           keyPassword: ${{ secrets.KEY_PASSWORD }}
+         env:
+           # override default build-tools version (29.0.3) -- optional
+           BUILD_TOOLS_VERSION: "30.0.2"
 
        - name: Upload as release
          uses: softprops/action-gh-release@v1
          with:
-           draft: true
-           files: app-debug.apk
-
-       - name: Trigger Repository Dispatch
-         uses: peter-evans/repository-dispatch@v2
-         with:
-           token: ${{ secrets.REPO_ACCESS_TOKEN }}
-           repository: araneforseti/grocery-app-private
-           event-type: apk-built
-           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+           tag_name: "candidate"
+           path: ${{steps.sign_app.outputs.signedReleaseFile}}
