@@ -137,7 +137,7 @@ jobs:
          uses: softprops/action-gh-release@v1
          with:
            draft: true
-           files: apk
+           files: app-debug.apk
 
        - name: Trigger Repository Dispatch
          uses: peter-evans/repository-dispatch@v2
