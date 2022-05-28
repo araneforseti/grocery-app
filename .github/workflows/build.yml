@@ -125,24 +125,35 @@ jobs:
      needs: build
      runs-on: ubuntu-latest
      steps:
-       - name: Download apk
-         uses: actions/download-artifact@v2
-         with:
-           name: apk
+       - name: Decode Keystore
+         env:
+           ENCODED_STRING: ${{ secrets.SIGNINGKEYBASE64 }}
+         run: |
+           TMP_KEYSTORE_FILE_PATH="${RUNNER_TEMP}"/keystore
+           mkdir "${TMP_KEYSTORE_FILE_PATH}"
+           echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/your_keystore_file.jks
 
-       - name: Sign
-         uses: r0adkll/sign-android-release@v1
-         # ID used to access action output
-         id: sign_app
+       - name: Checkout
+         uses: actions/checkout@v3.0.2
+
+       - name: Set up our JDK environment
+         uses: actions/setup-java@v3.3.0
          with:
-           releaseDirectory: ./
-           signingKeyBase64: ${{ secrets.SIGNINGKEYBASE64 }}
-           alias: ${{ secrets.ALIAS }}
-           keyStorePassword: ${{ secrets.KEYSTOREPASSWORD }}
-           keyPassword: ${{ secrets.KEYPASSWORD }}
+           distribution: 'temurin'
+           java-version: ${{ env.JAVA_VERSION }}
+
+       - name: Make gradlew executable
+         run: chmod +x ./gradlew
+
+       - name: build prod
+         run: ./gradlew app:bundleRelease
+         env:
+           SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
+           SIGNING_KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
+           SIGNING_STORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
 
        - name: Upload as release
          uses: softprops/action-gh-release@v1
          with:
            tag_name: "candidate"
-           path: ${{steps.sign_app.outputs.signedReleaseFile}}
+           path: app/build/outputs
