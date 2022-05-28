@@ -137,7 +137,7 @@ jobs:
          with:
            releaseDirectory: ./
            signingKeyBase64: ${{ secrets.SIGNINGKEYBASE64 }}
-#           alias: ${{ secrets.ALIAS }}
+           alias: ${{ secrets.ALIAS }}
            keyStorePassword: ${{ secrets.KEYSTOREPASSWORD }}
            keyPassword: ${{ secrets.KEYPASSWORD }}
 
