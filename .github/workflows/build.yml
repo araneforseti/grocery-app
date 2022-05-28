@@ -146,11 +146,16 @@ jobs:
          run: chmod +x ./gradlew
 
        - name: build prod
+         if: github.ref == 'refs/heads/master'
          run: ./gradlew app:bundleRelease
          env:
            SIGNING_KEY_ALIAS: ${{ secrets.ALIAS }}
            SIGNING_KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
            SIGNING_STORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
+
+       - name: build debug
+         if: github.ref != 'refs/heads/master'
+         run: ./gradlew app:bundleDebug
 
        - name: Save Artifact
          uses: actions/upload-artifact@v3
