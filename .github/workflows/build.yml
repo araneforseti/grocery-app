@@ -115,7 +115,7 @@ jobs:
          run: bash ./gradlew assembleDebug --
 
        - name: Upload our APK
-         uses: actions/upload-artifact@v2.2.0
+         uses: actions/upload-artifact@v3.1.0
          with:
            name: apk
            path: app/build/outputs/apk/debug/app-*.apk
@@ -158,7 +158,7 @@ jobs:
          run: ./gradlew app:bundleDebug
 
        - name: Save Artifact
-         uses: actions/upload-artifact@v3
+         uses: actions/upload-artifact@v3.1.0
          with:
            name: signed-artifact
            path: app/build/outputs
