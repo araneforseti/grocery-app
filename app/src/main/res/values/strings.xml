@@ -39,4 +39,10 @@
     <string name="store_grocery_title">Grocery by Store</string>
     <string name="no_store_selected"><![CDATA[<no store selected>]]></string>
     <string name="store_grocery_empty">No groceries found for store</string>
+    <string name="nav_data">Data Impot/Export</string>
+    <string name="data">Data</string>
+    <string name="export_data_label">Export</string>
+    <string name="import_label">Import</string>
+    <string name="ok">Ok</string>
+    <string name="no_permission">Storage permission needed for this action!</string>
 </resources>

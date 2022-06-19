@@ -36,4 +36,7 @@ interface StockStatusDao {
 
     @Query("SELECT * FROM stock_status WHERE item = :item AND store = :store")
     fun getStatus(item: String, store: String): StockStatus?
+
+    @Query("SELECT * FROM stock_status")
+    fun getAll(): Flow<List<StockStatus>>
 }
