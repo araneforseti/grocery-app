@@ -45,4 +45,5 @@
     <string name="import_label">Import</string>
     <string name="ok">Ok</string>
     <string name="no_permission">Storage permission needed for this action!</string>
+    <string name="data_exported">Data exported to groceryData.json file</string>
 </resources>
