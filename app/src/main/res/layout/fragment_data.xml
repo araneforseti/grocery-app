@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="exportCallback"
+            type="com.semblanceoffunctionality.grocery.ui.data.DataFragment.WorkerCallback" />
+        <variable
+            name="importCallback"
+            type="com.semblanceoffunctionality.grocery.ui.data.DataFragment.WorkerCallback" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/data_export"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_item_image_height"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> exportCallback.go()}"
+            android:text="@string/export_data_label"
+            android:background="@color/grocery_black"
+            />
+
+        <Button
+            android:id="@+id/data_import"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_item_image_height"
+            android:layout_marginTop="120dp"
+            android:background="@color/grocery_black"
+            android:text="@string/import_label"
+            android:onClick="@{() -> importCallback.go()}"
+            app:layout_constraintLeft_toLeftOf="@id/data_export"
+            app:layout_constraintTop_toTopOf="@id/data_export" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
