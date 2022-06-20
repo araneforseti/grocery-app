@@ -1,6 +1,5 @@
 package com.semblanceoffunctionality.grocery.data
 
-import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -50,4 +49,12 @@ class StockStatusRepository @Inject constructor(
     fun setStockedStatus(store: String, item: String) = stockStatusDao.setStock(item, store, StockStatusEnum.STOCKED)
     fun setUnknownStatus(store: String, item: String) = stockStatusDao.setStock(item, store, StockStatusEnum.UNKNOWN)
     fun setNotStockedStatus(store: String, item: String) = stockStatusDao.setStock(item, store, StockStatusEnum.NOT_STOCKED)
+
+    suspend fun duplicateItem(toString: String, name: String) {
+        var statuses = stockStatusDao.getStockStatusesForItem(name).first()
+        statuses.forEach { stockStatus ->
+            stockStatus.item = toString
+        }
+        stockStatusDao.insertAll(statuses)
+    }
 }

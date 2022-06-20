@@ -1,5 +1,7 @@
 package com.semblanceoffunctionality.grocery.data
 
+import androidx.room.Query
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -48,4 +50,10 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
     fun deleteItem(name: String) = itemDao.deleteItem(name)
 
     fun setObtained(name: String?, newObtained: Boolean?) = itemDao.setObtained(name, newObtained)
+
+    suspend fun duplicateItem(toString: String, name: String) {
+        var item = itemDao.getItem(name).first()
+        item.name = toString
+        itemDao.insertAll(listOf(item))
+    }
 }

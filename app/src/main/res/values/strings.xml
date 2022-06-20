@@ -47,4 +47,5 @@
     <string name="no_permission">Storage permission needed for this action!</string>
     <string name="data_exported">Data exported to groceryData.json file</string>
     <string name="data_imported">Data imported</string>
+    <string name="new_name_hint">New Name</string>
 </resources>

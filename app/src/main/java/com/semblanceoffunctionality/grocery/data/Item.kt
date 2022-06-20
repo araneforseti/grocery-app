@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "items")
 data class Item(
-    @PrimaryKey @ColumnInfo(name = "name") val name: String,
-    val wanted: Boolean = true,
-    val quantity: Int = 0,
-    val obtained: Boolean = false
+    @PrimaryKey @ColumnInfo(name = "name") var name: String,
+    var wanted: Boolean = true,
+    var quantity: Int = 0,
+    var obtained: Boolean = false
 ) {
     fun quantityString(): String {
         if(wanted) {

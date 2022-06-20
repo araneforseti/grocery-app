@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +15,9 @@ import com.semblanceoffunctionality.grocery.adapters.ItemStockAdapter
 import com.semblanceoffunctionality.grocery.data.Item
 import com.semblanceoffunctionality.grocery.databinding.FragmentItemDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * A fragment representing a single Item detail screen.
@@ -56,6 +61,9 @@ class ItemDetailFragment : Fragment() {
                         .show()
                 }
             }
+            editNameCallback = EditNameCallback {
+                editNameDialog(container)
+            }
         }
         setHasOptionsMenu(true)
 
@@ -72,6 +80,27 @@ class ItemDetailFragment : Fragment() {
         }
     }
 
+    private fun editNameDialog(container: ViewGroup?) {
+        activity?.let {
+            val builder = AlertDialog.Builder(it)
+            val inflater = requireActivity().layoutInflater
+            val dialogView = inflater.inflate(R.layout.fragment_edit_name_dialog, container, false)
+            builder.apply {
+                setView(dialogView)
+                setPositiveButton(R.string.create) { _, _ ->
+                    val userInput = dialogView.findViewById<EditText>(R.id.new_name)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        itemDetailViewModel.updateName(userInput.text.toString())
+                    }
+                }
+                setNegativeButton(R.string.cancel) { dialog, _ ->
+                    dialog?.cancel()
+                }
+            }
+            builder.create()
+        }?.show()
+    }
+
     fun interface AddCallback {
         fun add(item: Item?)
     }
@@ -82,5 +111,9 @@ class ItemDetailFragment : Fragment() {
 
     fun interface DeleteCallback {
         fun delete(item: Item?)
+    }
+
+    fun interface EditNameCallback {
+        fun edit()
     }
 }
