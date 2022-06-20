@@ -27,7 +27,7 @@ android {
         targetSdkVersion rootProject.targetSdkVersion
         testInstrumentationRunner "com.semblanceoffunctionality.grocery.utilities.MainTestRunner"
         versionCode 1
-        versionName "0.0.1"
+        versionName "0.0.2"
         vectorDrawables.useSupportLibrary true
 
         // Consult the README on instructions for setting up Unsplash API key
