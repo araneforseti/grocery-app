@@ -17,12 +17,12 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class ItemDetailViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     private val itemRepository: ItemRepository,
     private val stockStatusRepository: StockStatusRepository
 ) : ViewModel() {
 
-    val name: String = savedStateHandle.get<String>(ITEM_ID_SAVED_STATE_KEY)!!
+    private var name: String = savedStateHandle.get<String>(ITEM_ID_SAVED_STATE_KEY)!!
     val item = itemRepository.getItem(name).asLiveData()
     val statuses = stockStatusRepository.getStockStatusesForItem(name).asLiveData()
 
@@ -65,6 +65,18 @@ class ItemDetailViewModel @Inject constructor(
 
     fun getStatusForStore(store: String): StockStatus? {
         return stockStatusRepository.getStockStatus(name, store)
+    }
+
+    // I regret making name the constraint, then allowing name to be edited
+    fun updateName(toString: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            itemRepository.duplicateItem(toString, name)
+            stockStatusRepository.duplicateItem(toString, name)
+            stockStatusRepository.deleteItem(name)
+            itemRepository.deleteItem(name)
+            savedStateHandle.set(ITEM_ID_SAVED_STATE_KEY, toString)
+            name = toString
+        }
     }
 
     companion object {

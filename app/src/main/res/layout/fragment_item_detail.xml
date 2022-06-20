@@ -18,6 +18,9 @@
         <variable
             name="deleteCallback"
             type="com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailFragment.DeleteCallback" />
+        <variable
+            name="editNameCallback"
+            type="com.semblanceoffunctionality.grocery.ui.itemdetail.ItemDetailFragment.EditNameCallback" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -85,6 +88,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="@{viewModel.item.name}"
+                android:onClick="@{() -> editNameCallback.edit()}"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

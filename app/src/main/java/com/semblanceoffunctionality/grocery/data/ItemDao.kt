@@ -40,4 +40,7 @@ interface ItemDao {
 
     @Query("UPDATE items SET obtained = :obtained WHERE name = :name")
     fun setObtained(name: String?, obtained: Boolean?)
+
+    @Query("UPDATE items SET name = :toString WHERE name =:oldName")
+    fun setName(toString: String, oldName: String)
 }

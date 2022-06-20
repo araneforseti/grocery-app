@@ -13,9 +13,9 @@ import androidx.room.*
     primaryKeys = ["item", "store"]
 )
 data class StockStatus(
-    @ColumnInfo(name="item") val item: String,
-    @ColumnInfo(name="store") val store: String,
-    @ColumnInfo(name="stockStatus") val stockStatus: StockStatusEnum
+    @ColumnInfo(name="item") var item: String,
+    @ColumnInfo(name="store") var store: String,
+    @ColumnInfo(name="stockStatus") var stockStatus: StockStatusEnum
 ) {
     fun isStocked(): Boolean {
         return stockStatus == StockStatusEnum.STOCKED
