@@ -33,4 +33,14 @@ class DataViewModel @Inject constructor(
         val allData = Data(items, stores, stocks)
         return@runBlocking gson?.toJson(allData)
     }
+
+    fun importData(content: String) {
+        val data = Gson().fromJson(content, Data::class.java)
+
+        runBlocking {
+            storeRepository.createStores(data.stores)
+            itemRepository.createItems(data.items)
+            stockStatusRepository.createStockStatuses(data.stocks)
+        }
+    }
 }

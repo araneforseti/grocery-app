@@ -25,6 +25,8 @@ class StockStatusRepository @Inject constructor(
 
     fun getAll() = stockStatusDao.getAll()
 
+    suspend fun createStockStatuses(stocks: List<StockStatus>) = stockStatusDao.insertAll(stocks)
+
     suspend fun addStockStatusesForItem(name: String) {
         val stores = storeDao.getStores().first()
         stores.forEach { store ->

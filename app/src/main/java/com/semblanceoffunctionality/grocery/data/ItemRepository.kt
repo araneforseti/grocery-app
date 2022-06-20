@@ -18,6 +18,8 @@ class ItemRepository @Inject constructor(private val itemDao: ItemDao) {
 
     suspend fun createItem(itemName: String) = itemDao.insertAll(listOf(Item(itemName, true)))
 
+    suspend fun createItems(items: List<Item>) = itemDao.insertAll(items)
+
     fun incrementQuantity(name: String) {
         if(itemDao.isWanted(name))
         {

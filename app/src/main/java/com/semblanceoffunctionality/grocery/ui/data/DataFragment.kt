@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,12 +20,14 @@ import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.databinding.FragmentDataBinding
 import com.semblanceoffunctionality.grocery.ui.data.DataFragment.WorkerCallback
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.BufferedReader
 
 
 @AndroidEntryPoint
 class DataFragment : Fragment()  {
     private val dataViewModel: DataViewModel by viewModels()
-    private lateinit var startForResult: ActivityResultLauncher<Intent?>
+    private lateinit var chooseFileForExportLauncher: ActivityResultLauncher<Intent?>
+    private lateinit var openFileResultLauncher: ActivityResultLauncher<Intent?>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,20 +43,16 @@ class DataFragment : Fragment()  {
         ).apply {
             lifecycleOwner = viewLifecycleOwner
             exportCallback = WorkerCallback {
-                writeToStorage()
+                chooseFileForExport()
 
                 Snackbar.make(root, R.string.data_exported, Snackbar.LENGTH_LONG)
                     .show()
             }
             importCallback = WorkerCallback {
-                Log.e("import", "import")
-                val builder = AlertDialog.Builder(requireContext())
-                builder.setMessage("Import not yet implemented")
-                    .setPositiveButton(R.string.ok
-                    ) { _, _ ->
-                    }
-                val dialog = builder.create()
-                dialog.show()
+                chooseFileForImport()
+
+                Snackbar.make(root, R.string.data_imported, Snackbar.LENGTH_LONG)
+                    .show()
             }
         }
 
@@ -65,7 +62,7 @@ class DataFragment : Fragment()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        chooseFileForExportLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
         { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val jsonContent = dataViewModel.exportData()
@@ -75,9 +72,19 @@ class DataFragment : Fragment()  {
                 outputStream?.close()
             }
         }
+
+        openFileResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+        { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val chosenUri = result.data?.data!!
+                val inputStream = context?.contentResolver?.openInputStream(chosenUri)
+                val content = inputStream?.bufferedReader()?.use(BufferedReader::readText)
+                dataViewModel.importData(content!!)
+            }
+        }
     }
 
-    private fun writeToStorage() {
+    private fun chooseFileForExport() {
         val relativePath = "Documents/"
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
@@ -89,7 +96,22 @@ class DataFragment : Fragment()  {
             putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.parse(relativePath))
         }
 
-        startForResult.launch(intent)
+        chooseFileForExportLauncher.launch(intent)
+    }
+
+    private fun chooseFileForImport() {
+        val relativePath = "Documents/"
+
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "application/json"
+
+            // Optionally, specify a URI for the file that should appear in the
+            // system file picker when it loads.
+            putExtra(DocumentsContract.EXTRA_INITIAL_URI, Uri.parse(relativePath))
+        }
+
+        openFileResultLauncher.launch(intent)
     }
 
     fun interface WorkerCallback {
