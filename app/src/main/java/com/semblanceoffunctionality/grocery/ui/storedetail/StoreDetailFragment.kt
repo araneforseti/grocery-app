@@ -48,8 +48,8 @@ class StoreDetailFragment : Fragment() {
             deleteCallback = DeleteCallback { store ->
                 store?.let {
                     storeDetailViewModel.deleteStore()
-                    Snackbar.make(root, R.string.deleted_store, Snackbar.LENGTH_LONG)
-                        .show()
+                    val action = StoreDetailFragmentDirections.actionNavStoreDetailToNavStoreList()
+                    findNavController().navigate(action)
                 }
             }
             editNameCallback = EditNameCallback {
