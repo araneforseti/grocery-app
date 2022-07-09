@@ -1,13 +1,17 @@
 package com.semblanceoffunctionality.grocery.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.semblanceoffunctionality.grocery.data.StockStatus
 import com.semblanceoffunctionality.grocery.databinding.ListItemStatusBinding
+import com.semblanceoffunctionality.grocery.ui.itemlist.ItemListFragmentDirections
 import com.semblanceoffunctionality.grocery.ui.storedetail.StoreDetailFragment
+import com.semblanceoffunctionality.grocery.ui.storedetail.StoreDetailFragmentDirections
 import com.semblanceoffunctionality.grocery.ui.storedetail.StoreDetailViewModel
 import com.semblanceoffunctionality.grocery.utilities.statusradio.StatusButtonCallback
 import kotlinx.coroutines.CoroutineScope
@@ -46,6 +50,10 @@ class StoreStockAdapter(
         fun bind(listStatus: StockStatus) {
             binding.apply {
                 stockStatus = listStatus
+                clickListener = View.OnClickListener {
+                    val action = StoreDetailFragmentDirections.actionNavStoreDetailToNavItemDetail(listStatus.item)
+                    it.findNavController().navigate(action)
+                }
                 binding.statusButtons.stockedCallback = StatusButtonCallback.SetStockedCallback { item, store ->
                     if (store != null && item != null) {
                         storeDetailViewModel.setStockedStatus(item)
