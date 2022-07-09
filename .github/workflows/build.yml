@@ -16,7 +16,7 @@ jobs:
 
    build-nonprod:
      runs-on: macos-latest
-     needs: [lint, unit, instrumented]
+     needs: [run-tests]
      if: github.ref != 'refs/heads/master'
      steps:
        - name: Checkout
