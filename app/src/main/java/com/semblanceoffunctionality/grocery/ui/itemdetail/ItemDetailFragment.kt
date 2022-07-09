@@ -93,6 +93,8 @@ class ItemDetailFragment : Fragment() {
                     CoroutineScope(Dispatchers.IO).launch {
                         itemDetailViewModel.updateName(userInput.text.toString())
                     }
+                    val action = ItemDetailFragmentDirections.actionNavItemDetailSelf(userInput.text.toString())
+                    findNavController().navigate(action)
                 }
                 setNegativeButton(R.string.cancel) { dialog, _ ->
                     dialog?.cancel()

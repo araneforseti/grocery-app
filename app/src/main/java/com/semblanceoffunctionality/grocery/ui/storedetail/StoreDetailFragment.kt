@@ -77,6 +77,8 @@ class StoreDetailFragment : Fragment() {
                     CoroutineScope(Dispatchers.IO).launch {
                         storeDetailViewModel.updateName(userInput.text.toString())
                     }
+                    val action = StoreDetailFragmentDirections.actionNavStoreDetailSelf(userInput.text.toString())
+                    findNavController().navigate(action)
                 }
                 setNegativeButton(R.string.cancel) { dialog, _ ->
                     dialog?.cancel()

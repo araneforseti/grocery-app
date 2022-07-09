@@ -22,7 +22,7 @@ class ItemDetailViewModel @Inject constructor(
     private val stockStatusRepository: StockStatusRepository
 ) : ViewModel() {
 
-    private var name: String = savedStateHandle.get<String>(ITEM_ID_SAVED_STATE_KEY)!!
+    var name: String = savedStateHandle.get<String>(ITEM_ID_SAVED_STATE_KEY)!!
     val item = itemRepository.getItem(name).asLiveData()
     val statuses = stockStatusRepository.getStockStatusesForItem(name).asLiveData()
 
