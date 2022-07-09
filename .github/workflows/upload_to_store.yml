@@ -2,27 +2,18 @@ name: Upload
 
 on: workflow_dispatch
 
-env:
-  API_VERSION: 31
-  JAVA_VERSION: 11
-
 jobs:
   upload:
     runs-on: macos-latest
     steps:
       - name: Download current candidate
-        run: 'ls'
-
-      - name: Unzip candidate
-        uses: montudor/action-zip@v1
-        with:
-          args: unzip -qq signed-artifact.zip -d dir
+        run: "curl https://github.com/araneforseti/grocery-app/releases/download/candidate/app-release.aab -o app-release.aab"
 
       - name: Release
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ SERVICE_ACCOUNT_JSON }}
           packageName: com.semblanceoffunctionality.grocery
-          releaseFiles: bundle/release/app-release.aab
+          releaseFiles: app-release.aab
           track: production
           status: completed
