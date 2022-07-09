@@ -164,5 +164,6 @@ jobs:
          uses: softprops/action-gh-release@v1
          with:
            tag_name: 'candidate'
+           fail_on_unmatched_files: true
            files:
-            signed-artifact
+            app/build/outputs/*
