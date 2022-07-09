@@ -4,7 +4,7 @@
     <color name="grocery_black">#de000000</color>
     <color name="grocery_gray_50">#fafafa</color>
     <color name="grocery_gray_50_a600">#99fafafa</color>
-    <color name="grocery_green_300">#6dc790</color>
+    <color name="grocery_green_300">#c7f9c5</color>
     <color name="grocery_green_500">#49bb79</color>
     <color name="grocery_green_700">#005d2b</color>
     <color name="grocery_green_900">#1a231e</color>
@@ -12,5 +12,5 @@
     <color name="grocery_yellow_300">#f8f99f</color>
     <color name="grocery_yellow_500">#ffff63</color>
     <color name="grocery_check">#49bb79</color>
-    <color name="gray">#424141</color>
+    <color name="gray">#424140</color>
 </resources>
