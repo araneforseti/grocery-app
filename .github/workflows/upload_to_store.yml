@@ -9,6 +9,9 @@ jobs:
       - name: Download current candidate
         run: "curl https://github.com/araneforseti/grocery-app/releases/download/candidate/app-release.aab -o app-release.aab"
 
+      - name: Debug
+        run: "ls"
+
       - name: Release
         uses: r0adkll/upload-google-play@v1
         with:
