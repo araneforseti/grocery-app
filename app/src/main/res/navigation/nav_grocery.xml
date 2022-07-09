@@ -72,9 +72,6 @@
         <action
             android:id="@+id/action_nav_store_list_to_nav_store_detail"
             app:destination="@id/nav_store_detail" />
-        <argument
-            android:name="store"
-            app:argType="string" />
     </fragment>
 
     <fragment
@@ -85,6 +82,9 @@
         <argument
             android:name="store"
             app:argType="string" />
+        <action
+            android:id="@+id/action_nav_store_detail_to_nav_store_list"
+            app:destination="@id/nav_store_list" />
     </fragment>
 
     <fragment

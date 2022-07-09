@@ -58,8 +58,6 @@ class ItemDetailFragment : Fragment() {
             deleteCallback = DeleteCallback { item ->
                 item?.let {
                     itemDetailViewModel.deleteItem()
-                    Snackbar.make(root, R.string.deleted_item, Snackbar.LENGTH_LONG)
-                        .show()
                     val action = ItemDetailFragmentDirections.actionNavItemDetailToNavAllItems()
                     findNavController().navigate(action)
                 }

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.StoreStockAdapter
@@ -47,8 +48,8 @@ class StoreDetailFragment : Fragment() {
             deleteCallback = DeleteCallback { store ->
                 store?.let {
                     storeDetailViewModel.deleteStore()
-                    Snackbar.make(root, R.string.deleted_store, Snackbar.LENGTH_LONG)
-                        .show()
+                    val action = StoreDetailFragmentDirections.actionNavStoreDetailToNavStoreList()
+                    findNavController().navigate(action)
                 }
             }
             editNameCallback = EditNameCallback {
