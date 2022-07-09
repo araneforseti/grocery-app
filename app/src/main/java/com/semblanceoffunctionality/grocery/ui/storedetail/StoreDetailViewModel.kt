@@ -17,12 +17,12 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class StoreDetailViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     private val storeRepository: StoreRepository,
     private val stockStatusRepository: StockStatusRepository
 ) : ViewModel() {
 
-    private val storeName: String = savedStateHandle.get<String>(STORE_SAVED_STATE_KEY)!!
+    private var storeName: String = savedStateHandle.get<String>(STORE_SAVED_STATE_KEY)!!
     val store = storeRepository.getStore(storeName).asLiveData()
     val statuses = stockStatusRepository.getAllStockStatusesForStore(storeName).asLiveData()
 
@@ -30,6 +30,18 @@ class StoreDetailViewModel @Inject constructor(
         CoroutineScope(Dispatchers.IO).launch {
             stockStatusRepository.deleteStore(storeName)
             storeRepository.deleteStore(storeName)
+        }
+    }
+
+    // I regret making name the constraint, then allowing name to be edited
+    fun updateName(toString: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            storeRepository.duplicateStore(toString, storeName)
+            stockStatusRepository.duplicateStore(toString, storeName)
+            stockStatusRepository.deleteStore(storeName)
+            storeRepository.deleteStore(storeName)
+            savedStateHandle.set(STORE_SAVED_STATE_KEY, toString)
+            storeName = toString
         }
     }
 

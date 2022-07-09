@@ -26,4 +26,10 @@ class StoreRepository @Inject constructor(
     fun deleteStore(name: String) = storeDao.deleteStore(name)
 
     suspend fun getStoresNames() : List<String> = storeDao.getStoreNames().first()
+
+    suspend fun duplicateStore(toString: String, name: String) {
+        var store = storeDao.getStore(name).first()
+        store.name = toString
+        storeDao.insertAll(listOf(store))
+    }
 }

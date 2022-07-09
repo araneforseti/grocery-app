@@ -57,4 +57,12 @@ class StockStatusRepository @Inject constructor(
         }
         stockStatusDao.insertAll(statuses)
     }
+
+    suspend fun duplicateStore(toString: String, name: String) {
+        var statuses = stockStatusDao.getStockStatusForStore(name).first()
+        statuses.forEach { stockStatus ->
+            stockStatus.store = toString
+        }
+        stockStatusDao.insertAll(statuses)
+    }
 }
