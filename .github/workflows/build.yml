@@ -145,21 +145,6 @@ jobs:
            SIGNING_KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
            SIGNING_STORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
 
-
-       - name: Decode Keystore
-         env:
-           ENCODED_STRING: ${{ secrets.SIGNINGKEYBASE64 }}
-         run: |
-           TMP_KEYSTORE_FILE_PATH="${RUNNER_TEMP}"/keystore
-           mkdir "${TMP_KEYSTORE_FILE_PATH}"
-           echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/your_keystore_file.jks
-
-       - uses: ncipollo/release-action@v1
-         with:
-           allowUpdates: true
-           artifacts: "app/build/outputs/*"
-           tag: "candidate"
-
        - name: Save Artifact
          uses: actions/upload-artifact@v3.1.0
          with:
@@ -184,13 +169,8 @@ jobs:
            mkdir "${TMP_KEYSTORE_FILE_PATH}"
            echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/your_keystore_file.jks
 
-       - name: Debug
-         run: 'ls'
-
-       - name: Release Artifact to GitHub
-         uses: softprops/action-gh-release@v1
+       - uses: ncipollo/release-action@v1
          with:
-           tag_name: 'candidate'
-           fail_on_unmatched_files: true
-           files:
-            '/home/runner/work/grocery-app/grocery-app/*'
+           allowUpdates: true
+           artifacts: "signed-artifact"
+           tag: "candidate"
