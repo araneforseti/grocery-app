@@ -19,6 +19,6 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT }}
           packageName: com.semblanceoffunctionality.grocery
-          releaseFiles: app-release.aab
+          releaseFiles: "app-release.aab"
           track: production
           status: draft
