@@ -12,18 +12,18 @@ buildscript {
         coreTestingVersion = '2.1.0'
         coroutinesVersion = "1.6.3"
         espressoVersion = '3.4.0'
-        fragmentVersion = '1.4.1'
+        fragmentVersion = '1.5.0'
         glideVersion = '4.13.2'
         gradleVersion = '7.2.1'
         gsonVersion = '2.9.0'
         hiltVersion = '2.42'
         junitVersion = '4.13.2'
-        kotlinVersion = '1.7.0'
+        kotlinVersion = '1.7.10'
         ktlintVersion = '0.38.1'
         ktxVersion = '1.8.0'
         lifecycleVersion = '2.2.0'
         materialVersion = '1.6.1'
-        navigationVersion = '2.4.2'
+        navigationVersion = '2.5.0'
         okhttpLoggingVersion = '4.10.0'
         pagingVersion = '3.1.1'
         retrofitVersion = '2.9.0'
@@ -50,7 +50,7 @@ buildscript {
 }
 
 plugins {
-    id "com.diffplug.spotless" version "6.7.2"
+    id "com.diffplug.spotless" version "6.8.0"
 }
 
 allprojects {
