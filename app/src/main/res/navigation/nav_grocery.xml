@@ -89,6 +89,9 @@
         <argument
             android:name="store"
             app:argType="string" />
+        <action
+            android:id="@+id/action_nav_store_detail_self"
+            app:destination="@id/nav_store_detail" />
     </fragment>
 
     <fragment

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.StoreStockAdapter
@@ -76,6 +77,8 @@ class StoreDetailFragment : Fragment() {
                     CoroutineScope(Dispatchers.IO).launch {
                         storeDetailViewModel.updateName(userInput.text.toString())
                     }
+                    val action = StoreDetailFragmentDirections.actionNavStoreDetailSelf(userInput.text.toString())
+                    findNavController().navigate(action)
                 }
                 setNegativeButton(R.string.cancel) { dialog, _ ->
                     dialog?.cancel()
