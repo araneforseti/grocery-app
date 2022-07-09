@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Item(
     @PrimaryKey @ColumnInfo(name = "name") var name: String,
     var wanted: Boolean = true,
-    var quantity: Int = 0,
+    var quantity: Int = 1,
     var obtained: Boolean = false
 ) {
     fun quantityString(): String {
