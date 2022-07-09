@@ -169,6 +169,9 @@ jobs:
            mkdir "${TMP_KEYSTORE_FILE_PATH}"
            echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/your_keystore_file.jks
 
+       - name: Debug
+         run: 'ls'
+
        - name: Release Artifact to GitHub
          uses: softprops/action-gh-release@v1
          with:
