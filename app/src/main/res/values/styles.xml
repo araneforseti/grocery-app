@@ -3,14 +3,23 @@
     <!-- To see how these attributes are used, please visit https://material.io/develop/android/theming/color/ -->
     <style name="Base.Theme.Grocery" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/grocery_green_500</item>
-        <item name="colorOnPrimary">@color/grocery_yellow_500</item>
-        <item name="colorPrimaryDark">@color/grocery_green_700</item>
+        <item name="colorOnPrimary">@color/grocery_green_300</item>
+        <item name="colorPrimaryDark">@color/grocery_green_500</item>
         <item name="colorOnSurface">@color/grocery_black</item>
-        <item name="colorAccent">@color/grocery_green_700</item>
-        <item name="colorSurface">@color/grocery_gray_50</item>
-        <item name="colorSecondary">@color/grocery_yellow_500</item>
-        <item name="android:colorBackground">@color/grocery_green_500</item>
+        <item name="colorAccent">@color/grocery_green_500</item>
+        <item name="colorSurface">@color/gray</item>
+        <item name="colorSecondary">@color/grocery_green_300</item>
+        <item name="android:colorBackground">@color/grocery_green_900</item>
+
+        <item name="floatingActionButtonStyle">@style/MyButton</item>
     </style>
+
+    <style name="Base.Theme.Grocery.NavigationView">
+        <item name="android:textColorSecondary">@color/grocery_white</item>
+        <item name="android:textColorPrimary">@color/grocery_white</item>
+        <item name="android:textColor">@color/grocery_white</item>
+    </style>
+
 
     <style name="Theme.Grocery" parent="Base.Theme.Grocery"/>
 
@@ -19,12 +28,16 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Grocery.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+    <style name="Theme.Grocery.AppBarOverlay" parent="Base.Theme.Grocery"/>
 
     <style name="Theme.Grocery.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="TextAppearance.Grocery.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
         <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="MyButton" parent="ThemeOverlay.Material3.FloatingActionButton.Primary">
+
     </style>
 
 </resources>
