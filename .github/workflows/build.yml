@@ -178,4 +178,4 @@ jobs:
            tag_name: 'candidate'
            fail_on_unmatched_files: true
            files:
-            signed-artifact
+            '/home/runner/work/grocery-app/grocery-app/*'
