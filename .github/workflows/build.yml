@@ -157,7 +157,7 @@ jobs:
        - name: Release
          uses: softprops/action-gh-release@v1
          with:
-           files: "app/build/outputs/*"
+           files: "app/build/outputs/bundle/release/*"
            tag_name: "candidate"
 
        - name: Save Artifact
@@ -166,6 +166,13 @@ jobs:
            name: signed-artifact
            path: app/build/outputs
            if-no-files-found: error
+
+       - name: Tag Repo
+         uses: richardsimko/update-tag@v1
+         with:
+           tag_name: v0.0.2
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
    release:
      runs-on: ubuntu-latest
