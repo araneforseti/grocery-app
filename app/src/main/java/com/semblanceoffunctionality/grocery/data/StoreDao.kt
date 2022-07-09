@@ -22,4 +22,7 @@ interface StoreDao {
 
     @Query("SELECT name FROM stores")
     fun getStoreNames(): Flow<List<String>>
+
+    @Query("UPDATE stores SET name = :toString WHERE name =:oldName")
+    fun setName(toString: String, oldName: String)
 }
