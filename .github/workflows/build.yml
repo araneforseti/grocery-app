@@ -9,7 +9,7 @@ env:
 # Where will they run
 jobs:
    run-tests:
-     uses: araneforseti/grocery-app/.github/workflows/tests.yml@main
+     uses: araneforseti/grocery-app/.github/workflows/tests.yml@82-build-issue-pipeline-does-not-release-artifact-as-candidate
      with:
        api_level: ${{ env.API_VERSION }}
        java_version: ${{ env.JAVA_VERSION }}
