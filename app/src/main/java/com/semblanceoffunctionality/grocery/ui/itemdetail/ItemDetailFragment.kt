@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.semblanceoffunctionality.grocery.R
 import com.semblanceoffunctionality.grocery.adapters.ItemStockAdapter
@@ -57,8 +58,8 @@ class ItemDetailFragment : Fragment() {
             deleteCallback = DeleteCallback { item ->
                 item?.let {
                     itemDetailViewModel.deleteItem()
-                    Snackbar.make(root, R.string.deleted_item, Snackbar.LENGTH_LONG)
-                        .show()
+                    val action = ItemDetailFragmentDirections.actionNavItemDetailToNavAllItems()
+                    findNavController().navigate(action)
                 }
             }
             editNameCallback = EditNameCallback {
