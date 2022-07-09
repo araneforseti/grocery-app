@@ -5,18 +5,18 @@
     <style name="ShapeAppearance.Grocery.Card" parent="ShapeAppearance.MaterialComponents">
         <item name="cornerFamily">rounded</item>
 
-        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopLeft">@dimen/card_corner_radius</item>
         <item name="cornerSizeTopRight">@dimen/card_corner_radius</item>
-        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomRight">@dimen/card_corner_radius</item>
         <item name="cornerSizeBottomLeft">@dimen/card_corner_radius</item>
     </style>
 
     <style name="ShapeAppearance.Grocery.Button.Add" parent="ShapeAppearance.MaterialComponents">
         <item name="cornerFamily">rounded</item>
 
-        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopLeft">@dimen/button_corner_radius</item>
         <item name="cornerSizeTopRight">@dimen/button_corner_radius</item>
-        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomRight">@dimen/button_corner_radius</item>
         <item name="cornerSizeBottomLeft">@dimen/button_corner_radius</item>
     </style>
 
