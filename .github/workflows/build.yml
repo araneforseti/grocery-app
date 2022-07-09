@@ -145,6 +145,22 @@ jobs:
            SIGNING_KEY_PASSWORD: ${{ secrets.KEYPASSWORD }}
            SIGNING_STORE_PASSWORD: ${{ secrets.KEYSTOREPASSWORD }}
 
+       - name: Save Artifact
+         uses: actions/upload-artifact@v3.1.0
+         with:
+           name: signed-artifact
+           path: app/build/outputs
+           if-no-files-found: error
+
+   release:
+     runs-on: ubuntu-latest
+     needs: [build-candidate]
+     steps:
+       - name: Download artifact
+         uses: actions/download-artifact@v3
+         with:
+           name: signed-artifact
+
        - name: Decode Keystore
          env:
            ENCODED_STRING: ${{ secrets.SIGNINGKEYBASE64 }}
@@ -153,17 +169,10 @@ jobs:
            mkdir "${TMP_KEYSTORE_FILE_PATH}"
            echo $ENCODED_STRING | base64 -di > "${TMP_KEYSTORE_FILE_PATH}"/your_keystore_file.jks
 
-       - name: Save Artifact
-         uses: actions/upload-artifact@v3.1.0
-         with:
-           name: signed-artifact
-           path: app/build/outputs
-           if-no-files-found: error
-
        - name: Release Artifact to GitHub
          uses: softprops/action-gh-release@v1
          with:
            tag_name: 'candidate'
            fail_on_unmatched_files: true
            files:
-            app/build/outputs/*
+            signed-artifact
