@@ -1,0 +1,95 @@
+name: Tests
+
+on:
+  workflow_call:
+    inputs:
+      api_level:
+        required: true
+        type: string
+      java_version:
+        required: true
+        type: string
+
+# Where will they run
+jobs:
+   lint:
+      runs-on: macos-latest
+
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v3.0.2
+
+      - name: Set up our JDK environment
+        uses: actions/setup-java@v3.4.0
+        with:
+           distribution: 'temurin'
+           java-version: ${{ inputs.java_version }}
+
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+
+      - name: Run Kotlin Linter
+        run: ./gradlew lint
+
+   unit:
+     runs-on: macos-latest
+
+     steps:
+       - name: Checkout
+         uses: actions/checkout@v3.0.2
+
+       - name: Set up our JDK environment
+         uses: actions/setup-java@v3.4.0
+         with:
+           distribution: 'temurin'
+           java-version: ${{ inputs.java_version }}
+
+       - name: Gradle cache
+         uses: gradle/gradle-build-action@v2
+
+       - name: Run Unit Tests
+         uses: eskatos/gradle-command-action@v2.2.1
+         with:
+           gradle-version: current
+           wrapper-cache-enabled: true
+           dependencies-cache-enabled: true
+           configuration-cache-enabled: true
+           arguments: test
+
+   instrumented:
+     runs-on: macos-latest
+
+     steps:
+       - name: Checkout
+         uses: actions/checkout@v3.0.2
+
+       - name: Set up our JDK environment
+         uses: actions/setup-java@v3.4.0
+         with:
+           distribution: 'temurin'
+           java-version: ${{ inputs.java_version }}
+
+       - name: Gradle cache
+         uses: gradle/gradle-build-action@v2
+
+       - name: Set up Android virtual device
+         uses: reactivecircus/android-emulator-runner@v2
+         with:
+           api-level: ${{ inputs.api_level }}
+           arch: x86_64
+           target: ${{ inputs.api_level >= 30 && 'google_apis' || 'default' }}
+           force-avd-creation: false
+           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+           disable-animations: false
+           script: echo "Generated AVD snapshot for caching."
+
+       - name: Run instrumented tests on Android virtual device
+         uses: reactivecircus/android-emulator-runner@v2
+         with:
+           api-level: ${{ inputs.api_level }}
+           arch: x86_64
+           target: 'default'
+           force-avd-creation: false
+           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+           disable-animations: true
+           script: ./gradlew connectedAndroidTest --stacktrace

@@ -1,0 +1,19 @@
+name: Upload
+
+on: workflow_dispatch
+
+jobs:
+  upload:
+    runs-on: macos-latest
+    steps:
+      - name: Download current candidate
+        run: "curl https://github.com/araneforseti/grocery-app/releases/download/candidate/app-release.aab -o app-release.aab"
+
+      - name: Release
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ SERVICE_ACCOUNT_JSON }}
+          packageName: com.semblanceoffunctionality.grocery
+          releaseFiles: app-release.aab
+          track: production
+          status: completed
