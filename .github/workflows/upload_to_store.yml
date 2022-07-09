@@ -16,4 +16,4 @@ jobs:
           packageName: com.semblanceoffunctionality.grocery
           releaseFiles: app-release.aab
           track: production
-          status: completed
+          status: draft
