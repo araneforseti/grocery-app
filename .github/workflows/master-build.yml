@@ -14,8 +14,8 @@ jobs:
   run-tests:
     uses: araneforseti/grocery-app/.github/workflows/tests.yml@master
     with:
-      api_level: ${{ env.API_VERSION }}
-      java_version: ${{ env.JAVA_VERSION }}
+      api_level: 31 # Need to find a way to not duplicate these
+      java_version: 11
 
   build-candidate:
     runs-on: ubuntu-latest

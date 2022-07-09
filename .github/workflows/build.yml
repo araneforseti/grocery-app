@@ -11,8 +11,8 @@ jobs:
    run-tests:
      uses: araneforseti/grocery-app/.github/workflows/tests.yml@82-build-issue-pipeline-does-not-release-artifact-as-candidate
      with:
-       api_level: ${{ env.API_VERSION }}
-       java_version: ${{ env.JAVA_VERSION }}
+       api_level: 31
+       java_version: 11
 
    build-nonprod:
      runs-on: macos-latest
