@@ -10,7 +10,7 @@ buildscript {
         appCompatVersion = '1.4.2'
         constraintLayoutVersion = '2.1.4'
         coreTestingVersion = '2.1.0'
-        coroutinesVersion = "1.6.3"
+        coroutinesVersion = "1.6.4"
         espressoVersion = '3.4.0'
         fragmentVersion = '1.5.0'
         glideVersion = '4.13.2'
