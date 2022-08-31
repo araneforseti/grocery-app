@@ -55,6 +55,12 @@ jobs:
            dependencies-cache-enabled: true
            configuration-cache-enabled: true
            arguments: test
+       
+       - name: SonarCloud Scan
+         uses: SonarSource/sonarcloud-github-action@master
+         env:
+           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+           SONAR_TOKEN: "${{ secrets.SONAR_TOKEN }}"
 
    instrumented:
      runs-on: macos-latest
