@@ -32,7 +32,7 @@ jobs:
         run: ./gradlew lint
 
    unit:
-     runs-on: macos-latest
+     runs-on: ubuntu-latest
 
      steps:
        - name: Checkout
@@ -55,6 +55,11 @@ jobs:
            dependencies-cache-enabled: true
            configuration-cache-enabled: true
            arguments: test
+       
+#        - name: Fix code coverage paths
+#          working-directory: ./coverage
+#          run: |
+#           sed -i 's@'$GITHUB_WORKSPACE'@/github/workspace/@g' coverage.json
        
        - name: SonarCloud Scan
          uses: SonarSource/sonarcloud-github-action@master
