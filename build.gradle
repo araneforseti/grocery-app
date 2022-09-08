@@ -20,7 +20,7 @@ buildscript {
         junitVersion = '4.13.2'
         kotlinVersion = '1.7.10'
         ktlintVersion = '0.38.1'
-        ktxVersion = '1.8.0'
+        ktxVersion = '1.9.0'
         lifecycleVersion = '2.2.0'
         materialVersion = '1.6.1'
         navigationVersion = '2.5.1'
