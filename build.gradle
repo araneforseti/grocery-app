@@ -23,7 +23,7 @@ buildscript {
         ktxVersion = '1.9.0'
         lifecycleVersion = '2.2.0'
         materialVersion = '1.6.1'
-        navigationVersion = '2.5.1'
+        navigationVersion = '2.5.2'
         okhttpLoggingVersion = '4.10.0'
         pagingVersion = '3.1.1'
         retrofitVersion = '2.9.0'
