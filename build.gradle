@@ -30,7 +30,7 @@ buildscript {
         roomVersion = '2.4.3'
         runnerVersion = '1.0.1'
         truthVersion = '1.1.3'
-        testExtJunit = '1.1.3'
+        testExtJunit = '1.1.4'
         uiAutomatorVersion = '2.2.0'
         viewPagerVersion = '1.0.0'
         workVersion = '2.7.1'
