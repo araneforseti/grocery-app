@@ -36,7 +36,7 @@ jobs:
          run: ./gradlew app:bundleDebug
 
        - name: Upload our APK
-         uses: actions/upload-artifact@v3.1.1
+         uses: actions/upload-artifact@v3.1.2
          with:
            name: apk
            path: app/build/outputs/apk/debug/app-*.apk
