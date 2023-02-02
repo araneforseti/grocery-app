@@ -14,7 +14,7 @@ buildscript {
         espressoVersion = '3.5.1'
         fragmentVersion = '1.5.5'
         glideVersion = '4.14.2'
-        gradleVersion = '7.4.0'
+        gradleVersion = '7.4.1'
         gsonVersion = '2.10.1'
         hiltVersion = '2.44.2'
         junitVersion = '4.13.2'
