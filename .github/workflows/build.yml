@@ -9,7 +9,7 @@ env:
 # Where will they run
 jobs:
    run-tests:
-     uses: araneforseti/grocery-app/.github/workflows/tests.yml@master
+     uses: araneforseti/grocery-app/.github/workflows/tests.yml@enable-instrumented
      with:
        api_level: 31
        java_version: 11
