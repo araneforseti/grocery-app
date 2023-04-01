@@ -2,10 +2,52 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.semblanceoffunctionality.grocery"
+        minSdk 30
+        targetSdk 32
+        versionCode 2
+        versionName "0.0.2"
+
+        testInstrumentationRunner "com.semblanceoffunctionality.grocery.utilities.MainTestRunner"
+        vectorDrawables.useSupportLibrary true
+
+        // Consult the README on instructions for setting up Unsplash API key
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
+//            }
+//        }
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
+        }
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_11
+            targetCompatibility JavaVersion.VERSION_11
+        }
+
+        kotlinOptions {
+            jvmTarget = 11
+
+            // Enable Coroutines and Flow APIs
+            freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+            freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
+        }
+
+        buildFeatures {
+            viewBinding true
+            dataBinding true
+        }
+    }
 
     lintOptions {
         baseline(file("lint-baseline.xml"))
@@ -19,44 +61,6 @@ android {
         }
     }
 
-    buildFeatures {
-        dataBinding true
-    }
-    defaultConfig {
-        applicationId "com.semblanceoffunctionality.grocery"
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        testInstrumentationRunner "com.semblanceoffunctionality.grocery.utilities.MainTestRunner"
-        versionCode 2
-        versionName "0.0.2"
-        vectorDrawables.useSupportLibrary true
-
-        // Consult the README on instructions for setting up Unsplash API key
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
-            }
-        }
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        // work-runtime-ktx 2.1.0 and above now requires Java 8
-        jvmTarget = 11
-
-        // Enable Coroutines and Flow APIs
-        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
-        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
-    }
     packagingOptions {
         resources {
             excludes += ['/META-INF/AL2.0', '/META-INF/LGPL2.1']
