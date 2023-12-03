@@ -3,16 +3,16 @@ name: Build
 on: pull_request
 
 env:
-  API_VERSION: 31
-  JAVA_VERSION: 11
+  API_VERSION: 33
+  JAVA_VERSION: 17
 
 # Where will they run
 jobs:
    run-tests:
      uses: araneforseti/grocery-app/.github/workflows/tests.yml@main
      with:
-       api_level: 31
-       java_version: 11
+       api_level: 33
+       java_version: 17
 
    build-nonprod:
      runs-on: macos-latest

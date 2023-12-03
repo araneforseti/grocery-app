@@ -1,8 +1,19 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'com.google.devtools.ksp'
+
+allprojects {
+    tasks.withType(KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = "17"
+        }
+    }
+}
 
 android {
     compileSdk 33
@@ -10,9 +21,9 @@ android {
     defaultConfig {
         applicationId "com.semblanceoffunctionality.grocery"
         minSdk 30
-        targetSdk 32
+        targetSdk 33
         versionCode 2
-        versionName "0.0.2"
+        versionName "0.0.3"
 
         testInstrumentationRunner "com.semblanceoffunctionality.grocery.utilities.MainTestRunner"
         vectorDrawables.useSupportLibrary true
@@ -31,12 +42,12 @@ android {
         }
 
         compileOptions {
-            sourceCompatibility JavaVersion.VERSION_11
-            targetCompatibility JavaVersion.VERSION_11
+            sourceCompatibility JavaVersion.VERSION_17
+            targetCompatibility JavaVersion.VERSION_17
         }
 
         kotlinOptions {
-            jvmTarget = 11
+            jvmTarget = 17
 
             // Enable Coroutines and Flow APIs
             freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
@@ -49,10 +60,6 @@ android {
         }
     }
 
-    lintOptions {
-        baseline(file("lint-baseline.xml"))
-        disable 'NotificationPermission'
-    }
 
     configurations {
         androidTestImplementation {
@@ -66,15 +73,20 @@ android {
             excludes += ['/META-INF/AL2.0', '/META-INF/LGPL2.1']
         }
     }
+    namespace 'com.semblanceoffunctionality.grocery'
+    lint {
+        baseline file('lint-baseline.xml')
+        disable 'NotificationPermission'
+    }
 }
 
 dependencies {
-    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
-    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
+    ksp "androidx.room:room-compiler:$rootProject.roomVersion"
+    ksp "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+    ksp "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
-    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
+    implementation "androidx.core:core-ktx:1.9.0"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
