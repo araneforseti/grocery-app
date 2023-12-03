@@ -7,16 +7,16 @@
 
 Hardware: Pixel 4
 
-API: 31
+API: 33
 
 Android: 11 (beta)
 
 # Local Development Info
 
 ## Prerequisites
-- JDK 11
-- JAVA_HOME set to JDK 11
-- Android Studio (pointing to JDK 11)
+- JDK 17
+- JAVA_HOME set to JDK 17
+- Android Studio (pointing to JDK 17)
 
 ## Local Setup
 
