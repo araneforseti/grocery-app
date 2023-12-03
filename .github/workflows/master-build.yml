@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  API_VERSION: 31
-  JAVA_VERSION: 11
+  API_VERSION: 33
+  JAVA_VERSION: 17
 
 # Where will they run
 jobs:
