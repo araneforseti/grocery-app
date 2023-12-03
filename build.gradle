@@ -48,6 +48,7 @@ plugins {
     id 'com.google.dagger.hilt.android' version '2.45' apply false
     id "org.sonarqube" version "4.0.0.2929"
     id "com.diffplug.spotless" version "6.17.0"
+    id "com.google.devtools.ksp" version "1.8.21-1.0.11" apply false
 }
 
 spotless {
