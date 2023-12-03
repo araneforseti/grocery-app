@@ -1,8 +1,18 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'androidx.navigation.safeargs'
+
+allprojects {
+    tasks.withType(KotlinCompile).configureEach {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
+}
 
 android {
     compileSdk 33
@@ -49,10 +59,6 @@ android {
         }
     }
 
-    lintOptions {
-        baseline(file("lint-baseline.xml"))
-        disable 'NotificationPermission'
-    }
 
     configurations {
         androidTestImplementation {
@@ -65,6 +71,11 @@ android {
         resources {
             excludes += ['/META-INF/AL2.0', '/META-INF/LGPL2.1']
         }
+    }
+    namespace 'com.semblanceoffunctionality.grocery'
+    lint {
+        baseline file('lint-baseline.xml')
+        disable 'NotificationPermission'
     }
 }
 
