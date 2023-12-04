@@ -5,11 +5,11 @@
 
 # Android Target Info
 
-Hardware: Pixel 4
+Hardware: Fairphone 5
 
 API: 33
 
-Android: 11 (beta)
+Android: 13
 
 # Local Development Info
 
