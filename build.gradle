@@ -8,7 +8,7 @@ buildscript {
         coroutinesVersion = "1.7.3"
         espressoVersion = '3.5.1'
         fragmentVersion = '1.6.2'
-        glideVersion = '4.15.1'
+        glideVersion = '4.16.0'
         gradleVersion = '8.0.2'
         gsonVersion = '2.10.1'
         hiltVersion = '2.45'
