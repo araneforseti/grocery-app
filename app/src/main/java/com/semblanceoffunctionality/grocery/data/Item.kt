@@ -18,7 +18,7 @@ data class Item(
         return ""
     }
 
-    fun equals(Item otherItem): Boolean {
+    fun equals(otherItem: Item): Boolean {
         return name == otherItem.name
     }
 
