@@ -115,6 +115,6 @@ private class StoreGroceryItemDiffCallback : DiffUtil.ItemCallback<Map.Entry<Ite
         oldItem: Map.Entry<Item, StockStatus>,
         newItem: Map.Entry<Item, StockStatus>
     ): Boolean {
-        return oldItem.equals(newItem)
+        return (oldItem.key as Item) == (newItem.key as Item)
     }
 }
