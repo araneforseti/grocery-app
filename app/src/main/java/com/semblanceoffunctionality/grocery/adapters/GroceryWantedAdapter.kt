@@ -80,6 +80,6 @@ private class GroceryItemDiffCallback : DiffUtil.ItemCallback<Item>() {
         oldItem: Item,
         newItem: Item
     ): Boolean {
-        return oldItem == newItem
+        return oldItem.equals(newItem)
     }
 }
