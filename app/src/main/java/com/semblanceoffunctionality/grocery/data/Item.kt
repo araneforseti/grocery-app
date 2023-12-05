@@ -18,5 +18,9 @@ data class Item(
         return ""
     }
 
+    fun equals(Item otherItem): Boolean {
+        return name == otherItem.name
+    }
+
     override fun toString() = name
 }
