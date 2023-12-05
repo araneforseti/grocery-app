@@ -86,7 +86,7 @@ dependencies {
     ksp "com.google.dagger:hilt-android-compiler:$rootProject.hiltVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
-    implementation "androidx.core:core-ktx:1.9.0"
+    implementation "androidx.core:core-ktx:1.12.0"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
