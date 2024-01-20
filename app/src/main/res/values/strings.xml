@@ -9,7 +9,7 @@
     <string name="item_list_title" translation_description="Title for the item list screen where the user can see a list of items available to add to their grocery.">Item List</string>
     <string name="store_list_title" translation_description="Title for the store list">Store List</string>
     <string name="item_details_title" translation_description="Title for the item details screen where the user can see the details for a specific item.">item details</string>
-    <string name="add_item" translation_description="Button text that prompts user to navigate to the Item List to add items to their empty grocery.">Add item</string>
+    <string name="create_item" translation_description="Button text that prompts user to navigate to the Item List to add items to their empty grocery.">Create item</string>
     <string name="added_item_to_grocery" translation_description="Confirmation text that is shown when a user adds a item to their empty grocery.">Added item to grocery</string>
     <string name="grocery_empty" translation_description="Text that is shown on the 'My Grocery' screen when no items have been added to the user's grocery">Your grocery is empty</string>
     <string name="items_empty" translation_description="Text that is shown on the 'Item List' screen when no items have been added to the user's data">No items saved</string>

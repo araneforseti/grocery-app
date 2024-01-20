@@ -44,10 +44,10 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/add_item"
+            android:id="@+id/create_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/add_item"
+            android:text="@string/create_item"
             android:layout_gravity="bottom"
             android:layout_marginStart="150dp"
             app:shapeAppearance="@style/ShapeAppearance.Grocery.Button.Add" />
