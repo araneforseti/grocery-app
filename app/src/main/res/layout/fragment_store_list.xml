@@ -45,7 +45,7 @@
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/add_item"
+            android:id="@+id/create_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add_store"

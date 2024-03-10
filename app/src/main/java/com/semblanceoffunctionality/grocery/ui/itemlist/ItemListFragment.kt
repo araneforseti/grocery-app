@@ -33,7 +33,7 @@ class ItemListFragment : Fragment() {
         binding.itemList.adapter = adapter
         subscribeUi(adapter, binding)
 
-        binding.addItem.setOnClickListener {
+        binding.createItem.setOnClickListener {
             createItemDialog(container)
         }
 

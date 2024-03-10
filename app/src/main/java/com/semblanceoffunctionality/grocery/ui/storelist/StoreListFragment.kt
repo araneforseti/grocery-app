@@ -28,7 +28,7 @@ class StoreListFragment : Fragment() {
         binding.storeList.adapter = adapter
         subscribeUi(adapter, binding)
 
-        binding.addItem.setOnClickListener {
+        binding.createItem.setOnClickListener {
             createStoreDialog(container)
         }
 
